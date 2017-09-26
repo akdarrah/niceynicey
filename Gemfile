@@ -25,6 +25,7 @@ gem 'simple_form'
 gem 'uuid'
 
 group :development, :test  do
+  gem 'factory_girl'
   gem 'awesome_print'
   gem 'pry'
   gem 'pry-remote' #enables us to use pry with pow

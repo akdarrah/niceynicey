@@ -1,9 +1,10 @@
-require "test_helper"
+require 'test_helper'
 
-describe User do
-  let(:user) { User.new }
+class UserTest < ActiveSupport::TestCase
 
-  it "must be valid" do
-    value(user).must_be :valid?
+  test "Failure" do
+    binding.pry
+    assert false
   end
+
 end
