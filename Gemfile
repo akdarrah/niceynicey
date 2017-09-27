@@ -35,6 +35,7 @@ group :development, :test  do
   gem 'pry-stack_explorer'
   gem 'pry-doc'
   gem 'minitest-rails'
+  gem 'minitest-focus'
   gem 'bullet'
   gem 'i18n-tasks'
   gem 'coveralls'

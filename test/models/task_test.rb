@@ -26,4 +26,33 @@ class TaskTest < ActiveSupport::TestCase
     end
   end
 
+  # Children
+
+  test "a task completes its children when completed" do
+    child = create(:task, parent: @task)
+
+    assert @task.pending?
+    assert child.pending?
+
+    assert @task.complete!
+
+    assert @task.reload.completed?
+    assert child.reload.completed?
+  end
+
+  test "a task completes its grand-children when completed" do
+    child = create(:task, parent: @task)
+    grand = create(:task, parent: child)
+
+    assert @task.pending?
+    assert child.pending?
+    assert grand.pending?
+
+    assert @task.complete!
+
+    assert @task.reload.completed?
+    assert child.reload.completed?
+    assert grand.reload.completed?
+  end
+
 end
