@@ -24,6 +24,9 @@ gem 'haml'
 gem 'simple_form'
 gem 'uuid'
 
+gem 'angularjs-rails'
+gem 'angular-rails-templates'
+
 group :development, :test  do
   gem 'factory_girl'
   gem 'awesome_print'
