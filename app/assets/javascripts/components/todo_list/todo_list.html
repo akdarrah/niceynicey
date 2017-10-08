@@ -16,7 +16,7 @@
 
   <ul class="list-items" ng-show"$ctrl.todos.length">
     <li ng-repeat="todo in $ctrl.todos">
-      <span class="item-title">{{ todo }}</span>
+      <span class="item-title">{{ todo.label }}</span>
       <ul class="actions">
         <li>
           <button type='button' class="btn btn-primary" ng-click="$ctrl.completeTodo(todo)">
@@ -34,7 +34,7 @@
 
   <ul class="list-items complete" ng-show"$ctrl.completedTodos.length">
     <li ng-repeat="todo in $ctrl.completedTodos">
-      <h1 class="item-title">{{ todo }}</h1>
+      <h1 class="item-title">{{ todo.label }}</h1>
     </li>
   </ul>
 </div>
