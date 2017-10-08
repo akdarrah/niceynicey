@@ -40,7 +40,9 @@
     }
 
     function handleGetTasksResponse(response) {
-      console.log(response);
+      vm.todos = response.data.map(function(task){
+        return task.label;
+      });
     }
 
   }
