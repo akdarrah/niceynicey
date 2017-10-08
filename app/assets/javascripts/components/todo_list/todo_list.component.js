@@ -25,7 +25,10 @@
     ///////////////////////////////
 
     function handleSubmit(){
-      vm.todos.push(vm.todoText);
+      var label = vm.todoText;
+
+      vm.todos.push(label);
+      vm.factory.createTask(label);
 
       vm.todoText = '';
     }

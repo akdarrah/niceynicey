@@ -9,7 +9,8 @@
 
   function taskFactory($http) {
     return {
-      getTasks : getTasks
+      getTasks   : getTasks,
+      createTask : createTask
     };
 
     /////////////////////////
@@ -24,7 +25,22 @@
       }
 
       function getFailed(response) {
-        console.info('Fetching Scheduled Export failed: ', response);
+        console.info('Fetching Tasks Failed: ', response);
+        return response;
+      }
+    }
+
+    function createTask(label) {
+      return $http
+        .post('/api/tasks.json', {label: label})
+        .then(getComplete, getFailed);
+
+      function getComplete(response) {
+        return response;
+      }
+
+      function getFailed(response) {
+        console.info('Creating Task Failed: ', response);
         return response;
       }
     }

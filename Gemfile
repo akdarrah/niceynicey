@@ -28,6 +28,7 @@ gem 'uuid'
 
 gem 'angularjs-rails'
 gem 'angular-rails-templates'
+gem 'angular_rails_csrf'
 
 group :development, :test  do
   gem 'factory_girl'
