@@ -39,6 +39,7 @@
     }
 
     function removeTodo(todo){
+      vm.factory.destroyTask(todo.id);
       vm.todos.splice(vm.todos.indexOf(todo), 1);
     }
 
