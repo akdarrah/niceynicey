@@ -4,12 +4,12 @@
         ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"
         ng-class="{'form-valid': $ctrl.commentForm.$valid, 'form-invalid': $ctrl.commentForm.$invalid}"
         novalidate>
-    <div class="form-group">
+    <div class="input-group">
       <input type="text" class="form-control" placeholder="Add Item" ng-model="$ctrl.todoText" required>
+      <span class="input-group-btn">
+        <button class="btn btn-primary">Add</button>
+      </span>
     </div>
-    <button class="btn btn-primary">
-      Add
-    </button>
   </form>
 
   <br />

@@ -27,10 +27,11 @@
     function handleSubmit(){
       var label = vm.todoText;
 
-      vm.todos.push(label);
-      vm.factory.createTask(label);
-
-      vm.todoText = '';
+      var createTask = vm.factory.createTask(label);
+      createTask.then(function(response){
+        vm.todos.push(response.data);
+        vm.todoText = '';
+      });
     }
 
     function completeTodo(todo){
