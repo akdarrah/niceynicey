@@ -16,6 +16,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'wombat'
 gem 'aasm'
+gem 'bootstrap', '~> 4.0.0.beta'
 
 gem 'gon'
 gem 'acts_as_list'

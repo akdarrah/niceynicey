@@ -12,7 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require popper
+//= require bootstrap-sprockets
 //= require angular
 //= require angular-rails-templates
 //= require app
