@@ -4,22 +4,28 @@
         ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"
         ng-class="{'form-valid': $ctrl.commentForm.$valid, 'form-invalid': $ctrl.commentForm.$invalid}"
         novalidate>
-    <input type="text" placeholder="Add Item" ng-model="$ctrl.todoText" required>
-    <button class="fancy-button"><span class='material-icons'>add_circle_outline</span></button>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Add Item" ng-model="$ctrl.todoText" required>
+    </div>
+    <button class="btn btn-primary">
+      Add
+    </button>
   </form>
+
+  <br />
 
   <ul class="list-items" ng-show"$ctrl.todos.length">
     <li ng-repeat="todo in $ctrl.todos">
-      <h1 class="item-title">{{ todo }}</h1>
+      <span class="item-title">{{ todo }}</span>
       <ul class="actions">
         <li>
-          <button type='button' class="fancy-button confirm" ng-click="$ctrl.completeTodo(todo)">
-            <span class='material-icons'>check_circle</span>
+          <button type='button' class="btn btn-primary" ng-click="$ctrl.completeTodo(todo)">
+            <span class='material-icons'>Complete</span>
           </button>
         </li>
         <li>
-          <button type="button" class="fancy-button alert" ng-click="$ctrl.removeTodo(todo)">
-            <span class='material-icons'>cancel</span>
+          <button type="button" class="btn btn-danger" ng-click="$ctrl.removeTodo(todo)">
+            <span class='material-icons'>Remove</span>
           </button>
         </li>
       </ul>
