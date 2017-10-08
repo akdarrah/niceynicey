@@ -3,7 +3,8 @@
 
   angular.module('application', [
     'todoList',
-    'templates'
+    'templates',
+    'taskFactory'
   ]);
 
 })();

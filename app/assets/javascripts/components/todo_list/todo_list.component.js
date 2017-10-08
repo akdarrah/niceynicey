@@ -6,8 +6,14 @@
     controller: TodoListController
   });
 
-  function TodoListController(){
+  TodoListController.$inject = ['$scope', '$http', 'taskFactory'];
+
+  function TodoListController($scope, $http, taskFactory){
     var vm = this;
+    vm.factory = taskFactory;
+
+    var getTasks = vm.factory.getTasks();
+    getTasks.then(handleGetTasksResponse);
 
     vm.handleSubmit = handleSubmit;
     vm.completeTodo = completeTodo;
@@ -31,6 +37,10 @@
 
     function removeTodo(todo){
       vm.todos.splice(vm.todos.indexOf(todo), 1);
+    }
+
+    function handleGetTasksResponse(response) {
+      console.log(response);
     }
 
   }

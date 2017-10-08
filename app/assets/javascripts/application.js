@@ -16,6 +16,7 @@
 //= require angular
 //= require angular-rails-templates
 //= require app
+//= require services/task.factory
 //= require components/todo_list/todo_list.component
 //= require components/todo_list/todo_list
 //= require_tree .
