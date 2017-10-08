@@ -16,7 +16,7 @@
 
     function getTasks() {
       return $http
-        .get('/tasks.json')
+        .get('/api/tasks.json')
         .then(getComplete, getFailed);
 
       function getComplete(response) {
