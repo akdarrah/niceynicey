@@ -3,7 +3,10 @@
 
   angular.module('todoList', []).component('todoList', {
     templateUrl: 'components/todo_list/todo_list.html',
-    controller: TodoListController
+    controller: TodoListController,
+    bindings: {
+      todos: '<'
+    }
   });
 
   TodoListController.$inject = ['$scope', '$http', 'taskFactory'];
@@ -11,9 +14,6 @@
   function TodoListController($scope, $http, taskFactory){
     var vm = this;
     vm.factory = taskFactory;
-
-    var getTasks = vm.factory.getTasks();
-    getTasks.then(handleGetTasksResponse);
 
     vm.handleSubmit = handleSubmit;
     vm.completeTodo = completeTodo;
@@ -42,10 +42,6 @@
     function removeTodo(todo){
       vm.factory.destroyTask(todo.id);
       vm.todos.splice(vm.todos.indexOf(todo), 1);
-    }
-
-    function handleGetTasksResponse(response) {
-      vm.todos = response.data;
     }
 
   }
