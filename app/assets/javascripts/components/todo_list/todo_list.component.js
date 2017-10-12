@@ -20,7 +20,6 @@
     vm.removeTodo = removeTodo;
 
     vm.todos = [];
-    vm.completedTodos = [];
 
     ///////////////////////////////
 
@@ -35,8 +34,11 @@
     }
 
     function completeTodo(todo){
-      vm.todos.splice(vm.todos.indexOf(todo), 1);
-      vm.completedTodos.push(todo);
+      var completeTask = vm.factory.completeTask(todo.id);
+
+      completeTask.then(function(){
+        vm.todos.splice(vm.todos.indexOf(todo), 1);
+      });
     }
 
     function removeTodo(todo){

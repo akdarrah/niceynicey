@@ -1,6 +1,6 @@
 class Api::TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :complete]
 
   def index
     @tasks = current_user.tasks
@@ -30,6 +30,11 @@ class Api::TasksController < ApplicationController
 
   def destroy
     @task.destroy
+    render json: @task, status: :ok
+  end
+
+  def complete
+    @task.complete!
     render json: @task, status: :ok
   end
 
