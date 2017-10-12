@@ -5,7 +5,8 @@
     templateUrl: 'components/todo_list/todo_list.html',
     controller: TodoListController,
     bindings: {
-      todos: '<'
+      todos: '<',
+      parentId: '<'
     }
   });
 
@@ -20,13 +21,14 @@
     vm.removeTodo = removeTodo;
 
     vm.todos = [];
+    vm.parentId = null;
 
     ///////////////////////////////
 
     function handleSubmit(){
       var label = vm.todoText;
+      var createTask = vm.factory.createTask(label, vm.parentId);
 
-      var createTask = vm.factory.createTask(label);
       createTask.then(function(response){
         vm.todos.push(response.data);
         vm.todoText = '';
