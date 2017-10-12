@@ -6,6 +6,8 @@ class Task < ApplicationRecord
 
   has_many :children, class_name: "Task", foreign_key: :parent_id, dependent: :destroy
 
+  scope :top_level, -> { where(parent_id: nil) }
+
   aasm :column => :state do
     state :pending, :initial => true
     state :completed
