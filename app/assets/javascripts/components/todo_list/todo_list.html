@@ -1,4 +1,18 @@
 <div class="todo-list">
+  <ul class="list-items" ng-show"$ctrl.todos.length">
+    <li ng-repeat="todo in $ctrl.todos">
+      <button type='button' class="btn btn-primary" ng-click="$ctrl.completeTodo(todo)">
+        <span class='material-icons'>Complete</span>
+      </button>
+      <span class="item-title">{{ todo.label }}</span>
+      <button type="button" class="btn btn-danger float-right" ng-click="$ctrl.removeTodo(todo)">
+        <span class='material-icons'>Remove</span>
+      </button>
+
+      <todo-list todos="todo.children"></todo-list>
+    </li>
+  </ul>
+
   <form id="comment-form"
         name='$ctrl.commentForm'
         ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"
@@ -12,31 +26,4 @@
     </div>
   </form>
 
-  <br />
-
-  <ul class="list-items" ng-show"$ctrl.todos.length">
-    <li ng-repeat="todo in $ctrl.todos">
-      <span class="item-title">{{ todo.label }}</span>
-      <ul class="actions">
-        <li>
-          <button type='button' class="btn btn-primary" ng-click="$ctrl.completeTodo(todo)">
-            <span class='material-icons'>Complete</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="btn btn-danger" ng-click="$ctrl.removeTodo(todo)">
-            <span class='material-icons'>Remove</span>
-          </button>
-        </li>
-      </ul>
-
-      <todo-list todos="todo.children"></todo-list>
-    </li>
-  </ul>
-
-  <ul class="list-items complete" ng-show"$ctrl.completedTodos.length">
-    <li ng-repeat="todo in $ctrl.completedTodos">
-      <h1 class="item-title">{{ todo.label }}</h1>
-    </li>
-  </ul>
 </div>

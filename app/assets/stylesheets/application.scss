@@ -1,2 +1,15 @@
- @import "bootstrap";
- @import "font-awesome";
+@import "bootstrap";
+@import "font-awesome";
+
+.todo-list {
+  border: 2px solid red;
+
+  ul {
+    list-style-type: none;
+    border: 1px solid green;
+  }
+
+  form {
+    margin-top: 20px;
+  }
+}
