@@ -2,14 +2,14 @@
 @import "font-awesome";
 
 .todo-list {
-  border: 2px solid red;
+  margin-bottom: 20px;
+  padding-top: 20px;
 
   ul {
     list-style-type: none;
-    border: 1px solid green;
   }
 
   form {
-    margin-top: 20px;
+    margin-top: 10px;
   }
 }
