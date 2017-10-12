@@ -21,10 +21,6 @@ class Task < ApplicationRecord
     end
   end
 
-  def as_json(options={})
-    super(:include =>[:children])
-  end
-
   private
 
   def complete_children!

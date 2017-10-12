@@ -3,6 +3,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks = current_user.tasks.top_level
+    @tasks = ActiveModel::SerializableResource.new(@tasks.to_a).to_json 
   end
 
 end
