@@ -1,6 +1,11 @@
 @import "bootstrap";
 @import "font-awesome";
 
+.container > todo-list > .todo-list > ul {
+  margin: 0px;
+  padding: 0px;
+}
+
 .todo-list {
   margin-bottom: 20px;
   padding-top: 20px;

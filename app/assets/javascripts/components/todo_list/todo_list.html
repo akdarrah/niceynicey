@@ -11,19 +11,21 @@
 
       <todo-list parent-id="todo.id", todos="todo.children"></todo-list>
     </li>
-  </ul>
 
-  <form id="comment-form"
-        name='$ctrl.commentForm'
-        ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"
-        ng-class="{'form-valid': $ctrl.commentForm.$valid, 'form-invalid': $ctrl.commentForm.$invalid}"
-        novalidate>
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Add Item" ng-model="$ctrl.todoText" required>
-      <span class="input-group-btn">
-        <button class="btn btn-primary">Add</button>
-      </span>
-    </div>
-  </form>
+    <li>
+      <form id="comment-form"
+            name='$ctrl.commentForm'
+            ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"
+            ng-class="{'form-valid': $ctrl.commentForm.$valid, 'form-invalid': $ctrl.commentForm.$invalid}"
+            novalidate>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Add Item" ng-model="$ctrl.todoText" required>
+          <span class="input-group-btn">
+            <button class="btn btn-primary">Add</button>
+          </span>
+        </div>
+      </form>
+    </li>
+  </ul>
 
 </div>
