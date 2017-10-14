@@ -35,6 +35,7 @@
       createTask.then(function(response){
         vm.todos.push(response.data);
         vm.todoText = '';
+        vm.showForm = false;
       });
     }
 
