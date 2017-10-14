@@ -9,6 +9,9 @@
   font-size: 12px;
   line-height: 1.42;
   border-radius: 15px;
+
+  cursor:pointer;
+  cursor:hand;
 }
 
 body {
@@ -44,16 +47,24 @@ body {
     list-style-type: none;
 
     .task-row {
-      padding: 3px;
+      padding: 5px;
+
+      .remove-task-link {
+        display: none;
+      }
 
       &:hover {
         background: #eee;
+
+        .remove-task-link {
+          display: inline;
+        }
       }
     }
   }
 
   .add-task-link {
-    padding-left: 3px;
+    padding-left: 5px;
   }
 
   form {
