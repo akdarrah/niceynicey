@@ -30,12 +30,12 @@
 
     <li ng-repeat="todo in $ctrl.todos">
       <div class="task-row">
-        <button type='button' class="btn btn-primary" ng-click="$ctrl.completeTodo(todo)">
-          <span class='material-icons'>Complete</span>
+        <button type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.completeTodo(todo)">
+          <i class="fa fa-check"></i>
         </button>
         <span class="item-title">{{ todo.label }}</span>
-        <button type="button" class="btn btn-danger float-right" ng-click="$ctrl.removeTodo(todo)">
-          <span class='material-icons'>Remove</span>
+        <button type="button" class="btn btn-danger btn-circle float-right" ng-click="$ctrl.removeTodo(todo)">
+          <i class="fa fa-remove"></i>
         </button>
       </div>
 
