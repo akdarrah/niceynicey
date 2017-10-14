@@ -16,6 +16,14 @@ body {
 
   ul {
     list-style-type: none;
+
+    .task-row {
+      padding: 3px;
+      
+      &:hover {
+        background: #eee;
+      }
+    }
   }
 
   form {

@@ -29,13 +29,15 @@
     </li>
 
     <li ng-repeat="todo in $ctrl.todos">
-      <button type='button' class="btn btn-primary" ng-click="$ctrl.completeTodo(todo)">
-        <span class='material-icons'>Complete</span>
-      </button>
-      <span class="item-title">{{ todo.label }}</span>
-      <button type="button" class="btn btn-danger float-right" ng-click="$ctrl.removeTodo(todo)">
-        <span class='material-icons'>Remove</span>
-      </button>
+      <div class="task-row">
+        <button type='button' class="btn btn-primary" ng-click="$ctrl.completeTodo(todo)">
+          <span class='material-icons'>Complete</span>
+        </button>
+        <span class="item-title">{{ todo.label }}</span>
+        <button type="button" class="btn btn-danger float-right" ng-click="$ctrl.removeTodo(todo)">
+          <span class='material-icons'>Remove</span>
+        </button>
+      </div>
 
       <todo-list parent-task="todo", todos="todo.children"></todo-list>
     </li>
