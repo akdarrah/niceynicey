@@ -5,7 +5,7 @@
       <p>
         <a href="#" ng-click="$ctrl.enableForm()">
           <i class="fa fa-plus-circle"></i>
-          Add Task
+          Add Task to <b>{{ $ctrl.parentTask.label }}</b>
         </a>
       </p>
     </li>
@@ -37,7 +37,7 @@
         <span class='material-icons'>Remove</span>
       </button>
 
-      <todo-list parent-id="todo.id", todos="todo.children"></todo-list>
+      <todo-list parent-task="todo", todos="todo.children"></todo-list>
     </li>
   </ul>
 

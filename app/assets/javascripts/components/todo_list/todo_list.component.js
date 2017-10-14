@@ -6,7 +6,7 @@
     controller: TodoListController,
     bindings: {
       todos: '<',
-      parentId: '<'
+      parentTask: '<'
     }
   });
 
@@ -24,13 +24,13 @@
 
     vm.showForm = false;
     vm.todos = [];
-    vm.parentId = null;
+    vm.parentTask = null;
 
     ///////////////////////////////
 
     function handleSubmit(){
       var label = vm.todoText;
-      var createTask = vm.factory.createTask(label, vm.parentId);
+      var createTask = vm.factory.createTask(label, vm.parentTask.id);
 
       createTask.then(function(response){
         vm.todos.push(response.data);
