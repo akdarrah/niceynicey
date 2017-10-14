@@ -1,18 +1,16 @@
 <div class="todo-list">
   <ul class="list-items" ng-show"$ctrl.todos.length">
-    <li ng-repeat="todo in $ctrl.todos">
-      <button type='button' class="btn btn-primary" ng-click="$ctrl.completeTodo(todo)">
-        <span class='material-icons'>Complete</span>
-      </button>
-      <span class="item-title">{{ todo.label }}</span>
-      <button type="button" class="btn btn-danger float-right" ng-click="$ctrl.removeTodo(todo)">
-        <span class='material-icons'>Remove</span>
-      </button>
 
-      <todo-list parent-id="todo.id", todos="todo.children"></todo-list>
+    <li ng-show="!$ctrl.showForm">
+      <p>
+        <a href="#" ng-click="$ctrl.enableForm()">
+          <i class="fa fa-plus-circle"></i>
+          Add Task
+        </a>
+      </p>
     </li>
 
-    <li>
+    <li ng-show="$ctrl.showForm">
       <form id="comment-form"
             name='$ctrl.commentForm'
             ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"
@@ -25,6 +23,21 @@
           </span>
         </div>
       </form>
+      <p>
+        <a href="#" ng-click="$ctrl.disableForm()">Cancel</a>
+      </p>
+    </li>
+
+    <li ng-repeat="todo in $ctrl.todos">
+      <button type='button' class="btn btn-primary" ng-click="$ctrl.completeTodo(todo)">
+        <span class='material-icons'>Complete</span>
+      </button>
+      <span class="item-title">{{ todo.label }}</span>
+      <button type="button" class="btn btn-danger float-right" ng-click="$ctrl.removeTodo(todo)">
+        <span class='material-icons'>Remove</span>
+      </button>
+
+      <todo-list parent-id="todo.id", todos="todo.children"></todo-list>
     </li>
   </ul>
 

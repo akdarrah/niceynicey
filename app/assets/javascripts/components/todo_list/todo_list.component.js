@@ -19,7 +19,10 @@
     vm.handleSubmit = handleSubmit;
     vm.completeTodo = completeTodo;
     vm.removeTodo = removeTodo;
+    vm.enableForm = enableForm;
+    vm.disableForm = disableForm;
 
+    vm.showForm = false;
     vm.todos = [];
     vm.parentId = null;
 
@@ -46,6 +49,14 @@
     function removeTodo(todo){
       vm.factory.destroyTask(todo.id);
       vm.todos.splice(vm.todos.indexOf(todo), 1);
+    }
+
+    function enableForm(){
+      vm.showForm = true;
+    }
+
+    function disableForm(){
+      vm.showForm = false;
     }
 
   }

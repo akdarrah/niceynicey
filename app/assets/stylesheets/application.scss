@@ -1,6 +1,10 @@
 @import "bootstrap";
 @import "font-awesome";
 
+body {
+  padding-top: 15px;
+}
+
 .container > todo-list > .todo-list > ul {
   margin: 0px;
   padding: 0px;
@@ -15,6 +19,6 @@
   }
 
   form {
-    margin-top: 5px;
+    margin-bottom: 5px;
   }
 }
