@@ -68,11 +68,11 @@ body {
     }
   }
 
-  .add-task-link {
+  .add-task-link, .remove-task-link {
     padding-left: 5px;
   }
 
   form {
-    margin-top: 5px;
+    margin: 5px 0;
   }
 }
