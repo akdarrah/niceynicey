@@ -30,7 +30,8 @@
 
     function handleSubmit(){
       var label = vm.todoText;
-      var createTask = vm.factory.createTask(label, vm.parentTask.id);
+      var parentId = (vm.parentTask ? vm.parentTask.id : null);
+      var createTask = vm.factory.createTask(label, parentId);
 
       createTask.then(function(response){
         vm.todos.push(response.data);
