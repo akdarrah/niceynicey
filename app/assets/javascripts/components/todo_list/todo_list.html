@@ -1,14 +1,14 @@
 <div class="todo-list">
   <ul class="list-items" ng-show"$ctrl.todos.length">
 
-    <li ng-show="!$ctrl.showForm">
+    <!-- <li ng-show="!$ctrl.showForm">
       <p>
         <a href="#" class="add-task-link" ng-click="$ctrl.enableForm()">
           <i class="fa fa-plus-circle"></i>
           Add Task to <b>{{ $ctrl.parentTask.label }}</b>
         </a>
       </p>
-    </li>
+    </li> -->
 
     <li ng-show="$ctrl.showForm">
       <form id="comment-form"
@@ -24,7 +24,7 @@
         </div>
       </form>
       <p>
-        <a href="#" class="remove-task-link" ng-click="$ctrl.disableForm()">Cancel</a>
+        <a href="#" ng-click="$ctrl.disableForm()">Cancel</a>
       </p>
     </li>
 
@@ -34,9 +34,14 @@
           <i class="fa fa-check"></i>
         </button>
         <span class="item-title">{{ todo.label }}</span>
-        <button type="button" class="remove-task-link btn btn-danger btn-circle float-right" ng-click="$ctrl.removeTodo(todo)">
-          <i class="fa fa-remove"></i>
-        </button>
+        <div class="float-right">
+          <button type="button" class="hidden-task-link btn btn-success btn-circle" ng-click="$ctrl.enableForm()">
+            <i class="fa fa-plus"></i>
+          </button>
+          <button type="button" class="hidden-task-link btn btn-danger btn-circle" ng-click="$ctrl.removeTodo(todo)">
+            <i class="fa fa-remove"></i>
+          </button>
+        </div>
       </div>
 
       <todo-list parent-task="todo", todos="todo.children"></todo-list>
