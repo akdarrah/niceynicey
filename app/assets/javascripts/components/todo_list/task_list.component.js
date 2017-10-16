@@ -1,18 +1,18 @@
 (function() {
   'use strict';
 
-  angular.module('todoList', []).component('todoList', {
-    templateUrl: 'components/todo_list/todo_list.html',
-    controller: TodoListController,
+  angular.module('taskList', []).component('taskList', {
+    templateUrl: 'components/todo_list/task_list.html',
+    controller: TaskListController,
     bindings: {
-      todos: '<',
+      tasks: '<',
       parentTask: '<'
     }
   });
 
-  TodoListController.$inject = ['$scope', '$http', 'taskFactory'];
+  TaskListController.$inject = ['$scope', '$http', 'taskFactory'];
 
-  function TodoListController($scope, $http, taskFactory){
+  function TaskListController($scope, $http, taskFactory){
     var vm = this;
     vm.factory = taskFactory;
 
@@ -23,7 +23,7 @@
     vm.disableForm = disableForm;
 
     vm.showForm = false;
-    vm.todos = [];
+    vm.tasks = [];
     vm.parentTask = null;
 
     ///////////////////////////////

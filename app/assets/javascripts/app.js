@@ -2,9 +2,11 @@
   'use strict';
 
   angular.module('application', [
-    'todoList',
-    'templates',
-    'taskFactory'
+    'projectContainer',
+    'task',
+    'taskList',
+    'taskFactory',
+    'templates'
   ]);
 
 })();

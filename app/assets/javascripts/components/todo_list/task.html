@@ -1,0 +1,16 @@
+<li>
+  <button type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.completeTodo(todo)">
+    <i class="fa fa-check"></i>
+  </button>
+  <span class="item-title">{{ $ctrl.task.label }}</span>
+  <div class="float-right">
+    <button type="button" class="hidden-task-link btn btn-success btn-circle" ng-click="$ctrl.enableForm()">
+      <i class="fa fa-plus"></i>
+    </button>
+    <button type="button" class="hidden-task-link btn btn-danger btn-circle" ng-click="$ctrl.removeTodo(todo)">
+      <i class="fa fa-remove"></i>
+    </button>
+  </div>
+
+  <task-list parent-task="$ctrl.task", tasks="$ctrl.task.children"></todo-list>
+</li>
