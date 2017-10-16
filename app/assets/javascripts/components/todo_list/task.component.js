@@ -5,7 +5,9 @@
     templateUrl: 'components/todo_list/task.html',
     controller: TaskController,
     bindings: {
-      task: '<'
+      task: '<',
+      parentTask: '<',
+      showForm: '<'
     }
   });
 
@@ -21,8 +23,8 @@
     vm.enableForm = enableForm;
     vm.disableForm = disableForm;
 
+    vm.showForm = false;
     vm.task = null;
-    vm.todos = [];
     vm.parentTask = null;
 
     ///////////////////////////////
@@ -33,7 +35,7 @@
       var createTask = vm.factory.createTask(label, parentId);
 
       createTask.then(function(response){
-        vm.todos.push(response.data);
+        vm.task.children.push(response.data);
         vm.todoText = '';
         vm.showForm = false;
       });
@@ -43,13 +45,13 @@
       var completeTask = vm.factory.completeTask(todo.id);
 
       completeTask.then(function(){
-        vm.todos.splice(vm.todos.indexOf(todo), 1);
+        vm.tasks.splice(vm.tasks.indexOf(todo), 1);
       });
     }
 
     function removeTodo(todo){
       vm.factory.destroyTask(todo.id);
-      vm.todos.splice(vm.todos.indexOf(todo), 1);
+      vm.tasks.splice(vm.tasks.indexOf(todo), 1);
     }
 
     function enableForm(){

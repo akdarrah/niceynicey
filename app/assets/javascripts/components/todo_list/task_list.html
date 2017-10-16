@@ -1,34 +1,3 @@
 <ul ng-show"$ctrl.tasks.length">
-  <task ng-repeat="task in $ctrl.tasks", task="task", parentTask="$ctrl.parentTask"></task>
-  <!-- <li ng-repeat="task in $ctrl.tasks">
-    <p>{{task.label}}</p>
-  </li> -->
-
-  <!-- <li ng-show="!$ctrl.showForm">
-    <p>
-      <a href="#" class="add-task-link" ng-click="$ctrl.enableForm()">
-        <i class="fa fa-plus-circle"></i>
-        Add Task to <b>{{ $ctrl.parentTask.label }}</b>
-      </a>
-    </p>
-  </li> -->
-
-  <!-- <li ng-show="$ctrl.showForm">
-    <form id="comment-form"
-          name='$ctrl.commentForm'
-          ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"
-          ng-class="{'form-valid': $ctrl.commentForm.$valid, 'form-invalid': $ctrl.commentForm.$invalid}"
-          novalidate>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Add Item" ng-model="$ctrl.todoText" required>
-        <span class="input-group-btn">
-          <button class="btn btn-primary">Add</button>
-        </span>
-      </div>
-    </form>
-    <p>
-      <a href="#" ng-click="$ctrl.disableForm()">Cancel</a>
-    </p>
-  </li> -->
-
+  <task ng-repeat="task in $ctrl.tasks", task="task", parent-task="$ctrl.parentTask"></task>
 </ul>
