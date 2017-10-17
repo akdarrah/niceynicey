@@ -20,8 +20,7 @@
     vm.handleSubmit = handleSubmit;
     vm.completeTodo = completeTodo;
     vm.removeTodo = removeTodo;
-    vm.enableForm = enableForm;
-    vm.disableForm = disableForm;
+    vm.toggleForm = toggleForm;
 
     vm.showForm = false;
     vm.task = null;
@@ -53,12 +52,8 @@
       vm.tasks.splice(vm.tasks.indexOf(todo), 1);
     }
 
-    function enableForm(){
-      vm.showForm = true;
-    }
-
-    function disableForm(){
-      vm.showForm = false;
+    function toggleForm(){
+      vm.showForm = !vm.showForm;
     }
 
   }
