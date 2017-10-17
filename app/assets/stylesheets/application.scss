@@ -47,3 +47,16 @@ project-container > task-list > ul {
 ul {
   list-style-type: none;
 }
+
+.task-row {
+  padding: 3px;
+
+  &:hover {
+    background: #eee;
+
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px; /* future proofing */
+    -khtml-border-radius: 3px; /* for old Konqueror browsers */
+  }
+}
