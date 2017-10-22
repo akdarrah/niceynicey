@@ -19,7 +19,7 @@
 
     vm.handleSubmit = handleSubmit;
     vm.completeTodo = completeTodo;
-    vm.removeTodo = removeTodo;
+    vm.removeTask = removeTask;
     vm.toggleForm = toggleForm;
 
     vm.showForm = false;
@@ -47,9 +47,9 @@
       });
     }
 
-    function removeTodo(todo){
-      vm.factory.destroyTask(todo.id);
-      vm.tasks.splice(vm.tasks.indexOf(todo), 1);
+    function removeTask(task){
+      vm.factory.destroyTask(task.id);
+      vm.task = null;
     }
 
     function toggleForm(){

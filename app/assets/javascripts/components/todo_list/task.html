@@ -1,4 +1,4 @@
-<li>
+<li ng-if="$ctrl.task">
   <div class="task-row">
     <button type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.completeTodo(todo)">
       <i class="fa fa-check"></i>
@@ -8,7 +8,7 @@
       <button type="button" class="hidden-task-link btn btn-success btn-circle" ng-click="$ctrl.toggleForm()">
         <i class="fa fa-plus"></i>
       </button>
-      <button type="button" class="hidden-task-link btn btn-danger btn-circle" ng-click="$ctrl.removeTodo(todo)">
+      <button type="button" class="hidden-task-link btn btn-danger btn-circle" ng-click="$ctrl.removeTask($ctrl.task)">
         <i class="fa fa-remove"></i>
       </button>
     </div>
