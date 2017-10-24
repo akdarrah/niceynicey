@@ -19,8 +19,9 @@
     vm.sortableOptions = {
       start: function(){ console.log('...'); },
       update: function(e, ui) { console.log('..'); },
-      axis: 'y',
-      handle: ".reorder-icon"
+      cursor: "move",
+      handle: ".reorder-icon",
+      items: '.sortable-item'
     };
 
     vm.tasks = [];
