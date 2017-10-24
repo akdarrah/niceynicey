@@ -16,6 +16,7 @@
 //= require bootstrap-sprockets
 //= require angular
 //= require angular-rails-templates
+//= require ng-sortable.min
 //= require app
 //= require services/task.factory
 //= require components/todo_list/project_container.component
