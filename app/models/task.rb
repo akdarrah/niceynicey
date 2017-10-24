@@ -4,7 +4,13 @@ class Task < ApplicationRecord
   belongs_to :parent, class_name: "Task", optional: true
   belongs_to :user
 
-  has_many :children, class_name: "Task", foreign_key: :parent_id, dependent: :destroy
+  has_many :children,
+    -> { order(position: :asc) },
+    class_name: "Task",
+    foreign_key: :parent_id,
+    dependent: :destroy
+
+  acts_as_list scope: :parent_id
 
   scope :top_level, -> { where(parent_id: nil) }
 
