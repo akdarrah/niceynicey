@@ -1,6 +1,5 @@
 @import "bootstrap";
 @import "font-awesome";
-@import "ng-sortable.min";
 
 .btn-circle {
   width: 25px;
@@ -51,7 +50,7 @@ ul {
 
 .reorder-icon {
   margin-left: 2px;
-  
+
   &:hover {
     cursor: move;
   }

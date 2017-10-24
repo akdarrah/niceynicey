@@ -16,6 +16,13 @@
     var vm = this;
     vm.factory = taskFactory;
 
+    vm.sortableOptions = {
+      start: function(){ console.log('...'); },
+      update: function(e, ui) { console.log('..'); },
+      axis: 'y',
+      handle: ".reorder-icon"
+    };
+
     vm.tasks = [];
     vm.parentTask = null;
 
