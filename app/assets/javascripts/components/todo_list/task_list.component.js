@@ -17,11 +17,12 @@
     vm.factory = taskFactory;
 
     vm.sortableOptions = {
-      start: function(){ console.log('...'); },
-      update: function(e, ui) { console.log('..'); },
       cursor: "move",
       handle: ".reorder-icon",
-      items: '.sortable-item'
+      items: '.sortable-item',
+      stop: function(event, ui) {
+        console.log(ui.item.sortable.model);
+      },
     };
 
     vm.tasks = [];
