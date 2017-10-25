@@ -1,6 +1,14 @@
 @import "bootstrap";
 @import "font-awesome";
 
+html, body {
+  background: url(https://images.unsplash.com/photo-1455218873509-8097305ee378?w=2468&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .btn-circle {
   width: 25px;
   height: 25px;
@@ -16,7 +24,6 @@
 
 body {
   padding-top: 15px;
-  background: #0074D9;
 }
 
 .main-column {
