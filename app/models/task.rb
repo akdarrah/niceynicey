@@ -13,6 +13,7 @@ class Task < ApplicationRecord
   acts_as_list scope: :parent_id
 
   scope :top_level, -> { where(parent_id: nil) }
+  scope :position_order, -> { order(position: :asc) }
 
   aasm :column => :state do
     state :pending, :initial => true

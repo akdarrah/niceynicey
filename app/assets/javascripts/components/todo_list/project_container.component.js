@@ -26,7 +26,7 @@
       var createTask = vm.factory.createTask(label, null);
 
       createTask.then(function(response){
-        vm.tasks.push(response.data);
+        vm.tasks.unshift(response.data);
         vm.todoText = '';
         vm.showForm = false;
       });

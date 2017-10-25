@@ -34,7 +34,7 @@
 
     function createTask(label, parentId) {
       return $http
-        .post('/api/tasks.json', {label: label, parent_id: parentId})
+        .post('/api/tasks.json', {label: label, parent_id: parentId, position: 1})
         .then(getComplete, getFailed);
 
       function getComplete(response) {

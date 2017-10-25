@@ -33,7 +33,7 @@
       var createTask = vm.factory.createTask(label, vm.task.id);
 
       createTask.then(function(response){
-        vm.task.children.push(response.data);
+        vm.task.children.unshift(response.data);
         vm.todoText = '';
         vm.showForm = false;
       });
