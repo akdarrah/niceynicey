@@ -18,7 +18,7 @@
     vm.factory = taskFactory;
 
     vm.handleSubmit = handleSubmit;
-    vm.completeTodo = completeTodo;
+    vm.completeTask = completeTask;
     vm.removeTask = removeTask;
     vm.toggleForm = toggleForm;
 
@@ -39,11 +39,11 @@
       });
     }
 
-    function completeTodo(todo){
-      var completeTask = vm.factory.completeTask(todo.id);
+    function completeTask(task){
+      var completeTask = vm.factory.completeTask(task.id);
 
-      completeTask.then(function(){
-        vm.tasks.splice(vm.tasks.indexOf(todo), 1);
+      completeTask.then(function(response){
+        vm.task = response.data;
       });
     }
 

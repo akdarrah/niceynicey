@@ -59,6 +59,12 @@ ul {
 .task-row {
   padding: 3px;
 
+  .item-title {
+    &.completed {
+      text-decoration: line-through;
+    }
+  }
+
   &:hover {
     background: #eee;
 
