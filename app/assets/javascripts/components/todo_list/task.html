@@ -6,7 +6,7 @@
     </button>
     <span class="item-title" ng-class="{'completed': $ctrl.task.state=='completed'}">{{ $ctrl.task.label }}</span>
     <div class="float-right">
-      <button ng-if="(!$ctrl.parentTask && $ctrl.task.state == 'pending') || $ctrl.parentTask.state == 'pending'" type="button" class="hidden-task-link btn btn-success btn-circle" ng-click="$ctrl.toggleForm()">
+      <button ng-if="$ctrl.allowChildAddition()" type="button" class="hidden-task-link btn btn-success btn-circle" ng-click="$ctrl.toggleForm()">
         <i class="fa fa-plus"></i>
       </button>
       <button type="button" class="hidden-task-link btn btn-danger btn-circle" ng-click="$ctrl.removeTask($ctrl.task)">

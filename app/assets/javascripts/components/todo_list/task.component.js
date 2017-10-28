@@ -21,6 +21,7 @@
     vm.completeTask = completeTask;
     vm.removeTask = removeTask;
     vm.toggleForm = toggleForm;
+    vm.allowChildAddition = allowChildAddition;
 
     vm.showForm = false;
     vm.task = null;
@@ -54,6 +55,11 @@
 
     function toggleForm(){
       vm.showForm = !vm.showForm;
+    }
+
+    function allowChildAddition(){
+      return (!vm.parentTask && vm.task.state == 'pending') ||
+        vm.parentTask.state == 'pending';
     }
 
   }
