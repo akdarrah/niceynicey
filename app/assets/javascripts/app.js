@@ -6,6 +6,7 @@
     'task',
     'taskList',
     'taskFactory',
+    'taskShow',
     'templates',
     'ui.sortable'
   ]);
