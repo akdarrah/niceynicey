@@ -3,4 +3,11 @@ class TaskSerializer < ActiveModel::Serializer
     :created_at, :updated_at
 
   has_many :children, serializer: TaskSerializer
+
+  belongs_to :parent, if: -> { object.parent } do
+    {
+      id: object.parent.id,
+      label: object.parent.label
+    }
+  end
 end
