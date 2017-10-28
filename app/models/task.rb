@@ -4,6 +4,9 @@ class Task < ApplicationRecord
   belongs_to :parent, class_name: "Task", optional: true
   belongs_to :user
 
+  validates :user, :label, presence: true
+  validate :parent_must_be_pending, on: :create
+
   has_many :children,
     -> { order(position: :asc) },
     class_name: "Task",
@@ -32,6 +35,12 @@ class Task < ApplicationRecord
 
   def complete_children!
     children.each(&:complete!)
+  end
+
+  def parent_must_be_pending
+    if parent.present? && !parent.pending?
+      errors.add(:parent, "must be pending")
+    end
   end
 
 end

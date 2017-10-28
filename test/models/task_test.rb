@@ -55,4 +55,29 @@ class TaskTest < ActiveSupport::TestCase
     assert grand.reload.completed?
   end
 
+  # Task#parent_must_be_pending
+
+  test "parent task must be pending to add a child task" do
+    assert @task.pending?
+
+    child = @task.children.build(user: @task.user, label: "Test")
+    assert child.valid?
+
+    @task.children.clear
+    @task.complete!
+
+    child = @task.children.build(user: @task.user, label: "Test")
+    refute child.valid?
+  end
+
+  test "parent only has to be open on creation" do
+    assert @task.pending?
+
+    child = @task.children.build(user: @task.user, label: "Test")
+    assert child.save!
+
+    @task.complete!
+    assert child.valid?
+  end
+
 end
