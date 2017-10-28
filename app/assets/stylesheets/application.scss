@@ -31,10 +31,10 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
 
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px; /* future proofing */
-  -khtml-border-radius: 10px; /* for old Konqueror browsers */
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; /* future proofing */
+  -khtml-border-radius: 5px; /* for old Konqueror browsers */
 
   -webkit-box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
   -moz-box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
