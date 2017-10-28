@@ -11,9 +11,9 @@
     }
   });
 
-  TaskController.$inject = ['$scope', '$http', 'taskFactory'];
+  TaskController.$inject = ['$scope', '$http', '$window', 'taskFactory'];
 
-  function TaskController($scope, $http, taskFactory){
+  function TaskController($scope, $http, $window, taskFactory){
     var vm = this;
     vm.factory = taskFactory;
 
@@ -49,8 +49,10 @@
     }
 
     function removeTask(task){
-      vm.factory.destroyTask(task.id);
-      vm.task = null;
+      if ($window.confirm("Are you sure?")){
+        vm.factory.destroyTask(task.id);
+        vm.task = null;
+      }
     }
 
     function toggleForm(){
