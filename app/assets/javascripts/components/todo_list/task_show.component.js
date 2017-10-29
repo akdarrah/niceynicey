@@ -15,9 +15,19 @@
     var vm = this;
     vm.factory = taskFactory;
 
+    vm.aceLoaded = aceLoaded;
+    vm.aceChanged = aceChanged;
+
     vm.task = null;
 
     ///////////////////////////////
+
+    function aceLoaded(_editor) {
+    };
+
+    function aceChanged(e) {
+      console.log(e);
+    };
 
   }
 

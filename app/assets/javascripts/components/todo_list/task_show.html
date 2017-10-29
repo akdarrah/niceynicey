@@ -11,7 +11,10 @@
 <h1>{{$ctrl.task.label}}</h1>
 <br />
 
-<div ui-ace></div>
+<div ui-ace="{
+  onLoad: $ctrl.aceLoaded,
+  onChange: $ctrl.aceChanged
+}"></div>
 
 <hr>
 <task-list tasks="$ctrl.task.children" parent-task="$ctrl.task"></todo-list>
