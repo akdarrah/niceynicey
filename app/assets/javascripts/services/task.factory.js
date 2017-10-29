@@ -11,6 +11,7 @@
     return {
       getTasks     : getTasks,
       createTask   : createTask,
+      updateTask   : updateTask,
       destroyTask  : destroyTask,
       completeTask : completeTask
     };
@@ -35,6 +36,27 @@
     function createTask(label, parentId) {
       return $http
         .post('/api/tasks.json', {label: label, parent_id: parentId, position: 1})
+        .then(getComplete, getFailed);
+
+      function getComplete(response) {
+        return response;
+      }
+
+      function getFailed(response) {
+        console.info('Creating Task Failed: ', response);
+        return response;
+      }
+    }
+
+    function updateTask(task) {
+      var params = {
+        label: task.label,
+        notes: task.notes,
+        position: task.position
+      };
+
+      return $http
+        .patch('/api/tasks/' + task.id + '.json', params)
         .then(getComplete, getFailed);
 
       function getComplete(response) {

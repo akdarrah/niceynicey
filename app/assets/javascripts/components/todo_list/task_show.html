@@ -16,5 +16,8 @@
   onChange: $ctrl.aceChanged
 }"></div>
 
+<br />
+<button type="button" class="btn btn-primary" ng-click="$ctrl.buttonClicked()">Save</button>
+
 <hr>
 <task-list tasks="$ctrl.task.children" parent-task="$ctrl.task"></todo-list>

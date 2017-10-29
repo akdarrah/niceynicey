@@ -17,17 +17,32 @@
 
     vm.aceLoaded = aceLoaded;
     vm.aceChanged = aceChanged;
+    vm.buttonClicked = buttonClicked;
 
     vm.task = null;
+    vm.aceSession = null;
 
     ///////////////////////////////
 
     function aceLoaded(_editor) {
+      vm.aceSession = _editor.getSession();
+
+      if(vm.task.notes){
+        vm.aceSession.getDocument().setValue(vm.task.notes);
+      }
     };
 
     function aceChanged(e) {
-      console.log(e);
+      vm.task.notes = vm.aceSession.getDocument().getValue();
     };
+
+    function buttonClicked(){
+      var updateTask = vm.factory.updateTask(vm.task);
+
+      updateTask.then(function(response){
+        vm.task = response.data;
+      });
+    }
 
   }
 
