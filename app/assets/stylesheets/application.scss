@@ -2,7 +2,7 @@
 @import "font-awesome";
 
 html, body {
-  background: url(https://images.unsplash.com/photo-1455218873509-8097305ee378?w=2468&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D) no-repeat center center fixed;
+  background: url(https://images.unsplash.com/photo-1473790034954-491b2ee68f30?auto=format&fit=crop&w=1950&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -32,6 +32,8 @@ body {
   background: white;
   padding-top: 20px;
   padding-bottom: 20px;
+
+  border: 5px solid #ddd;
 
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
