@@ -17,6 +17,7 @@
     vm.factory = taskFactory;
 
     vm.handleSubmit = handleSubmit;
+    vm.placeHolderText = placeHolderText;
 
     vm.tasks = [];
     vm.parentTask = null;
@@ -33,6 +34,14 @@
         vm.todoText = '';
         vm.showForm = false;
       });
+    }
+
+    function placeHolderText(){
+      if(vm.parentTask){
+        return "Add task to " + vm.parentTask.label;
+      } else {
+        return "Add Project";
+      }
     }
 
   }

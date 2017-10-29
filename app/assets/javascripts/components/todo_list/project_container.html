@@ -4,7 +4,7 @@
       ng-class="{'form-valid': $ctrl.commentForm.$valid, 'form-invalid': $ctrl.commentForm.$invalid}"
       novalidate>
   <div class="input-group">
-    <input type="text" class="form-control" placeholder="Add Project" ng-model="$ctrl.todoText" required>
+    <input type="text" class="form-control" placeholder="{{ $ctrl.placeHolderText() }}" ng-model="$ctrl.todoText" required>
     <span class="input-group-btn">
       <button class="btn btn-primary">Add</button>
     </span>
