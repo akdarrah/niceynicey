@@ -24,5 +24,7 @@
 <br />
 <button type="button" class="btn btn-primary" ng-click="$ctrl.buttonClicked()">Save</button>
 
-<hr>
-<project-container tasks="$ctrl.task.children" parent-task="$ctrl.task"></project-container>
+<div ng-if="$ctrl.task.children.length || $ctrl.task.state == 'pending'">
+  <hr>
+  <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task"></project-container>
+</div>

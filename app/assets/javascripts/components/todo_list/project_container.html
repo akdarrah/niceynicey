@@ -1,14 +1,16 @@
-<form id="comment-form"
-      name='$ctrl.commentForm'
-      ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"
-      ng-class="{'form-valid': $ctrl.commentForm.$valid, 'form-invalid': $ctrl.commentForm.$invalid}"
-      novalidate>
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="{{ $ctrl.placeHolderText() }}" ng-model="$ctrl.todoText" required>
-    <span class="input-group-btn">
-      <button class="btn btn-primary">Add</button>
-    </span>
-  </div>
-</form>
+<div ng-if="!$ctrl.parentTask || $ctrl.parentTask.state == 'pending'">
+  <form id="comment-form"
+        name='$ctrl.commentForm'
+        ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"
+        ng-class="{'form-valid': $ctrl.commentForm.$valid, 'form-invalid': $ctrl.commentForm.$invalid}"
+        novalidate>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="{{ $ctrl.placeHolderText() }}" ng-model="$ctrl.todoText" required>
+      <span class="input-group-btn">
+        <button class="btn btn-primary">Add</button>
+      </span>
+    </div>
+  </form>
+</div>
 
 <task-list tasks="$ctrl.tasks"></todo-list>
