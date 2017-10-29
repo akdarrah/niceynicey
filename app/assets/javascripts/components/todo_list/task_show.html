@@ -1,1 +1,14 @@
-<h1>FASFSD</h1>
+<a href="/tasks">All Tasks</a>
+<span ng-if="$ctrl.task.parent">
+  /
+  <a ng-href="/tasks/{{ $ctrl.task.parent.id }}">
+    <i class="fa fa-level-up"></i>
+    {{ $ctrl.task.parent.label }}
+  </a>
+</span>
+<br />
+
+<h1>{{$ctrl.task.label}}</h1>
+
+<br />
+<task-list tasks="$ctrl.task.children"></todo-list>
