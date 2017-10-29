@@ -17,6 +17,8 @@
 //= require bootstrap-sprockets
 //= require angular
 //= require sortable
+//= require src-min-noconflict/ace
+//= require ui-ace
 //= require angular-rails-templates
 //= require app
 //= require services/task.factory

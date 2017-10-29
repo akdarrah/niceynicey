@@ -8,7 +8,8 @@
     'taskFactory',
     'taskShow',
     'templates',
-    'ui.sortable'
+    'ui.sortable',
+    'ui.ace'
   ]);
 
 })();
