@@ -1,6 +1,11 @@
-<a href="/tasks">All Tasks</a>
+<a href="/tasks">
+  <i class="fa fa-arrow-left"></i>
+  All Tasks
+</a>
 <span ng-if="$ctrl.task.parent">
-  /
+  &nbsp;
+  <i class="fa fa-angle-right"></i>
+  &nbsp;
   <a ng-href="/tasks/{{ $ctrl.task.parent.id }}">
     <i class="fa fa-level-up"></i>
     {{ $ctrl.task.parent.label }}
@@ -19,7 +24,5 @@
 <br />
 <button type="button" class="btn btn-primary" ng-click="$ctrl.buttonClicked()">Save</button>
 
-<div ng-if="$ctrl.task.children.length">
-  <hr>
-  <task-list tasks="$ctrl.task.children" parent-task="$ctrl.task"></todo-list>
-</div>
+<hr>
+<project-container tasks="$ctrl.task.children" parent-task="$ctrl.task"></project-container>

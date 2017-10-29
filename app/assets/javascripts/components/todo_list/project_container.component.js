@@ -5,7 +5,8 @@
     templateUrl: 'components/todo_list/project_container.html',
     controller: ProjectContainerController,
     bindings: {
-      tasks: '<'
+      tasks: '<',
+      parentTask: '<'
     }
   });
 
@@ -18,12 +19,14 @@
     vm.handleSubmit = handleSubmit;
 
     vm.tasks = [];
+    vm.parentTask = null;
 
     ///////////////////////////////
 
     function handleSubmit(){
       var label = vm.todoText;
-      var createTask = vm.factory.createTask(label, null);
+      var parentTaskId = (vm.parentTask ? vm.parentTask.id : null);
+      var createTask = vm.factory.createTask(label, parentTaskId);
 
       createTask.then(function(response){
         vm.tasks.unshift(response.data);
