@@ -9,15 +9,16 @@
     }
   });
 
-  TaskShowController.$inject = ['$scope', '$http', 'taskFactory'];
+  TaskShowController.$inject = ['$scope', '$http', '$sce', 'taskFactory'];
 
-  function TaskShowController($scope, $http, taskFactory){
+  function TaskShowController($scope, $http, $sce, taskFactory){
     var vm = this;
     vm.factory = taskFactory;
 
     vm.aceLoaded = aceLoaded;
     vm.aceChanged = aceChanged;
     vm.buttonClicked = buttonClicked;
+    vm.notesHTML = notesHTML;
 
     vm.task = null;
     vm.aceSession = null;
@@ -42,6 +43,10 @@
       updateTask.then(function(response){
         vm.task = response.data;
       });
+    }
+
+    function notesHTML(){
+      return $sce.trustAsHtml(vm.task.rendered_notes);
     }
 
   }

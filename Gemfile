@@ -20,6 +20,9 @@ gem 'bootstrap', '~> 4.0.0.beta'
 gem "font-awesome-rails"
 gem "active_model_serializers"
 
+gem 'html-pipeline'
+gem 'commonmarker'
+
 gem 'gon'
 gem 'acts_as_list'
 gem 'devise'
