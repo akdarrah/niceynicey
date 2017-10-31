@@ -1,4 +1,4 @@
-<ul ng-show"$ctrl.tasks.length" ui-sortable="$ctrl.sortableOptions" ng-model="$ctrl.tasks">
+<ul ng-show"$ctrl.tasks.length" ui-sortable="$ctrl.sortableOptions" ng-model="$ctrl.tasks" class="task-list">
   <a-transclusion-directive>
     <task ng-repeat="task in $ctrl.tasks", task="task", parent-task="$ctrl.parentTask" class="sortable-item"></task>
   </a-transclusion-directive>
