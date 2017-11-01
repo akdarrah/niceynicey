@@ -27,6 +27,10 @@
     vm.task = null;
     vm.parentTask = null;
 
+    vm.listStyle = {
+      'background': chroma.random()
+    }
+
     ///////////////////////////////
 
     function handleSubmit(){

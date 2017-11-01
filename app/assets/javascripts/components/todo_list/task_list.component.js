@@ -16,10 +16,6 @@
     var vm = this;
     vm.factory = taskFactory;
 
-    vm.listStyle = {
-      'background': chroma.random()
-    }
-
     vm.sortableOptions = {
       cursor: "move",
       handle: ".reorder-icon",
