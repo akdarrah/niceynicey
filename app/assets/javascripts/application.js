@@ -10,7 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require please-compressed.js
+//= require chroma.min
 //= require jquery
 //= require jquery_ujs
 //= require jquery_ui

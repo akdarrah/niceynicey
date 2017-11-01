@@ -17,7 +17,7 @@
     vm.factory = taskFactory;
 
     vm.listStyle = {
-      'background': Please.make_color()
+      'background': chroma.random()
     }
 
     vm.sortableOptions = {
