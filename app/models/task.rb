@@ -5,6 +5,7 @@ class Task < ApplicationRecord
   belongs_to :user
 
   validates :user, :label, presence: true
+  validates :color_hex, presence: true, if: :root_task?
   validate :parent_must_be_pending, on: :create
 
   has_many :children,
@@ -34,6 +35,10 @@ class Task < ApplicationRecord
   def rendered_notes
     filter = HTML::Pipeline::MarkdownFilter.new(notes.to_s)
     filter.call
+  end
+
+  def root_task?
+    parent.blank?
   end
 
   private
