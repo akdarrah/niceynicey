@@ -1,33 +1,35 @@
-<a href="/tasks">
-  <i class="fa fa-arrow-left"></i>
-  All Tasks
-</a>
-<span ng-if="$ctrl.task.parent">
-  &nbsp;
-  <i class="fa fa-angle-right"></i>
-  &nbsp;
-  <a ng-href="/tasks/{{ $ctrl.task.parent.id }}">
-    <i class="fa fa-level-up"></i>
-    {{ $ctrl.task.parent.label }}
+<div class="task-show">
+  <a href="/tasks">
+    <i class="fa fa-arrow-left"></i>
+    All Tasks
   </a>
-</span>
-<br />
+  <span ng-if="$ctrl.task.parent">
+    &nbsp;
+    <i class="fa fa-angle-right"></i>
+    &nbsp;
+    <a class="parent-link" ng-style="$ctrl.parentLinkStyle" ng-href="/tasks/{{ $ctrl.task.parent.id }}">
+      <i class="fa fa-level-up"></i>
+      {{ $ctrl.task.parent.label }}
+    </a>
+  </span>
+  <br />
 
-<h1>{{$ctrl.task.label}}</h1>
+  <h1 class='white-text task-title' ng-style="$ctrl.titleStyle">{{$ctrl.task.label}}</h1>
 
-<br />
-<div ng-bind-html="$ctrl.notesHTML()"></div>
-<br />
+  <br />
+  <div ng-bind-html="$ctrl.notesHTML()"></div>
+  <br />
 
-<div ui-ace="{
-  onLoad: $ctrl.aceLoaded,
-  onChange: $ctrl.aceChanged
-}"></div>
+  <div ui-ace="{
+    onLoad: $ctrl.aceLoaded,
+    onChange: $ctrl.aceChanged
+  }"></div>
 
-<br />
-<button type="button" class="btn btn-primary" ng-click="$ctrl.buttonClicked()">Save</button>
+  <br />
+  <button type="button" class="btn btn-primary" ng-click="$ctrl.buttonClicked()">Save</button>
 
-<div ng-if="$ctrl.task.children.length || $ctrl.task.state == 'pending'">
-  <hr>
-  <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task"></project-container>
+  <div ng-if="$ctrl.task.children.length || $ctrl.task.state == 'pending'">
+    <hr>
+    <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task"></project-container>
+  </div>
 </div>

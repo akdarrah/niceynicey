@@ -67,10 +67,8 @@
     }
 
     function onInit(){
-      if(vm.task && vm.task.color_hex){
-        vm.listStyle = {
-          'background': vm.task.color_hex
-        }
+      vm.listStyle = {
+        'background': vm.task.color_hex
       }
     }
 

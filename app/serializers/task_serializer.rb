@@ -7,7 +7,8 @@ class TaskSerializer < ActiveModel::Serializer
   belongs_to :parent, if: -> { object.parent } do
     {
       id: object.parent.id,
-      label: object.parent.label
+      label: object.parent.label,
+      color_hex: object.parent.color_hex
     }
   end
 end

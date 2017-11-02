@@ -19,9 +19,12 @@
     vm.aceChanged = aceChanged;
     vm.buttonClicked = buttonClicked;
     vm.notesHTML = notesHTML;
+    vm.$onInit = onInit;
 
     vm.task = null;
     vm.aceSession = null;
+    vm.titleStyle = {};
+    vm.parentLinkStyle = {};
 
     ///////////////////////////////
 
@@ -47,6 +50,18 @@
 
     function notesHTML(){
       return $sce.trustAsHtml(vm.task.rendered_notes);
+    }
+
+    function onInit(){
+      vm.titleStyle = {
+        'background': vm.task.color_hex
+      }
+
+      if(vm.task.parent){
+        vm.parentLinkStyle = {
+          'background': vm.task.parent.color_hex
+        }
+      }
     }
 
   }
