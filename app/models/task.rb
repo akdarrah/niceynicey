@@ -4,9 +4,10 @@ class Task < ApplicationRecord
   belongs_to :parent, class_name: "Task", optional: true
   belongs_to :user
 
-  validates :user, :label, presence: true
-  validates :color_hex, presence: true, if: :root_task?
+  validates :user, :label, :color_hex, presence: true
   validate :parent_must_be_pending, on: :create
+
+  before_validation :set_color_hex_from_parent
 
   has_many :children,
     -> { order(position: :asc) },
@@ -37,10 +38,6 @@ class Task < ApplicationRecord
     filter.call
   end
 
-  def root_task?
-    parent.blank?
-  end
-
   private
 
   def complete_children!
@@ -50,6 +47,12 @@ class Task < ApplicationRecord
   def parent_must_be_pending
     if parent.present? && !parent.pending?
       errors.add(:parent, "must be pending")
+    end
+  end
+
+  def set_color_hex_from_parent
+    if parent.present?
+      self.color_hex = parent.color_hex.paint.darken(5)
     end
   end
 

@@ -68,15 +68,9 @@
 
     function onInit(){
       if(vm.task && vm.task.color_hex){
-        var colorHex = vm.task.color_hex;
-
         vm.listStyle = {
-          'background': colorHex
+          'background': vm.task.color_hex
         }
-
-        vm.task.children.forEach(function(child) {
-          child.color_hex = chroma(colorHex).darken(0.5).hex();
-        });
       }
     }
 
