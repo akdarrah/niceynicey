@@ -76,13 +76,13 @@ ul.no-list-style {
 .task-row {
   padding: 3px;
 
+  a {
+    color: white;
+  }
+
   .item-title {
     &.completed {
       text-decoration: line-through;
     }
-  }
-
-  &:hover {
-    background: #eee;
   }
 }
