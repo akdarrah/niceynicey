@@ -22,14 +22,12 @@
     vm.removeTask = removeTask;
     vm.toggleForm = toggleForm;
     vm.allowChildAddition = allowChildAddition;
+    vm.$onInit = onInit;
 
     vm.showForm = false;
     vm.task = null;
     vm.parentTask = null;
-
-    vm.listStyle = {
-      'background': chroma.random()
-    }
+    vm.listStyle = {};
 
     ///////////////////////////////
 
@@ -66,6 +64,14 @@
     function allowChildAddition(){
       return (!vm.parentTask && vm.task.state == 'pending') ||
         (vm.parentTask && vm.parentTask.state == 'pending');
+    }
+
+    function onInit(){
+      if(vm.task && vm.task.color_hex){
+        vm.listStyle = {
+          'background': vm.task.color_hex
+        }
+      }
     }
 
   }
