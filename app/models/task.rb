@@ -1,12 +1,29 @@
 class Task < ApplicationRecord
   include AASM
 
+  COLORS = [
+    "#001f3f",
+    "#0074D9",
+    "#7FDBFF",
+    "#39CCCC",
+    "#3D9970",
+    "#2ECC40",
+    "#01FF70",
+    "#FFDC00",
+    "#FF851B",
+    "#FF4136",
+    "#85144b",
+    "#F012BE",
+    "#B10DC9"
+  ]
+
   belongs_to :parent, class_name: "Task", optional: true
   belongs_to :user
 
   validates :user, :label, :color_hex, presence: true
   validate :parent_must_be_pending, on: :create
 
+  before_validation :set_temporary_color_hex
   before_validation :set_color_hex_from_parent
 
   has_many :children,
@@ -50,9 +67,15 @@ class Task < ApplicationRecord
     end
   end
 
+  def set_temporary_color_hex
+    if parent.blank?
+      self.color_hex ||= COLORS.sample
+    end
+  end
+
   def set_color_hex_from_parent
     if parent.present?
-      self.color_hex = parent.color_hex.paint.darken(5)
+      self.color_hex ||= parent.color_hex.paint.darken(5)
     end
   end
 
