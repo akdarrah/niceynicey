@@ -8,9 +8,11 @@ Rails.application.configure do
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
+  # config.eager_load = false
 
   # https://collectiveidea.com/blog/archives/2016/07/22/solutions-to-potential-upgrade-problems-in-rails-5
   config.eager_load = false
+  config.enable_dependency_loading = true
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
