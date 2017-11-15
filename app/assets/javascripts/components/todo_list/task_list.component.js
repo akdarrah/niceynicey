@@ -25,10 +25,24 @@
       },
     };
 
+    vm.listStyle = {};
     vm.tasks = [];
     vm.parentTask = null;
 
+    vm.$onInit = onInit;
+
     ///////////////////////////////
+
+    function onInit(){
+      if(vm.tasks.length && vm.parentTask){
+        var colorHex = vm.tasks[0].color_hex;
+        var darkerHex = chroma(colorHex).darken().saturate(1).hex();
+
+        vm.listStyle = {
+          'border-left': "5px solid " + darkerHex
+        }
+      }
+    }
 
   }
 

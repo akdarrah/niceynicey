@@ -70,9 +70,15 @@
       var rightColorHex = "#FFFFFF";
 
       vm.listStyle = {
+        'border-top': "1px solid " + leftColorHex,
         'background': rightColorHex,
         'background': "-webkit-linear-gradient(to right, " + leftColorHex + ", " + rightColorHex + ")",
         'background': "linear-gradient(to right, " + leftColorHex + ", " + rightColorHex + ")"
+      }
+
+      if(!vm.parentTask){
+        var darkerHex = chroma(vm.task.color_hex).darken().saturate(1).hex();
+        vm.listStyle['border-left'] = "5px solid " + darkerHex;
       }
     }
 
