@@ -36,6 +36,7 @@ class Task < ApplicationRecord
 
   scope :top_level, -> { where(parent_id: nil) }
   scope :position_order, -> { order(position: :asc) }
+  scope :pending, -> { where(state: :pending) }
 
   aasm :column => :state do
     state :pending, :initial => true
@@ -58,7 +59,7 @@ class Task < ApplicationRecord
   private
 
   def complete_children!
-    children.each(&:complete!)
+    children.pending.each(&:complete!)
   end
 
   def parent_must_be_pending

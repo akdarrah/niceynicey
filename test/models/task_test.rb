@@ -40,6 +40,20 @@ class TaskTest < ActiveSupport::TestCase
     assert child.reload.completed?
   end
 
+  test "a completed child task is NOT completed again" do
+    child = create(:task, state: :completed, parent: @task)
+
+    assert @task.pending?
+    assert child.completed?
+
+    assert_nothing_raised AASM::InvalidTransition do
+      assert @task.complete!
+    end
+
+    assert @task.reload.completed?
+    assert child.reload.completed?
+  end
+
   test "a task completes its grand-children when completed" do
     child = create(:task, parent: @task)
     grand = create(:task, parent: child)
