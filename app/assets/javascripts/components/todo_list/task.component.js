@@ -62,8 +62,7 @@
     }
 
     function allowChildAddition(){
-      return (!vm.parentTask && vm.task.state == 'pending') ||
-        (vm.parentTask && vm.parentTask.state == 'pending');
+      return vm.task.state == 'pending';
     }
 
     function onInit(){
