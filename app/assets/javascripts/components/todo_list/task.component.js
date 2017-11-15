@@ -66,19 +66,13 @@
     }
 
     function onInit(){
-      if(vm.parentTask){
-        var leftColorHex = vm.parentTask.color_hex;
-        var rightColorHex = vm.task.color_hex;
+      var leftColorHex = vm.task.color_hex;
+      var rightColorHex = "#FFFFFF";
 
-        vm.listStyle = {
-          'background': rightColorHex,
-          'background': "-webkit-linear-gradient(to right, " + leftColorHex + ", " + rightColorHex + ")",
-          'background': "linear-gradient(to right, " + leftColorHex + ", " + rightColorHex + ")"
-        }
-      } else {
-        vm.listStyle = {
-          'background': vm.task.color_hex
-        }
+      vm.listStyle = {
+        'background': rightColorHex,
+        'background': "-webkit-linear-gradient(to right, " + leftColorHex + ", " + rightColorHex + ")",
+        'background': "linear-gradient(to right, " + leftColorHex + ", " + rightColorHex + ")"
       }
     }
 
