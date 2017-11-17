@@ -69,13 +69,6 @@
       var leftColorHex = vm.task.color_hex;
       var rightColorHex = "#FFFFFF";
 
-      // vm.listStyle = {
-      //   'border-top': "1px solid " + leftColorHex,
-      //   'background': rightColorHex,
-      //   'background': "-webkit-linear-gradient(to right, " + leftColorHex + ", " + rightColorHex + ")",
-      //   'background': "linear-gradient(to right, " + leftColorHex + ", " + rightColorHex + ")"
-      // }
-
       vm.listStyle = {
         'background': vm.task.color_hex
       }
