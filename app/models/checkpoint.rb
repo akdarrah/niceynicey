@@ -25,6 +25,12 @@ class Checkpoint < ApplicationRecord
         duplicate
       end
 
+      qualifying_tasks.each do |qualifying_task|
+        qualifying_task.traverse do |task|
+          task.archive! if task.completed?
+        end
+      end
+
       duplicated_tasks.each do |duplicated_task|
         checkpoint.tasks << duplicated_task
       end

@@ -23,6 +23,8 @@ class CheckpointTest < ActiveSupport::TestCase
 
     checkpoint = Checkpoint.create_checkpoint!(@user)
     assert_equal 1, checkpoint.tasks.count
+
+    assert task.reload.archived?
   end
 
   test "pending tasks with completed children ARE saved in a checkpoint" do
@@ -43,24 +45,19 @@ class CheckpointTest < ActiveSupport::TestCase
     assert_equal 1, checkpoint_task.children.count
     checkpoint_child =  checkpoint_task.children.first
     assert_equal checkpoint, checkpoint_child.checkpoint
+
+    assert task.reload.pending?
+    assert child.reload.archived?
   end
 
   test "tasks with a checkpoint_id are NOT saved in a new checkpoint" do
-    assert_equal 0, @user.tasks.count
-
-    task = create(:task, user: @user)
+    task = create(:task, user: @user, checkpoint_id: 5)
     task.complete!
     assert task.completed?
 
-    checkpoint = Checkpoint.create_checkpoint!(@user)
-    assert_equal 1, checkpoint.tasks.count
-
-    assert_equal 2, @user.tasks.count
-
-    checkpoint = Checkpoint.create_checkpoint!(@user)
-    assert_equal 1, checkpoint.tasks.count
-
-    assert_equal 3, @user.tasks.count
+    assert_raises ActiveRecord::RecordInvalid do
+      checkpoint = Checkpoint.create_checkpoint!(@user)
+    end
   end
 
 end
