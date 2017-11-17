@@ -13,7 +13,7 @@ class Checkpoint < ApplicationRecord
         .no_checkpoint
         .select(&:completed_or_has_completed_child?)
 
-      qualifying_tasks = qualifying_tasks.map do |task|
+      duplicated_tasks = qualifying_tasks.map do |task|
         duplicate = task.dup_with_children do |duplicating_task|
           duplicating_task.completed_or_has_completed_child?
         end
@@ -25,8 +25,8 @@ class Checkpoint < ApplicationRecord
         duplicate
       end
 
-      qualifying_tasks.each do |qualifying_task|
-        checkpoint.tasks << qualifying_task
+      duplicated_tasks.each do |duplicated_task|
+        checkpoint.tasks << duplicated_task
       end
 
       checkpoint.save!
