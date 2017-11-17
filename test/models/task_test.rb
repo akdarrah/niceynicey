@@ -149,4 +149,43 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal 0, duplicate_grand.children.length
   end
 
+  # Task#completed_or_has_completed_child?
+
+  test "returns FALSE if task is NOT completed" do
+    assert @task.pending?
+    assert @task.children.blank?
+
+    refute @task.completed_or_has_completed_child?
+  end
+
+  test "returns TRUE if task IS completed" do
+    @task.complete!
+
+    assert @task.completed?
+    assert @task.children.blank?
+
+    assert @task.completed_or_has_completed_child?
+  end
+
+  test "returns FALSE if child is NOT completed" do
+    child = create(:task, parent: @task)
+
+    assert @task.pending?
+    assert child.pending?
+
+    refute @task.completed_or_has_completed_child?
+    refute child.completed_or_has_completed_child?
+  end
+
+  test "returns TRUE if child IS completed" do
+    child = create(:task, parent: @task)
+    child.complete!
+
+    assert @task.pending?
+    assert child.completed?
+
+    assert @task.completed_or_has_completed_child?
+    assert child.completed_or_has_completed_child?
+  end
+
 end

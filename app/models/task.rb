@@ -67,6 +67,11 @@ class Task < ApplicationRecord
     duplicate
   end
 
+  def completed_or_has_completed_child?
+    completed? ||
+      children.detect(&:completed_or_has_completed_child?).present?
+  end
+
   private
 
   def complete_children!
