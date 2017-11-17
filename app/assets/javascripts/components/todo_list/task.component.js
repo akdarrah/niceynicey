@@ -75,7 +75,7 @@
 
       if(!vm.parentTask){
         var darkerHex = chroma(vm.task.color_hex).darken().saturate(1).hex();
-        vm.listStyle['border-left'] = "5px solid " + darkerHex;
+        vm.listStyle['border-left'] = "3px solid " + darkerHex;
       }
     }
 
