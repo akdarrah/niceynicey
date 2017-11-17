@@ -19,7 +19,6 @@
 
     vm.handleSubmit = handleSubmit;
     vm.completeTask = completeTask;
-    vm.removeTask = removeTask;
     vm.toggleForm = toggleForm;
     vm.allowChildAddition = allowChildAddition;
     vm.$onInit = onInit;
@@ -48,13 +47,6 @@
       completeTask.then(function(response){
         vm.task = response.data;
       });
-    }
-
-    function removeTask(task){
-      if ($window.confirm("Are you sure?")){
-        vm.factory.destroyTask(task.id);
-        vm.task = null;
-      }
     }
 
     function toggleForm(){

@@ -11,4 +11,11 @@ class TasksController < ApplicationController
     @task = ActiveModel::SerializableResource.new(@task).to_json
   end
 
+  def destroy
+    @task = current_user.tasks.find(params[:id])
+    @task.destroy
+
+    redirect_to tasks_path
+  end
+
 end

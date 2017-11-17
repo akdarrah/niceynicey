@@ -25,6 +25,8 @@
 
   <br />
   <button type="button" class="btn btn-primary" ng-click="$ctrl.buttonClicked()">Save</button>
+  or
+  <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" ng-href="/tasks/{{$ctrl.task.id}}">Delete</a>
 
   <div ng-if="$ctrl.task.children.length || $ctrl.task.state == 'pending'">
     <hr>
