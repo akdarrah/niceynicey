@@ -26,6 +26,22 @@ class TaskTest < ActiveSupport::TestCase
     end
   end
 
+  test "a pending task can NOT be archived" do
+    assert @task.pending?
+
+    assert_raises AASM::InvalidTransition do
+      @task.archive!
+    end
+  end
+
+  test "a completed task CAN be archived" do
+    @task.complete!
+    assert @task.completed?
+
+    assert @task.archive!
+    assert @task.archived?
+  end
+
   # Children
 
   test "a task completes its children when completed" do

@@ -43,6 +43,7 @@ class Task < ApplicationRecord
   aasm :column => :state do
     state :pending, :initial => true
     state :completed
+    state :archived
 
     event :complete do
       transitions :from => :pending, :to => :completed
@@ -50,6 +51,10 @@ class Task < ApplicationRecord
       after do
         complete_children!
       end
+    end
+
+    event :archive do
+      transitions :from => :completed, :to => :archived
     end
   end
 
