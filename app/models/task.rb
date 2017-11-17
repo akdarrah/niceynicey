@@ -18,6 +18,7 @@ class Task < ApplicationRecord
   ]
 
   belongs_to :parent, class_name: "Task", optional: true
+  belongs_to :checkpoint, optional: true
   belongs_to :user
 
   validates :user, :label, :color_hex, presence: true
@@ -54,6 +55,16 @@ class Task < ApplicationRecord
   def rendered_notes
     filter = HTML::Pipeline::MarkdownFilter.new(notes.to_s)
     filter.call
+  end
+
+  def dup_with_children
+    duplicate = dup
+
+    children.each do |child|
+      duplicate.children << child.dup_with_children
+    end
+
+    duplicate
   end
 
   private

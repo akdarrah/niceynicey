@@ -94,4 +94,59 @@ class TaskTest < ActiveSupport::TestCase
     assert child.valid?
   end
 
+  # Task#dup_with_children
+
+  test "returns a dup of itself with duplicate children" do
+    child = create(:task, parent: @task)
+    grand = create(:task, parent: child)
+
+    assert @task.persisted?
+    assert_equal 1, @task.children.count
+    assert_equal child, @task.children.first
+
+    assert child.persisted?
+    assert_equal 1, child.children.count
+    assert_equal grand, child.children.first
+
+    assert grand.persisted?
+    assert_equal 0, grand.children.count
+
+    duplicate = @task.dup_with_children
+
+    assert duplicate.new_record?
+    assert_equal @task.label, duplicate.label
+    assert_equal @task.parent_id, duplicate.parent_id
+    assert_equal @task.user_id, duplicate.user_id
+    assert_equal @task.state, duplicate.state
+    assert_equal @task.position, duplicate.position
+    assert_equal @task.notes, duplicate.notes
+    assert_equal @task.color_hex, duplicate.color_hex
+
+    assert_equal 1, duplicate.children.length
+    duplicate_child = duplicate.children.first
+
+    assert duplicate_child.new_record?
+    assert_equal child.label, duplicate_child.label
+    assert_equal child.parent_id, duplicate_child.parent_id
+    assert_equal child.user_id, duplicate_child.user_id
+    assert_equal child.state, duplicate_child.state
+    assert_equal child.position, duplicate_child.position
+    assert_equal child.notes, duplicate_child.notes
+    assert_equal child.color_hex, duplicate_child.color_hex
+
+    assert_equal 1, duplicate_child.children.length
+    duplicate_grand = duplicate_child.children.first
+
+    assert duplicate_grand.new_record?
+    assert_equal grand.label, duplicate_grand.label
+    assert_equal grand.parent_id, duplicate_grand.parent_id
+    assert_equal grand.user_id, duplicate_grand.user_id
+    assert_equal grand.state, duplicate_grand.state
+    assert_equal grand.position, duplicate_grand.position
+    assert_equal grand.notes, duplicate_grand.notes
+    assert_equal grand.color_hex, duplicate_grand.color_hex
+
+    assert_equal 0, duplicate_grand.children.length
+  end
+
 end
