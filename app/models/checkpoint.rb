@@ -4,28 +4,32 @@ class Checkpoint < ApplicationRecord
 
   validates :tasks, presence: true
 
-  def self.new_checkpoint(user)
+  def self.create_checkpoint!(user)
     checkpoint = user.checkpoints.new
 
-    qualifying_tasks = user.tasks
-      .top_level
-      .no_checkpoint
-      .select(&:completed_or_has_completed_child?)
+    transaction do
+      qualifying_tasks = user.tasks
+        .top_level
+        .no_checkpoint
+        .select(&:completed_or_has_completed_child?)
 
-    qualifying_tasks = qualifying_tasks.map do |task|
-      duplicate = task.dup_with_children do |duplicating_task|
-        duplicating_task.completed_or_has_completed_child?
+      qualifying_tasks = qualifying_tasks.map do |task|
+        duplicate = task.dup_with_children do |duplicating_task|
+          duplicating_task.completed_or_has_completed_child?
+        end
+
+        duplicate.traverse do |task|
+          task.checkpoint = checkpoint
+        end
+
+        duplicate
       end
 
-      duplicate.traverse do |task|
-        task.checkpoint = checkpoint
+      qualifying_tasks.each do |qualifying_task|
+        checkpoint.tasks << qualifying_task
       end
 
-      duplicate
-    end
-
-    qualifying_tasks.each do |qualifying_task|
-      checkpoint.tasks << qualifying_task
+      checkpoint.save!
     end
 
     checkpoint

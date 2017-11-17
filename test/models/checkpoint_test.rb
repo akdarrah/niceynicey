@@ -5,15 +5,15 @@ class CheckpointTest < ActiveSupport::TestCase
     @user = create(:user)
   end
 
-  # Checkpoint#new_checkpoint
+  # Checkpoint#create_checkpoint!
 
   test "pending tasks are NOT saved in a checkpoint" do
     task = create(:task, user: @user)
     assert task.pending?
 
-    checkpoint = Checkpoint.new_checkpoint(@user)
-    assert_equal 0, checkpoint.tasks.length
-    refute checkpoint.valid?
+    assert_raises ActiveRecord::RecordInvalid do
+      Checkpoint.create_checkpoint!(@user)
+    end
   end
 
   test "completed tasks ARE saved in a checkpoint" do
@@ -21,9 +21,8 @@ class CheckpointTest < ActiveSupport::TestCase
     task.complete!
     assert task.completed?
 
-    checkpoint = Checkpoint.new_checkpoint(@user)
-    assert_equal 1, checkpoint.tasks.length
-    assert checkpoint.valid?
+    checkpoint = Checkpoint.create_checkpoint!(@user)
+    assert_equal 1, checkpoint.tasks.count
   end
 
   test "pending tasks with completed children ARE saved in a checkpoint" do
@@ -34,10 +33,7 @@ class CheckpointTest < ActiveSupport::TestCase
     child.complete!
     assert child.completed?
 
-    checkpoint = Checkpoint.new_checkpoint(@user)
-    assert checkpoint.valid?
-    assert checkpoint.save!
-
+    checkpoint = Checkpoint.create_checkpoint!(@user)
     assert_equal 2, checkpoint.tasks.count
 
     checkpoint_task = checkpoint.tasks.first
@@ -56,16 +52,12 @@ class CheckpointTest < ActiveSupport::TestCase
     task.complete!
     assert task.completed?
 
-    checkpoint = Checkpoint.new_checkpoint(@user)
-    assert checkpoint.valid?
-    assert checkpoint.save!
+    checkpoint = Checkpoint.create_checkpoint!(@user)
     assert_equal 1, checkpoint.tasks.count
 
     assert_equal 2, @user.tasks.count
 
-    checkpoint = Checkpoint.new_checkpoint(@user)
-    assert checkpoint.valid?
-    assert checkpoint.save!
+    checkpoint = Checkpoint.create_checkpoint!(@user)
     assert_equal 1, checkpoint.tasks.count
 
     assert_equal 3, @user.tasks.count
