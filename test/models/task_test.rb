@@ -210,4 +210,21 @@ class TaskTest < ActiveSupport::TestCase
     assert child.completed_or_has_completed_child?
   end
 
+  # Task#traverse
+
+  test "traverses through structure calling block" do
+    skip "Requires Mocha Gem"
+
+    child = create(:task, parent: @task)
+    grand = create(:task, parent: child)
+
+    @task.expects(:testing).once
+    child.expects(:testing).once
+    grand.expects(:testing).once
+
+    @task.traverse do |task|
+      task.testing
+    end
+  end
+
 end

@@ -81,6 +81,14 @@ class Task < ApplicationRecord
       children.detect(&:completed_or_has_completed_child?).present?
   end
 
+  def traverse(&block)
+    yield(self)
+
+    children.each do |child|
+      child.traverse(&block)
+    end
+  end
+
   private
 
   def complete_children!
