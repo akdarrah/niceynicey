@@ -38,6 +38,7 @@ class Task < ApplicationRecord
   scope :top_level, -> { where(parent_id: nil) }
   scope :position_order, -> { order(position: :asc) }
   scope :pending, -> { where(state: :pending) }
+  scope :no_checkpoint, -> { where(checkpoint_id: nil) }
 
   aasm :column => :state do
     state :pending, :initial => true
@@ -57,14 +58,22 @@ class Task < ApplicationRecord
     filter.call
   end
 
-  def dup_with_children
-    duplicate = dup
+  def dup_with_children(&block)
+    criteria_passed = (block_given? ? yield(self) : true)
 
-    children.each do |child|
-      duplicate.children << child.dup_with_children
+    if criteria_passed
+      duplicate = dup
+
+      children.each do |child|
+        duplicate_child = child.dup_with_children(&block)
+
+        if duplicate_child.present?
+          duplicate.children << duplicate_child
+        end
+      end
+
+      duplicate
     end
-
-    duplicate
   end
 
   def completed_or_has_completed_child?

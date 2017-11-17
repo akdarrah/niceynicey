@@ -149,6 +149,28 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal 0, duplicate_grand.children.length
   end
 
+  test "block can be passed to determine to keep task or not" do
+    child = create(:task, parent: @task)
+    grand = create(:task, parent: child)
+    pending_sibling = create(:task, parent: @task)
+
+    child.reload.complete!
+
+    assert @task.pending?
+    assert child.completed?
+    assert grand.reload.completed?
+    assert pending_sibling.pending?
+
+    duplicate = @task.dup_with_children do |task|
+      task.completed_or_has_completed_child?
+    end
+
+    assert_equal 2, @task.children.length
+    assert_equal 1, duplicate.children.length
+
+    assert duplicate.children.all?(&:completed?)
+  end
+
   # Task#completed_or_has_completed_child?
 
   test "returns FALSE if task is NOT completed" do
