@@ -66,16 +66,15 @@
     }
 
     function onInit(){
-      var leftColorHex = vm.task.color_hex;
-      var rightColorHex = "#FFFFFF";
+      var backgroundColor = vm.task.color_hex;
+      var borderColor = chroma(vm.task.color_hex).darken().saturate(1).hex();
 
       vm.listStyle = {
-        'background': vm.task.color_hex
+        'background': backgroundColor
       }
 
       if(!vm.parentTask){
-        var darkerHex = chroma(vm.task.color_hex).darken().saturate(1).hex();
-        vm.listStyle['border-left'] = "3px solid " + darkerHex;
+        vm.listStyle['border-left'] = "3px solid " + borderColor;
       }
     }
 
