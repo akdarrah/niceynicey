@@ -5,7 +5,7 @@
     templateUrl: 'components/todo_list/task_show.html',
     controller: TaskShowController,
     bindings: {
-      task: '<'
+      taskId: '@'
     }
   });
 
@@ -21,6 +21,7 @@
     vm.notesHTML = notesHTML;
     vm.$onInit = onInit;
 
+    vm.taskId = null;
     vm.task = null;
     vm.aceSession = null;
     vm.titleStyle = {};
@@ -30,10 +31,6 @@
 
     function aceLoaded(_editor) {
       vm.aceSession = _editor.getSession();
-
-      if(vm.task.notes){
-        vm.aceSession.getDocument().setValue(vm.task.notes);
-      }
     };
 
     function aceChanged(e) {
@@ -53,15 +50,25 @@
     }
 
     function onInit(){
-      vm.titleStyle = {
-        'background': vm.task.color_hex
-      }
+      var getTask = vm.factory.getTask(vm.taskId);
 
-      if(vm.task.parent){
-        vm.parentLinkStyle = {
-          'background': vm.task.parent.color_hex
+      getTask.then(function(response){
+        vm.task = response.data;
+
+        if(vm.task.notes){
+          vm.aceSession.getDocument().setValue(vm.task.notes);
         }
-      }
+
+        vm.titleStyle = {
+          'background': vm.task.color_hex
+        }
+
+        if(vm.task.parent){
+          vm.parentLinkStyle = {
+            'background': vm.task.parent.color_hex
+          }
+        }
+      });
     }
 
   }

@@ -10,6 +10,7 @@
   function taskFactory($http) {
     return {
       getTasks     : getTasks,
+      getTask      : getTask,
       createTask   : createTask,
       updateTask   : updateTask,
       destroyTask  : destroyTask,
@@ -29,6 +30,21 @@
 
       function getFailed(response) {
         console.info('Fetching Tasks Failed: ', response);
+        return response;
+      }
+    }
+
+    function getTask(taskId) {
+      return $http
+        .get('/api/tasks/' + taskId + '.json')
+        .then(getComplete, getFailed);
+
+      function getComplete(response) {
+        return response;
+      }
+
+      function getFailed(response) {
+        console.info('Fetching Task Failed: ', response);
         return response;
       }
     }
