@@ -6,7 +6,8 @@
     controller: ProjectContainerController,
     bindings: {
       tasks: '<',
-      parentTask: '<'
+      parentTask: '<',
+      tasksIndex: '='
     }
   });
 
@@ -21,6 +22,7 @@
 
     vm.tasks = [];
     vm.parentTask = null;
+    vm.tasksIndex = false;
 
     vm.$onInit = onInit;
 
@@ -47,7 +49,7 @@
     }
 
     function onInit(){
-      if(!vm.tasks){
+      if(vm.tasksIndex){
         var getTasks = vm.factory.getTasks();
 
         getTasks.then(function(response){
