@@ -6,6 +6,7 @@
     'task',
     'taskList',
     'taskFactory',
+    'checkpointFactory',
     'taskShow',
     'templates',
     'ui.sortable',
