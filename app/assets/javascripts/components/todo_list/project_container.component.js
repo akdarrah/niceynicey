@@ -22,6 +22,8 @@
     vm.tasks = [];
     vm.parentTask = null;
 
+    vm.$onInit = onInit;
+
     ///////////////////////////////
 
     function handleSubmit(){
@@ -41,6 +43,16 @@
         return "Add task to " + vm.parentTask.label;
       } else {
         return "Add Project";
+      }
+    }
+
+    function onInit(){
+      if(!vm.tasks){
+        var getTasks = vm.factory.getTasks();
+
+        getTasks.then(function(response){
+          vm.tasks = response.data;
+        });
       }
     }
 
