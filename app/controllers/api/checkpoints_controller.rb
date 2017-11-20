@@ -1,4 +1,4 @@
-class Api::TasksController < ApplicationController
+class Api::CheckpointsController < ApplicationController
   before_action :authenticate_user!
 
   def create

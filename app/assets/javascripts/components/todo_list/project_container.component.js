@@ -11,14 +11,16 @@
     }
   });
 
-  ProjectContainerController.$inject = ['$scope', '$http', 'taskFactory'];
+  ProjectContainerController.$inject = ['$scope', '$http', 'taskFactory', 'checkpointFactory'];
 
-  function ProjectContainerController($scope, $http, taskFactory){
+  function ProjectContainerController($scope, $http, taskFactory, checkpointFactory){
     var vm = this;
     vm.factory = taskFactory;
+    vm.checkpointFactory = checkpointFactory;
 
     vm.handleSubmit = handleSubmit;
     vm.placeHolderText = placeHolderText;
+    vm.createCheckpoint = createCheckpoint;
 
     vm.tasks = [];
     vm.parentTask = null;
@@ -50,12 +52,24 @@
 
     function onInit(){
       if(vm.tasksIndex){
-        var getTasks = vm.factory.getTasks();
-
-        getTasks.then(function(response){
-          vm.tasks = response.data;
-        });
+        getTasks();
       }
+    }
+
+    function createCheckpoint(){
+      var createCheckpoint = vm.checkpointFactory.createCheckpoint();
+
+      createCheckpoint.then(function(response){
+        getTasks();
+      });
+    }
+
+    function getTasks(){
+      var getTasks = vm.factory.getTasks();
+
+      getTasks.then(function(response){
+        vm.tasks = response.data;
+      });
     }
 
   }

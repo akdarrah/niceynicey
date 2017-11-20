@@ -14,7 +14,7 @@
 
     /////////////////////////
 
-    function createTask() {
+    function createCheckpoint() {
       return $http
         .post('/api/checkpoints.json')
         .then(getComplete, getFailed);

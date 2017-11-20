@@ -14,3 +14,12 @@
 </div>
 
 <task-list tasks="$ctrl.tasks"></task-list>
+
+<div ng-if="$ctrl.tasksIndex">
+  <div class="card">
+    <div class="card-block">
+      <h4 class="card-title">Archive Completed Tasks</h4>
+      <button class="btn btn-primary card-link" ng-click="$ctrl.createCheckpoint()">Create Checkpoint</button>
+    </div>
+  </div>
+</div>
