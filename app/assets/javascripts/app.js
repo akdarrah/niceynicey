@@ -6,6 +6,7 @@
     'task',
     'taskList',
     'taskFactory',
+    'checkpointShow',
     'checkpointFactory',
     'taskShow',
     'templates',
