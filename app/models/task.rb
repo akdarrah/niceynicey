@@ -37,8 +37,9 @@ class Task < ApplicationRecord
 
   scope :top_level, -> { where(parent_id: nil) }
   scope :position_order, -> { order(position: :asc) }
-  scope :pending, -> { where(state: :pending) }
   scope :no_checkpoint, -> { where(checkpoint_id: nil) }
+  scope :pending, -> { where(state: :pending) }
+  scope :completed, -> { where(state: :completed) }
   scope :unarchived, -> { where.not(state: :archived) }
 
   aasm :column => :state do
