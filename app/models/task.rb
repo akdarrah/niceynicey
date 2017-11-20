@@ -39,6 +39,7 @@ class Task < ApplicationRecord
   scope :position_order, -> { order(position: :asc) }
   scope :pending, -> { where(state: :pending) }
   scope :no_checkpoint, -> { where(checkpoint_id: nil) }
+  scope :unarchived, -> { where.not(state: :archived) }
 
   aasm :column => :state do
     state :pending, :initial => true

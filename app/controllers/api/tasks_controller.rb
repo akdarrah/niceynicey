@@ -3,7 +3,12 @@ class Api::TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy, :complete]
 
   def index
-    @tasks = current_user.tasks.top_level.position_order
+    @tasks = current_user.tasks
+      .top_level
+      .position_order
+      .no_checkpoint
+      .unarchived
+
     render json: @tasks, status: :ok
   end
 
