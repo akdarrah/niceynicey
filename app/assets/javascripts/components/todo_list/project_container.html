@@ -1,4 +1,4 @@
-<div ng-if="!$ctrl.parentTask || $ctrl.parentTask.state == 'pending'">
+<div ng-if="$ctrl.showForm()">
   <form id="comment-form"
         name='$ctrl.commentForm'
         ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"

@@ -21,6 +21,7 @@
     vm.handleSubmit = handleSubmit;
     vm.placeHolderText = placeHolderText;
     vm.createCheckpoint = createCheckpoint;
+    vm.showForm = showForm;
 
     vm.tasks = [];
     vm.parentTask = null;
@@ -70,6 +71,10 @@
       getTasks.then(function(response){
         vm.tasks = response.data;
       });
+    }
+
+    function showForm(){
+      return !vm.parentTask || vm.parentTask.state == 'pending'
     }
 
   }
