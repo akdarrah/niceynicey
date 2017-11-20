@@ -20,6 +20,7 @@ gem 'bootstrap', '~> 4.0.0.beta'
 gem "font-awesome-rails"
 gem "active_model_serializers"
 gem 'chroma'
+gem 'stamp'
 
 gem 'html-pipeline'
 gem 'commonmarker'
