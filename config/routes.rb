@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :api do
-    resources :checkpoints, only: [:create, :show]
+    resources :checkpoints, only: [:create, :index, :show]
     resources :tasks, only: [:index, :show, :create, :update, :destroy] do
       member do
         post :complete

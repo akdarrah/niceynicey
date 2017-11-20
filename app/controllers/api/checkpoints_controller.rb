@@ -6,6 +6,11 @@ class Api::CheckpointsController < ApplicationController
     render json: @checkpoint, status: :ok
   end
 
+  def index
+    @checkpoints = current_user.checkpoints.order("created_at desc")
+    render json: @checkpoints, status: :ok
+  end
+
   def create
     @checkpoint = Checkpoint.create_checkpoint!(current_user)
     render json: @checkpoint, status: :ok

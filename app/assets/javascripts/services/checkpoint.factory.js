@@ -10,7 +10,8 @@
   function checkpointFactory($http) {
     return {
       createCheckpoint : createCheckpoint,
-      getCheckpoint    : getCheckpoint
+      getCheckpoint    : getCheckpoint,
+      getCheckpoints   : getCheckpoints
     };
 
     /////////////////////////
@@ -41,6 +42,21 @@
 
       function getFailed(response) {
         console.info('Getting Checkpoint Failed: ', response);
+        return response;
+      }
+    }
+
+    function getCheckpoints(){
+      return $http
+        .get('/api/checkpoints.json')
+        .then(getComplete, getFailed);
+
+      function getComplete(response) {
+        return response;
+      }
+
+      function getFailed(response) {
+        console.info('Getting Checkpoints Failed: ', response);
         return response;
       }
     }
