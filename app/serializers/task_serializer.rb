@@ -11,4 +11,10 @@ class TaskSerializer < ActiveModel::Serializer
       color_hex: object.parent.color_hex
     }
   end
+
+  def children
+    object.children
+      .no_checkpoint
+      .unarchived
+  end
 end
