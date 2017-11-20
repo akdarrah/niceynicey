@@ -101,7 +101,7 @@ class Task < ApplicationRecord
   end
 
   def parent_must_be_pending
-    if parent.present? && !parent.pending?
+    if checkpoint.blank? && parent.present? && !parent.pending?
       errors.add(:parent, "must be pending")
     end
   end

@@ -110,6 +110,20 @@ class TaskTest < ActiveSupport::TestCase
     assert child.valid?
   end
 
+  test "parent does not have to be pending if checkpoint is present" do
+    @task.complete!
+    assert @task.completed?
+
+    child = @task.children.build(user: @task.user, label: "Test")
+    refute child.valid?
+
+    @task.children.clear
+
+    @checkpoint = build(:checkpoint)
+    child = @task.children.build(user: @task.user, label: "Test", checkpoint: @checkpoint)
+    assert child.valid?
+  end
+
   # Task#dup_with_children
 
   test "returns a dup of itself with duplicate children" do
