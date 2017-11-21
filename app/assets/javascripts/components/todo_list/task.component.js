@@ -7,7 +7,8 @@
     bindings: {
       task: '<',
       parentTask: '<',
-      showForm: '<'
+      showForm: '<',
+      readOnly: '='
     }
   });
 
@@ -23,6 +24,7 @@
     vm.allowChildAddition = allowChildAddition;
     vm.$onInit = onInit;
 
+    vm.readOnly = false;
     vm.showForm = false;
     vm.task = null;
     vm.parentTask = null;
