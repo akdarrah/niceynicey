@@ -5,7 +5,8 @@
     templateUrl: 'components/todo_list/task_show.html',
     controller: TaskShowController,
     bindings: {
-      taskId: '@'
+      taskId: '@',
+      readOnly: '='
     }
   });
 
@@ -21,6 +22,7 @@
     vm.notesHTML = notesHTML;
     vm.$onInit = onInit;
 
+    vm.readOnly = false;
     vm.taskId = null;
     vm.task = null;
     vm.aceSession = null;
@@ -31,6 +33,7 @@
 
     function aceLoaded(_editor) {
       vm.aceSession = _editor.getSession();
+      _editor.setReadOnly(vm.readOnly);
     };
 
     function aceChanged(e) {
