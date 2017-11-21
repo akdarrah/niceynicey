@@ -32,6 +32,6 @@
 
   <div ng-if="$ctrl.task.children.length || $ctrl.task.state == 'pending'">
     <hr>
-    <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task"></project-container>
+    <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task" read-only="$ctrl.readOnly"></project-container>
   </div>
 </div>

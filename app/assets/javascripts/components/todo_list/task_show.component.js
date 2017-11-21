@@ -5,8 +5,7 @@
     templateUrl: 'components/todo_list/task_show.html',
     controller: TaskShowController,
     bindings: {
-      taskId: '@',
-      readOnly: '='
+      taskId: '@'
     }
   });
 
@@ -57,6 +56,8 @@
 
       getTask.then(function(response){
         vm.task = response.data;
+
+        vm.readOnly = vm.task.checkpoint_id != null;
 
         if(vm.task.notes){
           vm.aceSession.getDocument().setValue(vm.task.notes);
