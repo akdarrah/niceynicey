@@ -7,7 +7,8 @@
     bindings: {
       tasks: '<',
       parentTask: '<',
-      tasksIndex: '='
+      tasksIndex: '=',
+      readOnly: '='
     }
   });
 
@@ -26,6 +27,7 @@
     vm.tasks = [];
     vm.parentTask = null;
     vm.tasksIndex = false;
+    vm.readOnly = false;
 
     vm.$onInit = onInit;
 
@@ -74,7 +76,7 @@
     }
 
     function showForm(){
-      return !vm.parentTask || vm.parentTask.state == 'pending'
+      return !vm.readOnly && (!vm.parentTask || vm.parentTask.state == 'pending')
     }
 
   }
