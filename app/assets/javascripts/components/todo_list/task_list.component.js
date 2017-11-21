@@ -6,7 +6,8 @@
     controller: TaskListController,
     bindings: {
       tasks: '<',
-      parentTask: '<'
+      parentTask: '<',
+      readOnly: '='
     }
   });
 
@@ -28,6 +29,7 @@
     vm.listStyle = {};
     vm.tasks = [];
     vm.parentTask = null;
+    vm.readOnly = false;
 
     vm.$onInit = onInit;
 
