@@ -14,8 +14,12 @@ class TaskSerializer < ActiveModel::Serializer
   end
 
   def children
-    object.children
-      .no_checkpoint
-      .unarchived
+    if object.checkpoint.present?
+      object.children
+    else
+      object.children
+        .no_checkpoint
+        .unarchived
+    end
   end
 end

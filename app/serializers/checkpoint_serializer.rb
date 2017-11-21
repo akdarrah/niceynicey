@@ -2,7 +2,7 @@ class CheckpointSerializer < ActiveModel::Serializer
   attributes :id, :user_id, :created_at, :updated_at,
     :completed_tasks_count, :human_completed_at
 
-  has_many :tasks, serializer: ArchivedTaskSerializer
+  has_many :tasks
 
   def tasks
     object.tasks
