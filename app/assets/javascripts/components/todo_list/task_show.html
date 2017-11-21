@@ -30,7 +30,7 @@
     <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" ng-href="/tasks/{{$ctrl.task.id}}">Delete</a>
   </div>
 
-  <div ng-if="$ctrl.task.children.length || $ctrl.task.state == 'pending'">
+  <div ng-if="$ctrl.showChildren()">
     <hr>
     <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task" read-only="$ctrl.readOnly"></project-container>
   </div>

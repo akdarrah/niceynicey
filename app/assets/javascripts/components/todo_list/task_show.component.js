@@ -19,6 +19,7 @@
     vm.aceChanged = aceChanged;
     vm.buttonClicked = buttonClicked;
     vm.notesHTML = notesHTML;
+    vm.showChildren = showChildren;
     vm.$onInit = onInit;
 
     vm.readOnly = false;
@@ -49,6 +50,10 @@
 
     function notesHTML(){
       return $sce.trustAsHtml(vm.task.rendered_notes);
+    }
+
+    function showChildren(){
+      return vm.task && (vm.task.children.length || vm.task.state == 'pending');
     }
 
     function onInit(){
