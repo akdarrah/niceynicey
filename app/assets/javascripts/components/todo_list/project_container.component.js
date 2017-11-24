@@ -41,7 +41,6 @@
       createTask.then(function(response){
         vm.tasks.unshift(response.data);
         vm.todoText = '';
-        vm.showForm = false;
       });
     }
 
