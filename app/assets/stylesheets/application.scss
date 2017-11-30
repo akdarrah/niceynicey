@@ -96,6 +96,8 @@ ul.no-list-style {
 }
 
 .task-show {
+  overflow-wrap: break-word;
+
   .parent-link {
     color: white;
     padding: 3px;
