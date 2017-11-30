@@ -67,6 +67,10 @@
         'background': backgroundColor
       }
 
+      if(vm.task.state == "completed"){
+        vm.listStyle['opacity'] = "0.8";
+      }
+
       if(!vm.parentTask){
         vm.listStyle['border-left'] = "3px solid " + borderColor;
       }
