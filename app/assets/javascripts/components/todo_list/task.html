@@ -1,5 +1,5 @@
 <li ng-if="$ctrl.task" ng-style="$ctrl.listStyle">
-  <div class="task-row">
+  <div class="task-row no-word-break">
     <span ng-if="!$ctrl.readOnly">
       <!-- <i class="fa fa-bars reorder-icon"></i> -->
       <button ng-disabled="$ctrl.task.state=='completed'" type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.completeTask($ctrl.task)">
