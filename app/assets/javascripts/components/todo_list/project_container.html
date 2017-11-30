@@ -18,7 +18,7 @@
 <div ng-if="$ctrl.tasksIndex">
   <div class="card">
     <div class="card-block">
-      <h4 class="card-title">Archive Completed Tasks</h4>
+      <h4 class="card-title">Archive {{$ctrl.completedTaskCount()}} Completed Tasks</h4>
       <button class="btn btn-primary card-link" ng-click="$ctrl.createCheckpoint()">Create Checkpoint</button>
       or
       <a href="/checkpoints">View All Checkpoints</a>
