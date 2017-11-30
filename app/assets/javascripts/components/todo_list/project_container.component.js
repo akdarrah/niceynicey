@@ -23,7 +23,6 @@
     vm.placeHolderText = placeHolderText;
     vm.createCheckpoint = createCheckpoint;
     vm.showForm = showForm;
-    vm.completedTaskCount = completedTaskCount;
 
     vm.tasks = [];
     vm.parentTask = null;
@@ -77,24 +76,6 @@
 
     function showForm(){
       return !vm.readOnly && (!vm.parentTask || vm.parentTask.state == 'pending')
-    }
-
-    function completedTaskCount(tasks){
-      var parentTasks = tasks || vm.tasks || [];
-
-      var completedCount = parentTasks.map(function(task){
-        return (task.state == "completed" ? 1 : 0);
-      }).reduce(function(sum, number){
-        return sum + number;
-      }, 0);
-
-      var completedChildrenCount = parentTasks.map(function(task){
-        return completedTaskCount(task.children);
-      }).reduce(function(sum, number){
-        return sum + number;
-      }, 0);
-
-      return completedCount + completedChildrenCount;
     }
 
   }
