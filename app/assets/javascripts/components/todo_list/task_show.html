@@ -12,26 +12,59 @@
       {{ $ctrl.task.parent.label }}
     </a>
   </span>
+  <div class="float-right">
+    <a href="" ng-click="$ctrl.toggleEditMode()" title="Edit {{$ctrl.task.label}}">
+      <i class="fa fa-cog"></i>
+    </a>
+  </div>
   <br />
 
-  <h1 class='white-text task-title no-word-break' ng-style="$ctrl.titleStyle">{{$ctrl.task.label}}</h1>
-
-  <br />
-
-  <div ui-ace="{
-    onLoad: $ctrl.aceLoaded,
-    onChange: $ctrl.aceChanged
-  }"></div>
-
-  <div ng-if="!$ctrl.readOnly">
+  <div ng-if="!$ctrl.editMode">
+    <h1 class='white-text task-title no-word-break' ng-style="$ctrl.titleStyle">{{$ctrl.task.label}}</h1>
     <br />
-    <button type="button" class="btn btn-primary" ng-click="$ctrl.buttonClicked()">Save</button>
-    or
-    <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" ng-href="/tasks/{{$ctrl.task.id}}">Delete</a>
+    <div ui-ace="{
+      onLoad: $ctrl.aceLoaded,
+      onChange: $ctrl.aceChanged
+    }"></div>
+    <div ng-if="!$ctrl.readOnly">
+      <br />
+      <button type="button" class="btn btn-primary" ng-click="$ctrl.updateTask()">Save</button>
+    </div>
+    <div ng-if="$ctrl.showChildren()">
+      <hr>
+      <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task" read-only="$ctrl.readOnly"></project-container>
+    </div>
   </div>
 
-  <div ng-if="$ctrl.showChildren()">
-    <hr>
-    <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task" read-only="$ctrl.readOnly"></project-container>
+  <div ng-if="$ctrl.editMode">
+    <br />
+    <form id="comment-form"
+          name='$ctrl.commentForm'
+          ng-submit="$ctrl.commentForm.$valid && $ctrl.updateTask()"
+          ng-class="{'form-valid': $ctrl.commentForm.$valid, 'form-invalid': $ctrl.commentForm.$invalid}"
+          novalidate>
+      <div class="form-group row">
+        <label for="task-label-control" class="col-sm-2 col-form-label col-form-label-lg">Label</label>
+        <div class="col-sm-10">
+          <input type="text" ng-model="$ctrl.task.label" class="form-control form-control-lg" id="task-label-control" placeholder="Label" ng-value="$ctrl.task.label">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-primary">Save</button>
+          or
+          <a href="" ng-click="$ctrl.toggleEditMode()">Cancel</a>
+        </div>
+      </div>
+    </form>
+    <br />
+    <div class="alert alert-danger" role="alert">
+      <p>Delete {{$ctrl.task.label}} along with <strong>{{$ctrl.task.children.length}}</strong> sub-tasks.</p>
+      <div class="small-12">
+        <a data-confirm="Are you sure?" class="btn btn-danger" rel="nofollow" data-method="delete" ng-href="/tasks/{{$ctrl.task.id}}">Delete {{$ctrl.task.label}}</a>
+      </div>
+    </div>
   </div>
+
 </div>

@@ -17,11 +17,13 @@
 
     vm.aceLoaded = aceLoaded;
     vm.aceChanged = aceChanged;
-    vm.buttonClicked = buttonClicked;
+    vm.updateTask = updateTask;
     vm.notesHTML = notesHTML;
     vm.showChildren = showChildren;
+    vm.toggleEditMode = toggleEditMode;
     vm.$onInit = onInit;
 
+    vm.editMode = false;
     vm.readOnly = false;
     vm.taskId = null;
     vm.task = null;
@@ -39,14 +41,6 @@
     function aceChanged(e) {
       vm.task.notes = vm.aceSession.getDocument().getValue();
     };
-
-    function buttonClicked(){
-      var updateTask = vm.factory.updateTask(vm.task);
-
-      updateTask.then(function(response){
-        vm.task = response.data;
-      });
-    }
 
     function notesHTML(){
       return $sce.trustAsHtml(vm.task.rendered_notes);
@@ -77,6 +71,19 @@
             'background': vm.task.parent.color_hex
           }
         }
+      });
+    }
+
+    function toggleEditMode(){
+      vm.editMode = !vm.editMode;
+    }
+
+    function updateTask(){
+      var updateTask = vm.factory.updateTask(vm.task);
+
+      updateTask.then(function(response){
+        vm.task = response.data;
+        vm.editMode = false;
       });
     }
 
