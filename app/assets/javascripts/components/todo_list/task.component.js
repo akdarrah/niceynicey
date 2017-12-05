@@ -63,16 +63,15 @@
       var backgroundColor = vm.task.color_hex;
       var borderColor = chroma(vm.task.color_hex).darken().saturate(1).hex();
 
-      vm.listStyle = {
-        'background': backgroundColor
-      }
+      vm.listStyle = {};
 
       if(vm.task.state == "completed"){
         vm.listStyle['opacity'] = "0.8";
       }
 
       if(!vm.parentTask){
-        vm.listStyle['border-left'] = "3px solid " + borderColor;
+        vm.listStyle['border-left'] = "5px solid " + borderColor;
+        vm.listStyle['background'] = backgroundColor;
       }
     }
 
