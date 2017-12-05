@@ -22,14 +22,7 @@
   <div ng-if="!$ctrl.editMode">
     <h1 class='white-text task-title no-word-break' ng-style="$ctrl.titleStyle">{{$ctrl.task.label}}</h1>
     <br />
-    <div ui-ace="{
-      onLoad: $ctrl.aceLoaded,
-      onChange: $ctrl.aceChanged
-    }"></div>
-    <div ng-if="!$ctrl.readOnly">
-      <br />
-      <button type="button" class="btn btn-primary" ng-click="$ctrl.updateTask()">Save</button>
-    </div>
+    <div ui-ace ng-change="$ctrl.updateTask()" ng-model-options="{ debounce: 1000 }" ng-model="$ctrl.task.notes"></div>
     <div ng-if="$ctrl.showChildren()">
       <hr>
       <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task" read-only="$ctrl.readOnly"></project-container>

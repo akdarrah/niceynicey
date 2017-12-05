@@ -15,10 +15,7 @@
     var vm = this;
     vm.factory = taskFactory;
 
-    vm.aceLoaded = aceLoaded;
-    vm.aceChanged = aceChanged;
     vm.updateTask = updateTask;
-    vm.notesHTML = notesHTML;
     vm.showChildren = showChildren;
     vm.toggleEditMode = toggleEditMode;
     vm.$onInit = onInit;
@@ -27,24 +24,10 @@
     vm.readOnly = false;
     vm.taskId = null;
     vm.task = null;
-    vm.aceSession = null;
     vm.titleStyle = {};
     vm.parentLinkStyle = {};
 
     ///////////////////////////////
-
-    function aceLoaded(_editor) {
-      vm.aceSession = _editor.getSession();
-      _editor.setReadOnly(vm.readOnly);
-    };
-
-    function aceChanged(e) {
-      vm.task.notes = vm.aceSession.getDocument().getValue();
-    };
-
-    function notesHTML(){
-      return $sce.trustAsHtml(vm.task.rendered_notes);
-    }
 
     function showChildren(){
       return vm.task && (vm.task.children.length || vm.task.state == 'pending');
@@ -57,10 +40,6 @@
         vm.task = response.data;
 
         vm.readOnly = vm.task.checkpoint_id != null;
-
-        if(vm.task.notes){
-          vm.aceSession.getDocument().setValue(vm.task.notes);
-        }
 
         vm.titleStyle = {
           'background': vm.task.color_hex
