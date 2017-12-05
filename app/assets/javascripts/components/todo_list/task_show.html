@@ -12,7 +12,7 @@
       {{ $ctrl.task.parent.label }}
     </a>
   </span>
-  <div class="float-right">
+  <div ng-if="!$ctrl.readOnly" class="float-right">
     <a href="" ng-click="$ctrl.toggleEditMode()" title="Edit {{$ctrl.task.label}}">
       <i class="fa fa-cog"></i>
     </a>
@@ -22,7 +22,7 @@
   <div ng-if="!$ctrl.editMode">
     <h1 class='white-text task-title no-word-break' ng-style="$ctrl.titleStyle">{{$ctrl.task.label}}</h1>
     <br />
-    <div ui-ace ng-change="$ctrl.updateTask()" ng-model-options="{ debounce: 1000 }" ng-model="$ctrl.task.notes"></div>
+    <div ui-ace ng-change="$ctrl.updateTask()" ng-readonly="$ctrl.readOnly" ng-model-options="{ debounce: 1000 }" ng-model="$ctrl.task.notes"></div>
     <div ng-if="$ctrl.showChildren()">
       <hr>
       <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task" read-only="$ctrl.readOnly"></project-container>

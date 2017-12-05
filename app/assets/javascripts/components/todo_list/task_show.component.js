@@ -58,6 +58,10 @@
     }
 
     function updateTask(){
+      if(vm.readOnly){
+        return false;
+      }
+
       var updateTask = vm.factory.updateTask(vm.task);
 
       updateTask.then(function(response){
