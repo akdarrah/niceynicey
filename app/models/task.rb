@@ -60,11 +60,6 @@ class Task < ApplicationRecord
     end
   end
 
-  def rendered_notes
-    filter = HTML::Pipeline::MarkdownFilter.new(notes.to_s)
-    filter.call
-  end
-
   def dup_with_children(&block)
     criteria_passed = (block_given? ? yield(self) : true)
 
