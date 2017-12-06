@@ -26,6 +26,10 @@
         var position = (ui.item.sortable.dropindex + 1);
         var parentTask = ui.item.sortable.droptarget.scope().$ctrl.parentTask;
 
+        if(vm.parentTask !== parentTask){
+          return false;
+        }
+
         task.parent_id = parentTask.id;
         task.parent = parentTask;
         task.position = position;
