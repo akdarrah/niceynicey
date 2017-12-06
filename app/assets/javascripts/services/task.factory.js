@@ -81,7 +81,7 @@
       }
 
       function getFailed(response) {
-        console.info('Creating Task Failed: ', response);
+        console.info('Updating Task Failed: ', response);
         return response;
       }
     }
