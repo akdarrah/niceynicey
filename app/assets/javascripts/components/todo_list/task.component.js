@@ -61,7 +61,6 @@
 
     function onInit(){
       var backgroundColor = vm.task.color_hex;
-      var borderColor = chroma(vm.task.color_hex).darken().saturate(1).hex();
 
       vm.listStyle = {};
 
@@ -70,7 +69,6 @@
       }
 
       if(!vm.parentTask){
-        vm.listStyle['border-left'] = "5px solid " + borderColor;
         vm.listStyle['background'] = backgroundColor;
       }
     }
