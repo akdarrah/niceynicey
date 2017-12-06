@@ -68,7 +68,8 @@
       var params = {
         label: task.label,
         notes: task.notes,
-        position: task.position
+        position: task.position,
+        parent_id: task.parent_id
       };
 
       return $http

@@ -1,7 +1,7 @@
-<li ng-if="$ctrl.task" ng-style="$ctrl.listStyle">
+<div ng-style="$ctrl.listStyle">
   <div class="task-row no-word-break">
     <span ng-if="!$ctrl.readOnly">
-      <!-- <i class="fa fa-bars reorder-icon"></i> -->
+      <i class="fa fa-bars reorder-icon"></i>
       <button ng-disabled="$ctrl.task.state=='completed'" type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.completeTask($ctrl.task)">
         <i class="fa fa-check"></i>
       </button>
@@ -10,6 +10,7 @@
       </button>
     </span>
     <a ng-href="/tasks/{{$ctrl.task.id}}">
+      <span>{{$ctrl.task.id}}</span>
       <span class="item-title" ng-class="{'completed': $ctrl.task.state=='completed'}">{{ $ctrl.task.label }}</span>
     </a>
   </div>
@@ -35,4 +36,4 @@
   </div>
 
   <task-list parent-task="$ctrl.task" tasks="$ctrl.task.children" read-only="$ctrl.readOnly"></task-list>
-</li>
+</div>

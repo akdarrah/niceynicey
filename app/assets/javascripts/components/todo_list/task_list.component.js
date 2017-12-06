@@ -20,9 +20,21 @@
     vm.sortableOptions = {
       cursor: "move",
       handle: ".reorder-icon",
-      items: '.sortable-item',
-      stop: function(event, ui) {
-        console.log(ui.item.sortable.model);
+      connectWith: ".task-sortable-ul",
+      update: function(event, ui) {
+        var task = ui.item.sortable.model;
+        var position = (ui.item.sortable.dropindex + 1);
+        var parentTask = ui.item.sortable.droptarget.scope().$ctrl.parentTask;
+
+        task.parent_id = parentTask.id;
+        task.parent = parentTask;
+        task.position = position;
+
+        var updateTask = vm.factory.updateTask(task);
+
+        updateTask.then(function(response){
+          task = response.data;
+        });
       },
     };
 
