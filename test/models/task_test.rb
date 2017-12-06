@@ -124,6 +124,17 @@ class TaskTest < ActiveSupport::TestCase
     assert child.valid?
   end
 
+  test "A task cannot be moved under a completed parent" do
+    @task.complete!
+    assert @task.completed?
+
+    child = create(:task)
+    assert child.valid?
+
+    child.parent_id = @task.id
+    refute child.valid?
+  end
+
   # Task#dup_with_children
 
   test "returns a dup of itself with duplicate children" do

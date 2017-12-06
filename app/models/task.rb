@@ -22,7 +22,7 @@ class Task < ApplicationRecord
   belongs_to :user
 
   validates :user, :label, :color_hex, presence: true
-  validate :parent_must_be_pending, on: :create
+  validate :parent_must_be_pending
 
   before_validation :set_temporary_color_hex
   before_validation :set_color_hex_from_parent
@@ -98,7 +98,7 @@ class Task < ApplicationRecord
   end
 
   def parent_must_be_pending
-    if checkpoint.blank? && parent.present? && !parent.pending?
+    if !completed? && checkpoint.blank? && parent.present? && !parent.pending?
       errors.add(:parent, "must be pending")
     end
   end
