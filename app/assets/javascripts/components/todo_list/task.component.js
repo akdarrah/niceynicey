@@ -61,14 +61,13 @@
 
     function onInit(){
       var backgroundColor = vm.task.color_hex;
+      var completedBackgroundColor = chroma(vm.task.color_hex).darken().saturate(1).hex();
 
       vm.listStyle = {};
 
       if(vm.task.state == "completed"){
-        vm.listStyle['opacity'] = "0.8";
-      }
-
-      if(!vm.parentTask){
+        vm.listStyle['background'] = completedBackgroundColor;
+      } else if(!vm.parentTask){
         vm.listStyle['background'] = backgroundColor;
       }
     }
