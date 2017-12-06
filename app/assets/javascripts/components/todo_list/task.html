@@ -10,7 +10,6 @@
       </button>
     </span>
     <a ng-href="/tasks/{{$ctrl.task.id}}">
-      <span>{{$ctrl.task.id}}</span>
       <span class="item-title" ng-class="{'completed': $ctrl.task.state=='completed'}">{{ $ctrl.task.label }}</span>
     </a>
   </div>
