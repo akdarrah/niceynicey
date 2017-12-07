@@ -8,7 +8,8 @@
       task: '<',
       parentTask: '<',
       showForm: '<',
-      readOnly: '='
+      readOnly: '=',
+      topLevel: '='
     }
   });
 
@@ -72,7 +73,7 @@
 
       if(vm.task.state == "completed"){
         vm.listStyle['background'] = completedBackgroundColor;
-      } else if(!vm.parentTask){
+      } else if(vm.topLevel){
         vm.listStyle['background'] = backgroundColor;
       }
     }

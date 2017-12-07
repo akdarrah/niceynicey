@@ -13,7 +13,7 @@
   </form>
 </div>
 
-<task-list parent-task="$ctrl.parentTask" tasks="$ctrl.tasks" read-only="$ctrl.readOnly"></task-list>
+<task-list top-level="true" parent-task="$ctrl.parentTask" tasks="$ctrl.tasks" read-only="$ctrl.readOnly"></task-list>
 
 <div ng-if="$ctrl.tasksIndex">
   <div class="card">

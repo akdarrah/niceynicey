@@ -7,7 +7,8 @@
     bindings: {
       tasks: '<',
       parentTask: '<',
-      readOnly: '='
+      readOnly: '=',
+      topLevel: '='
     }
   });
 
@@ -52,7 +53,7 @@
     ///////////////////////////////
 
     function onInit(){
-      if(vm.tasks && vm.tasks.length && vm.parentTask){
+      if(vm.tasks && vm.tasks.length && vm.parentTask && !vm.topLevel){
         var colorHex = vm.tasks[0].color_hex;
         var borderColor = chroma(colorHex).darken().saturate(1).hex();
 
