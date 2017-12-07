@@ -46,7 +46,7 @@
 
     function placeHolderText(){
       if(vm.parentTask){
-        return "Add task to " + vm.parentTask.label;
+        return "Add subtask to " + vm.parentTask.label;
       } else {
         return "Add Project";
       }
