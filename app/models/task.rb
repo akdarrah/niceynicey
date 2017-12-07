@@ -24,7 +24,7 @@ class Task < ApplicationRecord
   validates :user, :label, :color_hex, presence: true
   validate :parent_must_be_pending
 
-  before_validation :set_temporary_color_hex
+  before_validation :set_color_hex_for_parent
   before_validation :set_color_hex_from_parent
 
   has_many :children,
@@ -103,7 +103,7 @@ class Task < ApplicationRecord
     end
   end
 
-  def set_temporary_color_hex
+  def set_color_hex_for_parent
     if parent.blank?
       self.color_hex ||= COLORS.sample
     end
