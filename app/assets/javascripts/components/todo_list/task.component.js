@@ -48,6 +48,7 @@
 
       completeTask.then(function(response){
         vm.task = response.data;
+        setListStyle();
       });
     }
 
@@ -60,6 +61,10 @@
     }
 
     function onInit(){
+      setListStyle();
+    }
+
+    function setListStyle(){
       var backgroundColor = vm.task.color_hex;
       var completedBackgroundColor = chroma(vm.task.color_hex).darken().saturate(1).hex();
 
