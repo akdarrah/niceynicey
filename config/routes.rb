@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'tasks#index'
+
   resources :tasks, only: [:index, :show, :destroy]
   resources :checkpoints, only: [:index, :show]
   devise_for :users
