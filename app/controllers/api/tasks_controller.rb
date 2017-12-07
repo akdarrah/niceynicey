@@ -53,7 +53,7 @@ class Api::TasksController < ApplicationController
 
   def task_params
     params.require(:task)
-      .permit(:label, :parent_id, :state, :position, :notes)
+      .permit(:label, :parent_id, :state, :position, :notes, :color_hex)
   end
 
 end

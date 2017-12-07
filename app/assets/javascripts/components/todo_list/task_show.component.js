@@ -38,18 +38,9 @@
 
       getTask.then(function(response){
         vm.task = response.data;
-
         vm.readOnly = vm.task.checkpoint_id != null;
 
-        vm.titleStyle = {
-          'background': vm.task.color_hex
-        }
-
-        if(vm.task.parent){
-          vm.parentLinkStyle = {
-            'background': vm.task.parent.color_hex
-          }
-        }
+        setStyles();
       });
     }
 
@@ -66,8 +57,21 @@
 
       updateTask.then(function(response){
         vm.task = response.data;
+        setStyles();
         vm.editMode = false;
       });
+    }
+
+    function setStyles(){
+      vm.titleStyle = {
+        'background': vm.task.color_hex
+      }
+
+      if(vm.task.parent){
+        vm.parentLinkStyle = {
+          'background': vm.task.parent.color_hex
+        }
+      }
     }
 
   }
