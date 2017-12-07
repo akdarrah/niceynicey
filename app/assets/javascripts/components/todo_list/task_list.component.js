@@ -30,7 +30,7 @@
           return false;
         }
 
-        task.parent_id = parentTask.id;
+        task.parent_id = (parentTask ? parentTask.id : null);
         task.parent = parentTask;
         task.position = position;
 
