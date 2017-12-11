@@ -61,6 +61,13 @@
       } else {
         vm.showForm = false;
       }
+
+      // https://stackoverflow.com/questions/14833326/how-to-set-focus-on-input-field
+      if(vm.showForm){
+        setTimeout(function(){
+          angular.element('.task-text-input').trigger('focus');
+        }, 1);
+      }
     });
 
     ///////////////////////////////
