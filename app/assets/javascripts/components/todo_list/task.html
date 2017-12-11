@@ -14,25 +14,5 @@
     </a>
   </div>
 
-  <div ng-show="$ctrl.showForm">
-    <ul class="no-list-style">
-      <li>
-        <form id="comment-form"
-              class="add-task-form"
-              name='$ctrl.commentForm'
-              ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"
-              ng-class="{'form-valid': $ctrl.commentForm.$valid, 'form-invalid': $ctrl.commentForm.$invalid}"
-              novalidate>
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Add subtask to {{ $ctrl.task.label }}" ng-model="$ctrl.todoText" required>
-            <span class="input-group-btn">
-              <button class="btn btn-primary">Add</button>
-            </span>
-          </div>
-        </form>
-      </li>
-    </ul>
-  </div>
-
   <task-list parent-task="$ctrl.task" tasks="$ctrl.task.children" read-only="$ctrl.readOnly"></task-list>
 </div>

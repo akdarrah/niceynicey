@@ -19,7 +19,6 @@
     var vm = this;
     vm.factory = taskFactory;
 
-    vm.handleSubmit = handleSubmit;
     vm.completeTask = completeTask;
     vm.toggleForm = toggleForm;
     vm.allowChildAddition = allowChildAddition;
@@ -33,17 +32,6 @@
 
     ///////////////////////////////
 
-    function handleSubmit(){
-      var label = vm.todoText;
-      var createTask = vm.factory.createTask(label, vm.task.id);
-
-      createTask.then(function(response){
-        vm.task.children.unshift(response.data);
-        vm.todoText = '';
-        vm.showForm = false;
-      });
-    }
-
     function completeTask(task){
       var completeTask = vm.factory.completeTask(task.id);
 
@@ -54,7 +42,7 @@
     }
 
     function toggleForm(){
-      vm.showForm = !vm.showForm;
+      $scope.$broadcast('toggleTaskForm', vm.task);
     }
 
     function allowChildAddition(){

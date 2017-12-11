@@ -47,8 +47,16 @@
     vm.tasks = [];
     vm.parentTask = null;
     vm.readOnly = false;
+    vm.showForm = false;
 
+    vm.handleSubmit = handleSubmit;
     vm.$onInit = onInit;
+
+    $scope.$on('toggleTaskForm', function(event, parentTask){
+      if(vm.parentTask === parentTask){
+        vm.showForm = !vm.showForm;
+      }
+    });
 
     ///////////////////////////////
 
@@ -61,6 +69,17 @@
           'border-left': "5px solid " + borderColor
         }
       }
+    }
+
+    function handleSubmit(){
+      var label = vm.todoText;
+      var createTask = vm.factory.createTask(label, vm.parentTask.id);
+
+      createTask.then(function(response){
+        vm.tasks.unshift(response.data);
+        vm.todoText = '';
+        vm.showForm = false;
+      });
     }
 
   }

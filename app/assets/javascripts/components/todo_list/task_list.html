@@ -1,4 +1,20 @@
 <ul ui-sortable="$ctrl.sortableOptions" ng-model="$ctrl.tasks" class="no-list-style task-sortable-ul" ng-style="$ctrl.listStyle">
+  <li ng-if="$ctrl.showForm">
+    <form id="comment-form"
+          class="add-task-form"
+          name='$ctrl.commentForm'
+          ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"
+          ng-class="{'form-valid': $ctrl.commentForm.$valid, 'form-invalid': $ctrl.commentForm.$invalid}"
+          novalidate>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Add subtask to {{ $ctrl.parentTask.label }}" ng-model="$ctrl.todoText" required>
+        <span class="input-group-btn">
+          <button class="btn btn-primary">Add</button>
+        </span>
+      </div>
+    </form>
+  </li>
+
   <li ng-repeat="task in $ctrl.tasks">
     <task top-level="$ctrl.topLevel" task="task" parent-task="$ctrl.parentTask" read-only="$ctrl.readOnly"></task>
   </li>
