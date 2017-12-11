@@ -13,9 +13,9 @@
     }
   });
 
-  TaskController.$inject = ['$scope', '$http', '$window', 'taskFactory'];
+  TaskController.$inject = ['$rootScope', '$scope', '$http', '$window', 'taskFactory'];
 
-  function TaskController($scope, $http, $window, taskFactory){
+  function TaskController($rootScope, $scope, $http, $window, taskFactory){
     var vm = this;
     vm.factory = taskFactory;
 
@@ -42,7 +42,7 @@
     }
 
     function toggleForm(){
-      $scope.$broadcast('toggleTaskForm', vm.task);
+      $rootScope.$broadcast('toggleTaskForm', vm.task);
     }
 
     function allowChildAddition(){

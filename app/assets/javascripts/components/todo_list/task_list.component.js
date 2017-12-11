@@ -12,9 +12,9 @@
     }
   });
 
-  TaskListController.$inject = ['$scope', '$http', 'taskFactory'];
+  TaskListController.$inject = ['$rootScope', '$scope', '$http', 'taskFactory'];
 
-  function TaskListController($scope, $http, taskFactory){
+  function TaskListController($rootScope, $scope, $http, taskFactory){
     var vm = this;
     vm.factory = taskFactory;
 
@@ -52,9 +52,13 @@
     vm.handleSubmit = handleSubmit;
     vm.$onInit = onInit;
 
-    $scope.$on('toggleTaskForm', function(event, parentTask){
+    $rootScope.$on('toggleTaskForm', function(event, parentTask){
+      $rootScope.$broadcast('closeOtherTaskForms', vm.parentTask);
+
       if(vm.parentTask === parentTask){
         vm.showForm = !vm.showForm;
+      } else {
+        vm.showForm = false;
       }
     });
 
