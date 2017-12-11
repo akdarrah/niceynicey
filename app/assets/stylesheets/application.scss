@@ -62,6 +62,18 @@ body {
 }
 
 .main-column {
+
+  // Small only
+  @media (max-width: 576px) {
+    border-right: none;
+    border-left: none;
+
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px; /* future proofing */
+    -khtml-border-radius: 0px; /* for old Konqueror browsers */
+  }
+
   background: white;
   padding-top: 20px;
   padding-bottom: 20px;
