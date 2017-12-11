@@ -49,6 +49,7 @@
     vm.readOnly = false;
     vm.showForm = false;
 
+    vm.todoTextKeyup = todoTextKeyup;
     vm.handleSubmit = handleSubmit;
     vm.$onInit = onInit;
 
@@ -84,6 +85,12 @@
         vm.todoText = '';
         vm.showForm = false;
       });
+    }
+
+    function todoTextKeyup(event){
+      if(event.keyCode == 27){
+        vm.showForm = false;
+      }
     }
 
   }
