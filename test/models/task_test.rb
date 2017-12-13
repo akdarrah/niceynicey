@@ -254,18 +254,28 @@ class TaskTest < ActiveSupport::TestCase
   # Task#traverse
 
   test "traverses through structure calling block" do
-    skip "Requires Mocha Gem"
-
     child = create(:task, parent: @task)
     grand = create(:task, parent: child)
 
-    @task.expects(:testing).once
-    child.expects(:testing).once
-    grand.expects(:testing).once
+    Task.any_instance.expects(:testing).times(3)
+    # @task.expects(:testing).once
+    # child.expects(:testing).once
+    # grand.expects(:testing).once
 
     @task.traverse do |task|
       task.testing
     end
   end
+
+  # Task Colors
+
+  # focus
+  # test "A new project level task is automatically given a color" do
+  #   color = "#001f3f"
+  #
+  #   Task.stub_const(:COLORS, ["#001f3f"]) do
+  #
+  #   end
+  # end
 
 end
