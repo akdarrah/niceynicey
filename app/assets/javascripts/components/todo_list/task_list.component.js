@@ -49,6 +49,7 @@
     vm.readOnly = false;
     vm.showForm = false;
 
+    vm.enableSortable = enableSortable;
     vm.todoTextKeyup = todoTextKeyup;
     vm.handleSubmit = handleSubmit;
     vm.$onInit = onInit;
@@ -98,6 +99,10 @@
       if(event.keyCode == 27){
         vm.showForm = false;
       }
+    }
+
+    function enableSortable(){
+      return vm.parentTask && vm.parentTask.state !== 'completed';
     }
 
   }

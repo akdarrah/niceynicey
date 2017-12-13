@@ -1,4 +1,4 @@
-<ul ui-sortable="$ctrl.sortableOptions" ng-model="$ctrl.tasks" class="no-list-style task-sortable-ul" ng-style="$ctrl.listStyle">
+<ul ui-sortable="$ctrl.sortableOptions" ng-model="$ctrl.tasks" class="no-list-style" ng-style="$ctrl.listStyle" ng-class="{'task-sortable-ul': $ctrl.enableSortable()}">
   <li ng-if="$ctrl.showForm">
     <form id="comment-form"
           class="add-task-form"
