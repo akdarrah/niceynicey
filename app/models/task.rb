@@ -26,6 +26,7 @@ class Task < ApplicationRecord
 
   before_validation :set_color_hex_for_parent
   before_validation :set_color_hex_from_parent
+  after_save :propagated_color_hex_changes_to_children
 
   has_many :children,
     -> { order(position: :asc) },
@@ -116,6 +117,15 @@ class Task < ApplicationRecord
   def set_color_hex_from_parent
     if parent.present?
       self.color_hex ||= parent.child_color_hex
+    end
+  end
+
+  def propagated_color_hex_changes_to_children
+    if color_hex_changed? && color_hex_was.present?
+      children.each do |child|
+        child.color_hex = child.parent.child_color_hex
+        child.save!
+      end
     end
   end
 

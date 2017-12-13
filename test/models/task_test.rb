@@ -284,4 +284,22 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal color, child.color_hex
   end
 
+  test "color_hex changes are propagated to tasks children" do
+    new_task_color = "#001f3f"
+    new_child_color = "#001225"
+    new_grand_color = "#00060b"
+
+    child = create(:task, parent: @task)
+    grand = create(:task, parent: child)
+
+    assert_not_equal new_task_color, @task.color_hex
+
+    @task.color_hex = new_task_color
+    @task.save!
+
+    assert_equal new_task_color, @task.reload.color_hex
+    assert_equal new_child_color, child.reload.color_hex
+    assert_equal new_grand_color, grand.reload.color_hex
+  end
+
 end
