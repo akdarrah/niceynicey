@@ -73,7 +73,7 @@
     ///////////////////////////////
 
     function onInit(){
-      if(vm.parentTask){
+      if(vm.parentTask && !vm.topLevel){
         var colorHex = vm.parentTask.child_color_hex;
         var borderColor = chroma(colorHex).darken().saturate(1).hex();
 
