@@ -258,9 +258,6 @@ class TaskTest < ActiveSupport::TestCase
     grand = create(:task, parent: child)
 
     Task.any_instance.expects(:testing).times(3)
-    # @task.expects(:testing).once
-    # child.expects(:testing).once
-    # grand.expects(:testing).once
 
     @task.traverse do |task|
       task.testing
@@ -269,13 +266,22 @@ class TaskTest < ActiveSupport::TestCase
 
   # Task Colors
 
-  # focus
-  # test "A new project level task is automatically given a color" do
-  #   color = "#001f3f"
-  #
-  #   Task.stub_const(:COLORS, ["#001f3f"]) do
-  #
-  #   end
-  # end
+  test "A new project level task is automatically given a color" do
+    user = create(:user)
+    color = "#001f3f"
+
+    Task.stub_const(:COLORS, ["#001f3f"]) do
+      task = Task.create!(label: "Project", user: user)
+      assert_equal color, task.color_hex
+    end
+  end
+
+  test "A new child sub-task is given a color darker than it's parent" do
+    user = create(:user)
+    color = @task.child_color_hex
+
+    child = Task.create!(label: "Project", user: user, parent: @task)
+    assert_equal color, child.color_hex
+  end
 
 end
