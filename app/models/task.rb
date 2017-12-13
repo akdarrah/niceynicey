@@ -91,6 +91,10 @@ class Task < ApplicationRecord
     end
   end
 
+  def child_color_hex
+    color_hex.paint.darken(5).to_s
+  end
+
   private
 
   def complete_children!
@@ -111,7 +115,7 @@ class Task < ApplicationRecord
 
   def set_color_hex_from_parent
     if parent.present?
-      self.color_hex ||= parent.color_hex.paint.darken(5)
+      self.color_hex ||= parent.child_color_hex
     end
   end
 

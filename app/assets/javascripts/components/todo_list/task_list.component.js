@@ -73,8 +73,8 @@
     ///////////////////////////////
 
     function onInit(){
-      if(vm.tasks && vm.tasks.length && vm.parentTask && !vm.topLevel){
-        var colorHex = vm.tasks[0].color_hex;
+      if(vm.parentTask){
+        var colorHex = vm.parentTask.child_color_hex;
         var borderColor = chroma(colorHex).darken().saturate(1).hex();
 
         vm.listStyle = {
