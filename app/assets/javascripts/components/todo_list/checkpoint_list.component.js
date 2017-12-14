@@ -3,13 +3,13 @@
 
   angular.module('checkpointList', []).component('checkpointList', {
     templateUrl: 'components/todo_list/checkpoint_list.html',
-    controller: checkpointListController,
+    controller: CheckpointListController,
     bindings: {}
   });
 
-  checkpointListController.$inject = ['$scope', '$http', 'checkpointFactory'];
+  CheckpointListController.$inject = ['$scope', '$http', 'checkpointFactory'];
 
-  function checkpointListController($scope, $http, checkpointFactory){
+  function CheckpointListController($scope, $http, checkpointFactory){
     var vm = this;
     vm.factory = checkpointFactory;
 
