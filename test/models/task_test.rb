@@ -302,4 +302,47 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal new_grand_color, grand.reload.color_hex
   end
 
+  test "when parent changes and task is now a project" do
+    skip
+
+    new_task_color = "#001f3f"
+    new_child_color = "#001225"
+
+    child = create(:task, parent: @task)
+    grand = create(:task, parent: child)
+
+    assert_not_equal new_task_color, child.color_hex
+    assert_not_equal new_child_color, grand.color_hex
+
+    Task.stub_const(:COLORS, [new_task_color]) do
+      child.parent = nil
+      child.save!
+    end
+
+    assert_equal new_task_color, child.reload.color_hex
+    assert_equal new_child_color, grand.reload.color_hex
+  end
+
+  test "when parent changes and task is now nested under a new parent" do
+    skip
+
+    new_task_color = "#001f3f"
+    new_child_color = "#001225"
+    new_grand_color = "#00060b"
+
+    @task.update_column :color_hex, new_task_color
+
+    child = create(:task)
+    grand = create(:task, parent: child)
+
+    assert_not_equal new_child_color, child.color_hex
+    assert_not_equal new_grand_color, grand.color_hex
+
+    child.parent = @task
+    child.save!
+
+    assert_equal new_child_color, child.reload.color_hex
+    assert_equal new_grand_color, grand.reload.color_hex
+  end
+
 end
