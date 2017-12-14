@@ -24,8 +24,8 @@ class Task < ApplicationRecord
   validates :user, :label, :color_hex, presence: true
   validate :parent_must_be_pending
 
-  before_validation :set_color_hex_for_parent
-  before_validation :set_color_hex_from_parent
+  before_validation :set_color_hex_on_create, on: :create
+  before_validation :set_color_hex_on_update, on: :update
   after_save :propagated_color_hex_changes_to_children
 
   has_many :children,
@@ -108,15 +108,13 @@ class Task < ApplicationRecord
     end
   end
 
-  def set_color_hex_for_parent
-    if parent.blank?
-      self.color_hex ||= COLORS.sample
-    end
+  def set_color_hex_on_create
+    self.color_hex ||= (parent.present? ? parent.child_color_hex : COLORS.sample)
   end
 
-  def set_color_hex_from_parent
-    if parent.present?
-      self.color_hex ||= parent.child_color_hex
+  def set_color_hex_on_update
+    if parent_id_changed?
+      self.color_hex = (parent.present? ? parent.child_color_hex : COLORS.sample)
     end
   end
 

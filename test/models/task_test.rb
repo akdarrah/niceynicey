@@ -303,8 +303,6 @@ class TaskTest < ActiveSupport::TestCase
   end
 
   test "when parent changes and task is now a project" do
-    skip
-
     new_task_color = "#001f3f"
     new_child_color = "#001225"
 
@@ -324,8 +322,6 @@ class TaskTest < ActiveSupport::TestCase
   end
 
   test "when parent changes and task is now nested under a new parent" do
-    skip
-
     new_task_color = "#001f3f"
     new_child_color = "#001225"
     new_grand_color = "#00060b"
