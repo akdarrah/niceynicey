@@ -80,7 +80,7 @@
 
         vm.listStyle = {
           'border-left': "5px solid " + borderColor
-        }
+        };
       }
     }
 

@@ -75,7 +75,7 @@
     }
 
     function showForm(){
-      return !vm.readOnly && (!vm.parentTask || vm.parentTask.state == 'pending')
+      return !vm.readOnly && (!vm.parentTask || vm.parentTask.state == 'pending');
     }
 
   }

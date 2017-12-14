@@ -65,12 +65,12 @@
     function setStyles(){
       vm.titleStyle = {
         'background': vm.task.color_hex
-      }
+      };
 
       if(vm.task.parent){
         vm.parentLinkStyle = {
           'background': vm.task.parent.color_hex
-        }
+        };
       }
     }
 

@@ -60,9 +60,9 @@
       vm.listStyle = {};
 
       if(vm.task.state == "completed"){
-        vm.listStyle['background'] = completedBackgroundColor;
+        vm.listStyle.background = completedBackgroundColor;
       } else if(vm.topLevel){
-        vm.listStyle['background'] = backgroundColor;
+        vm.listStyle.background = backgroundColor;
       }
     }
 
