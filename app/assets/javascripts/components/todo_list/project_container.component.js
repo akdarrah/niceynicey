@@ -50,7 +50,7 @@
       if(vm.parentTask){
         return "Add subtask to " + vm.parentTask.label;
       } else {
-        return "Add Project";
+        return "Add Project (e.g. School, Work, Home)";
       }
     }
 
