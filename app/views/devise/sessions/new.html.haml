@@ -1,0 +1,16 @@
+.row
+  .col-lg-6.mx-auto.main-column
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .form-group
+        = f.input :email, required: true, autofocus: true, input_html: {class: "form-control", placeholder: "Email"}, label: false
+      .form-group
+        = f.input :password, required: true, input_html: {class: "form-control", placeholder: "Password"}, label: false
+      .form-group
+        .form-check.form-check-inline.disabled
+          %label{class: "form-check-label"}
+            %input{name: "user[remember_me]", type: "hidden", value: "0", autocomplete: "off"}
+            %input.form-check-input{name: "user[remember_me]", type: "checkbox", value: "1"}
+            Remember me
+      .form-group
+        = f.button :submit, "Log in", class: "btn btn-primary btn-lg btn-block"
+    = render "devise/shared/links"
