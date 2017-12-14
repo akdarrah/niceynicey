@@ -30,6 +30,13 @@
     vm.parentTask = null;
     vm.listStyle = {};
 
+    $rootScope.$on('taskSortableUpdate', function(event, task){
+      if(vm.task.id === task.id){
+        vm.task = task;
+        setListStyle();
+      }
+    });
+
     ///////////////////////////////
 
     function completeTask(task){

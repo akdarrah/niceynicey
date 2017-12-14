@@ -39,6 +39,7 @@
 
         updateTask.then(function(response){
           task = response.data;
+          $rootScope.$broadcast('taskSortableUpdate', task);
         });
       },
     };
