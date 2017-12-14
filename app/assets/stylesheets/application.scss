@@ -20,6 +20,16 @@
   hyphens: auto;
 }
 
+.blockquote {
+  background: #f9f4ed;
+  padding: 15px;
+  font-family: 'Roboto Slab', serif;
+
+  .quote-body {
+    color: #283c46 !important;
+  }
+}
+
 .white-text {
   color: white;
 }

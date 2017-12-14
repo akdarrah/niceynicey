@@ -23,6 +23,7 @@
     vm.placeHolderText = placeHolderText;
     vm.createCheckpoint = createCheckpoint;
     vm.showForm = showForm;
+    vm.quote = gon.quote;
 
     vm.tasks = [];
     vm.parentTask = null;

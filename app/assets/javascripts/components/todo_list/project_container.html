@@ -13,7 +13,14 @@
   </form>
 </div>
 
-<task-list top-level="true" parent-task="$ctrl.parentTask" tasks="$ctrl.tasks" read-only="$ctrl.readOnly"></task-list>
+<task-list ng-if="$ctrl.tasks.length" top-level="true" parent-task="$ctrl.parentTask" tasks="$ctrl.tasks" read-only="$ctrl.readOnly"></task-list>
+<div ng-if="!$ctrl.tasks.length">
+  <br />
+  <blockquote class="blockquote text-center">
+    <p class="quote-body">&ldquo;{{ $ctrl.quote.body }}&rdquo;</p>
+    <footer class="blockquote-footer">{{ $ctrl.quote.author }}</footer>
+  </blockquote>
+</div>
 
 <div ng-if="$ctrl.tasksIndex">
   <div class="card">
