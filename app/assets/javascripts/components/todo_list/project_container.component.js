@@ -21,6 +21,7 @@
 
     vm.handleSubmit = handleSubmit;
     vm.placeHolderText = placeHolderText;
+    vm.quoteDirectionText = quoteDirectionText;
     vm.createCheckpoint = createCheckpoint;
     vm.showForm = showForm;
     vm.quote = gon.quote;
@@ -50,6 +51,14 @@
         return "Add subtask to " + vm.parentTask.label;
       } else {
         return "Add Project";
+      }
+    }
+
+    function quoteDirectionText(){
+      if(vm.parentTask){
+        return "Add a subtask to get started! ☝️";
+      } else {
+        return "Add a project to get started! ☝️";
       }
     }
 

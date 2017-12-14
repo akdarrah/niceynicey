@@ -23,7 +23,14 @@
 .blockquote {
   background: #f9f4ed;
   padding: 15px;
-  font-family: 'Roboto Slab', serif;
+
+  small {
+    font-size: 70%;
+  }
+
+  p, footer {
+    font-family: 'Roboto Slab', serif;
+  }
 
   .quote-body {
     color: #283c46 !important;
