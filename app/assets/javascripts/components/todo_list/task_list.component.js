@@ -102,7 +102,8 @@
     }
 
     function enableSortable(){
-      return vm.parentTask && vm.parentTask.state !== 'completed';
+      return !vm.parentTask ||
+        (vm.parentTask && vm.parentTask.state !== 'completed');
     }
 
   }
