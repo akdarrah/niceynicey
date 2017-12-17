@@ -379,4 +379,13 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal [child, grand], @task.descendants
   end
 
+  # Task#lineage
+
+  test "returns ancestors, self, and descendants" do
+    child = create(:task, parent: @task)
+    grand = create(:task, parent: child)
+
+    assert_equal [@task, child, grand], child.lineage
+  end
+
 end

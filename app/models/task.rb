@@ -73,6 +73,10 @@ class Task < ApplicationRecord
     (children + children.map(&:descendants)).flatten
   end
 
+  def lineage
+    (ancestors + Array(self) + descendants)
+  end
+
   def dup_with_children(&block)
     criteria_passed = (block_given? ? yield(self) : true)
 
