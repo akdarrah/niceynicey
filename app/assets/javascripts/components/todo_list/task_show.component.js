@@ -9,11 +9,12 @@
     }
   });
 
-  TaskShowController.$inject = ['$scope', '$http', '$sce', 'taskFactory'];
+  TaskShowController.$inject = ['$scope', '$http', '$sce', 'taskFactory', 'colorFactory'];
 
-  function TaskShowController($scope, $http, $sce, taskFactory){
+  function TaskShowController($scope, $http, $sce, taskFactory, colorFactory){
     var vm = this;
     vm.factory = taskFactory;
+    vm.colorFactory = colorFactory;
 
     vm.updateTask = updateTask;
     vm.showChildren = showChildren;
@@ -64,12 +65,14 @@
 
     function setStyles(){
       vm.titleStyle = {
-        'background': vm.task.color_hex
+        'background': vm.task.color_hex,
+        'color': vm.colorFactory.getTextColor(vm.task.color_hex)
       };
 
       if(vm.task.parent){
         vm.parentLinkStyle = {
-          'background': vm.task.parent.color_hex
+          'background': vm.task.parent.color_hex,
+          'color': vm.colorFactory.getTextColor(vm.task.parent.color_hex)
         };
       }
     }
