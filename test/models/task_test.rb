@@ -341,4 +341,23 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal new_grand_color, grand.reload.color_hex
   end
 
+  # Task#ancestors
+
+  test "a project-level task has no ancestors" do
+    assert_nil @task.parent
+    assert_equal [], @task.ancestors
+  end
+
+  test "a task with a project-level parent returns the parent" do
+    child = create(:task, parent: @task)
+    assert_equal [@task], child.ancestors
+  end
+
+  test "a task that is deeply nested returns tasks up-to project level" do
+    child = create(:task, parent: @task)
+    grand = create(:task, parent: child)
+
+    assert_equal [child, @task], grand.ancestors
+  end
+
 end

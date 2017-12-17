@@ -65,6 +65,10 @@ class Task < ApplicationRecord
     end
   end
 
+  def ancestors
+    Array(parent) + Array(parent.try(:ancestors))
+  end
+
   def dup_with_children(&block)
     criteria_passed = (block_given? ? yield(self) : true)
 
