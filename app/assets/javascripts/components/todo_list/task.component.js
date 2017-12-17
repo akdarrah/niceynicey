@@ -13,11 +13,12 @@
     }
   });
 
-  TaskController.$inject = ['$rootScope', '$scope', '$http', '$window', 'taskFactory'];
+  TaskController.$inject = ['$rootScope', '$scope', '$http', '$window', 'taskFactory', 'colorFactory'];
 
-  function TaskController($rootScope, $scope, $http, $window, taskFactory){
+  function TaskController($rootScope, $scope, $http, $window, taskFactory, colorFactory){
     var vm = this;
     vm.factory = taskFactory;
+    vm.colorFactory = colorFactory;
 
     vm.completeTask = completeTask;
     vm.toggleForm = toggleForm;
@@ -61,15 +62,17 @@
     }
 
     function setListStyle(){
-      var backgroundColor = vm.task.color_hex;
-      var completedBackgroundColor = chroma(vm.task.color_hex).darken().saturate(1).hex();
-
+      var colorHex = vm.task.color_hex;
       vm.listStyle = {};
 
       if(vm.task.state == "completed"){
-        vm.listStyle.background = completedBackgroundColor;
-      } else if(vm.topLevel){
+        var backgroundColor = vm.colorFactory.getDarkenedColor(colorHex);
+
         vm.listStyle.background = backgroundColor;
+        vm.listStyle.color = vm.colorFactory.getTextColor(backgroundColor);
+      } else if(vm.topLevel){
+        vm.listStyle.background = colorHex;
+        vm.listStyle.color = vm.colorFactory.getTextColor(colorHex);
       }
     }
 

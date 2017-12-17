@@ -9,6 +9,7 @@
     'checkpointShow',
     'checkpointList',
     'checkpointFactory',
+    'colorFactory',
     'taskShow',
     'templates',
     'ui.sortable',

@@ -12,11 +12,12 @@
     }
   });
 
-  TaskListController.$inject = ['$rootScope', '$scope', '$http', 'taskFactory'];
+  TaskListController.$inject = ['$rootScope', '$scope', '$http', 'taskFactory', 'colorFactory'];
 
-  function TaskListController($rootScope, $scope, $http, taskFactory){
+  function TaskListController($rootScope, $scope, $http, taskFactory, colorFactory){
     var vm = this;
     vm.factory = taskFactory;
+    vm.colorFactory = colorFactory;
 
     vm.sortableOptions = {
       cursor: "move",
@@ -77,7 +78,7 @@
     function onInit(){
       if(vm.parentTask && !vm.topLevel){
         var colorHex = vm.parentTask.child_color_hex;
-        var borderColor = chroma(colorHex).darken().saturate(1).hex();
+        var borderColor = vm.colorFactory.getDarkenedColor(colorHex);
 
         vm.listStyle = {
           'border-left': "5px solid " + borderColor
