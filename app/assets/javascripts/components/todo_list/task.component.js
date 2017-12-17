@@ -72,7 +72,7 @@
       vm.taskLinkStyle = {};
 
       if(vm.task.state == "completed"){
-        vm.backgroundColor = vm.colorFactory.getDarkenedColor(colorHex);
+        vm.backgroundColor = colorHex;
         vm.listStyle.background = vm.backgroundColor;
       } else if(vm.topLevel){
         vm.backgroundColor = colorHex;

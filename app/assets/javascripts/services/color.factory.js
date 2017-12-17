@@ -9,16 +9,8 @@
 
   function ColorFactory(){
     return {
-      getDarkenedColor: getDarkenedColor,
       getTextColor: getTextColor
     };
-
-    function getDarkenedColor(colorHex){
-      return chroma(colorHex)
-        .darken()
-        .saturate(1)
-        .hex();
-    }
 
     function getTextColor(colorHex){
       var darkText = chroma('#283c46');

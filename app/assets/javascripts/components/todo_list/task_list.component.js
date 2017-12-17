@@ -80,10 +80,9 @@
     function onInit(){
       if(vm.parentTask && !vm.topLevel){
         var colorHex = vm.parentTask.child_color_hex;
-        var borderColor = vm.colorFactory.getDarkenedColor(colorHex);
 
         vm.listStyle = {
-          'border-left': "5px solid " + borderColor
+          'border-left': "5px solid " + colorHex
         };
       }
     }
