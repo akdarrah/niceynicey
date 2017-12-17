@@ -8,7 +8,8 @@
       tasks: '<',
       parentTask: '<',
       readOnly: '=',
-      topLevel: '='
+      topLevel: '=',
+      backgroundColor: '<'
     }
   });
 
@@ -50,6 +51,7 @@
     vm.parentTask = null;
     vm.readOnly = false;
     vm.showForm = false;
+    vm.backgroundColor = null;
 
     vm.enableSortable = enableSortable;
     vm.todoTextKeyup = todoTextKeyup;

@@ -9,7 +9,8 @@
       parentTask: '<',
       showForm: '<',
       readOnly: '=',
-      topLevel: '='
+      topLevel: '=',
+      backgroundColor: '<'
     }
   });
 
@@ -28,8 +29,10 @@
     vm.readOnly = false;
     vm.showForm = false;
     vm.task = null;
+    vm.backgroundColor = null;
     vm.parentTask = null;
     vm.listStyle = {};
+    vm.taskLinkStyle = {};
 
     $rootScope.$on('taskSortableUpdate', function(event, task){
       if(vm.task.id === task.id){
@@ -63,17 +66,21 @@
 
     function setListStyle(){
       var colorHex = vm.task.color_hex;
+      var textColor;
+
       vm.listStyle = {};
+      vm.taskLinkStyle = {};
 
       if(vm.task.state == "completed"){
-        var backgroundColor = vm.colorFactory.getDarkenedColor(colorHex);
-
-        vm.listStyle.background = backgroundColor;
-        vm.listStyle.color = vm.colorFactory.getTextColor(backgroundColor);
+        vm.backgroundColor = vm.colorFactory.getDarkenedColor(colorHex);
+        vm.listStyle.background = vm.backgroundColor;
       } else if(vm.topLevel){
-        vm.listStyle.background = colorHex;
-        vm.listStyle.color = vm.colorFactory.getTextColor(colorHex);
+        vm.backgroundColor = colorHex;
+        vm.listStyle.background = vm.backgroundColor;
       }
+
+      vm.listStyle.color = vm.colorFactory.getTextColor(vm.backgroundColor);
+      vm.taskLinkStyle.color = vm.colorFactory.getTextColor(vm.backgroundColor);
     }
 
   }

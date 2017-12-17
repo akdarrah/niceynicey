@@ -9,10 +9,10 @@
         <i class="fa fa-plus"></i>
       </button>
     </span>
-    <a ng-href="/tasks/{{$ctrl.task.id}}">
+    <a ng-href="/tasks/{{$ctrl.task.id}}" ng-style="$ctrl.taskLinkStyle">
       <span class="item-title" ng-class="{'completed': $ctrl.task.state=='completed'}">{{ $ctrl.task.label }}</span>
     </a>
   </div>
 
-  <task-list parent-task="$ctrl.task" tasks="$ctrl.task.children" read-only="$ctrl.readOnly"></task-list>
+  <task-list parent-task="$ctrl.task" tasks="$ctrl.task.children" read-only="$ctrl.readOnly" background-color="$ctrl.backgroundColor"></task-list>
 </div>
