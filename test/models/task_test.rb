@@ -360,4 +360,23 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal [child, @task], grand.ancestors
   end
 
+  # Task#descendants
+
+  test "a task with no children has no descendants" do
+    assert @task.children.blank?
+    assert_equal [], @task.descendants
+  end
+
+  test "a task with children has descendants" do
+    child = create(:task, parent: @task)
+    assert_equal [child], @task.descendants
+  end
+
+  test "children tasks of a child task are included" do
+    child = create(:task, parent: @task)
+    grand = create(:task, parent: child)
+
+    assert_equal [child, grand], @task.descendants
+  end
+
 end
