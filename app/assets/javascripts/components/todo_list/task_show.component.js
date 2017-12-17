@@ -56,7 +56,7 @@
       var updateTask = vm.factory.updateTask(vm.task);
 
       updateTask.then(function(response){
-        vm.task = response.data;
+        angular.extend(vm.task, response.data);
         setStyles();
         vm.editMode = false;
       });

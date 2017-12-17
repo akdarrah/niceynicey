@@ -38,7 +38,7 @@
         var updateTask = vm.factory.updateTask(task);
 
         updateTask.then(function(response){
-          task = response.data;
+          angular.extend(task, response.data);
           $rootScope.$broadcast('taskSortableUpdate', task);
         });
       },
