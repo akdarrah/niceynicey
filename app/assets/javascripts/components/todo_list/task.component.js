@@ -43,7 +43,7 @@
       var completeTask = vm.factory.completeTask(task.id);
 
       completeTask.then(function(response){
-        vm.task = response.data;
+        angular.extend(vm.task, response.data);
         setListStyle();
       });
     }
