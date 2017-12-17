@@ -21,6 +21,7 @@ gem "font-awesome-rails"
 gem "active_model_serializers"
 gem 'chroma'
 gem 'stamp'
+gem 'missing_validators'
 
 gem 'html-pipeline'
 gem 'commonmarker'

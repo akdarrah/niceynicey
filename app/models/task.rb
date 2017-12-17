@@ -26,6 +26,7 @@ class Task < ApplicationRecord
 
   validates :user, :label, :color_hex, presence: true
   validate :parent_must_be_pending
+  validates :color_hex, color: true
 
   before_validation :set_color_hex_on_create, on: :create
   before_validation :set_color_hex_on_update, on: :update
