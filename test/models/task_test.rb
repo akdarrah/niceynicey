@@ -85,6 +85,24 @@ class TaskTest < ActiveSupport::TestCase
     assert grand.reload.completed?
   end
 
+  test "a task archives it's children when it is archived" do
+    child = create(:task, parent: @task)
+    grand = create(:task, parent: child)
+
+    assert @task.pending?
+    assert @task.complete!
+
+    assert @task.reload.completed?
+    assert child.reload.completed?
+    assert grand.reload.completed?
+
+    assert @task.archive!
+
+    assert @task.reload.archived?
+    assert child.reload.archived?
+    assert grand.reload.archived?
+  end
+
   # Task#parent_must_be_pending
 
   test "parent task must be pending to add a child task" do
@@ -133,6 +151,21 @@ class TaskTest < ActiveSupport::TestCase
 
     child.parent_id = @task.id
     refute child.valid?
+  end
+
+  test "An archived task is allowed to be under an archived parent" do
+    child = create(:task, parent: @task)
+
+    @task.complete!
+
+    assert @task.reload.completed?
+    assert child.reload.completed?
+
+    @task.archive!
+
+    assert @task.reload.archived?
+    assert child.reload.archived?
+    assert child.valid?
   end
 
   # Task#dup_with_children

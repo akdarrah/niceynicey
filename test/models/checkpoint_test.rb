@@ -60,4 +60,22 @@ class CheckpointTest < ActiveSupport::TestCase
     end
   end
 
+  test "Grand tasks are marked as archived when their parent is archived" do
+    task = create(:task, user: @user)
+
+    child = create(:task, user: @user, parent: task)
+    grand = create(:task, user: @user, parent: child)
+
+    child.complete!
+
+    assert child.reload.completed?
+    assert grand.reload.completed?
+
+    Checkpoint.create_checkpoint!(@user)
+
+    assert task.reload.pending?
+    assert child.reload.archived?
+    assert grand.reload.archived?
+  end
+
 end

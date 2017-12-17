@@ -62,6 +62,10 @@ class Task < ApplicationRecord
 
     event :archive do
       transitions :from => :completed, :to => :archived
+
+      after do
+        archive_children!
+      end
     end
   end
 
@@ -118,8 +122,12 @@ class Task < ApplicationRecord
     children.pending.each(&:complete!)
   end
 
+  def archive_children!
+    children.completed.each(&:archive!)
+  end
+
   def parent_must_be_pending
-    if !completed? && checkpoint.blank? && parent.present? && !parent.pending?
+    if pending? && checkpoint.blank? && parent.present? && !parent.pending?
       errors.add(:parent, "must be pending")
     end
   end
