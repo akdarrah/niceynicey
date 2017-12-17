@@ -2,19 +2,22 @@ class Task < ApplicationRecord
   include AASM
 
   COLORS = [
-    "#001f3f",
-    "#0074D9",
-    "#7FDBFF",
-    "#39CCCC",
-    "#3D9970",
-    "#2ECC40",
-    "#01FF70",
-    "#FFDC00",
-    "#FF851B",
-    "#FF4136",
-    "#85144b",
-    "#F012BE",
-    "#B10DC9"
+    "#b60205",
+    "#d93f0b",
+    "#fbca04",
+    "#0e8a16",
+    "#006b75",
+    "#1d76db",
+    "#0052cc",
+    "#5319e7",
+    "#e99695",
+    "#f9d0c4",
+    "#fef2c0",
+    "#c2e0c6",
+    "#bfdadc",
+    "#c5def5",
+    "#bfd4f2",
+    "#d4c5f9"
   ]
 
   belongs_to :parent, class_name: "Task", optional: true
