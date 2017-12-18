@@ -78,4 +78,60 @@ class CheckpointTest < ActiveSupport::TestCase
     assert grand.reload.archived?
   end
 
+  # With parent_task_id
+  test "Checkpoint can be scoped by parent_task_id" do
+    task = create(:task, user: @user)
+
+    child = create(:task, user: @user, parent: task)
+    grand = create(:task, user: @user, parent: child)
+    great_grand = create(:task, user: @user, parent: grand)
+
+    other_child = create(:task, user: @user, parent: task)
+    other_grand = create(:task, user: @user, parent: other_child)
+
+    child.complete!
+
+    assert task.reload.pending?
+    assert child.reload.completed?
+    assert grand.reload.completed?
+    assert great_grand.reload.completed?
+    assert other_child.reload.pending?
+    assert other_grand.reload.pending?
+
+    checkpoint = Checkpoint.create_checkpoint!(@user, child.id)
+
+    assert task.reload.pending?
+    assert child.reload.completed?
+    assert grand.reload.archived?
+    assert great_grand.reload.archived?
+    assert other_child.reload.pending?
+    assert other_grand.reload.pending?
+
+    assert_equal 4, checkpoint.tasks.count
+
+    checkpoint_task = checkpoint.tasks.top_level.first
+    checkpoint_child = checkpoint_task.children.first
+    checkpoint_grand = checkpoint_child.children.first
+    checkpoint_great_grand = checkpoint_grand.children.first
+
+    assert checkpoint_task.pending?
+    assert checkpoint_child.completed?
+    assert checkpoint_grand.completed?
+    assert checkpoint_great_grand.completed?
+  end
+
+  test "when parent_task_id does not belong to the user" do
+    other_user = create(:user)
+
+    task = create(:task, user: @user)
+    child = create(:task, user: @user, parent: task)
+    grand = create(:task, user: @user, parent: child)
+
+    child.complete!
+
+    assert_raises ActiveRecord::RecordInvalid do
+      Checkpoint.create_checkpoint!(other_user, child.id)
+    end
+  end
+
 end
