@@ -70,10 +70,20 @@
     }
 
     function createCheckpoint(){
-      var createCheckpoint = vm.checkpointFactory.createCheckpoint();
+      var createCheckpoint;
+
+      if(vm.parentTask){
+        createCheckpoint = vm.checkpointFactory.createCheckpoint(vm.parentTask.id);
+      } else {
+        createCheckpoint = vm.checkpointFactory.createCheckpoint();
+      }
 
       createCheckpoint.then(function(response){
-        getTasks();
+        if(vm.parentTask){
+          $scope.$emit('checkpointCreated');
+        } else {
+          getTasks();
+        }
       });
     }
 

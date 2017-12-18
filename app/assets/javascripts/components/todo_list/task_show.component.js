@@ -28,6 +28,10 @@
     vm.titleStyle = {};
     vm.parentLinkStyle = {};
 
+    $scope.$on('checkpointCreated', function(){
+      getTaskData();
+    });
+
     ///////////////////////////////
 
     function showChildren(){
@@ -35,6 +39,10 @@
     }
 
     function onInit(){
+      getTaskData();
+    }
+
+    function getTaskData(){
       var getTask = vm.factory.getTask(vm.taskId);
 
       getTask.then(function(response){

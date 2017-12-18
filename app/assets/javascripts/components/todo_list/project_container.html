@@ -25,11 +25,11 @@
   </blockquote>
 </div>
 
-<div ng-if="$ctrl.tasksIndex">
+<div ng-if="!$ctrl.readOnly && $ctrl.completedTaskCount() > 0">
   <div class="card">
     <div class="card-block">
       <h4 class="card-title">Archive {{$ctrl.completedTaskCount()}} Completed Tasks</h4>
-      <button class="btn btn-primary card-link" ng-disabled="$ctrl.completedTaskCount() == 0" ng-click="$ctrl.createCheckpoint()">Create Checkpoint</button>
+      <button class="btn btn-primary card-link" ng-click="$ctrl.createCheckpoint()">Create Checkpoint</button>
       or
       <a href="/checkpoints">View All Checkpoints</a>
     </div>

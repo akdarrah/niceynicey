@@ -16,9 +16,9 @@
 
     /////////////////////////
 
-    function createCheckpoint() {
+    function createCheckpoint(parentTaskId) {
       return $http
-        .post('/api/checkpoints.json')
+        .post('/api/checkpoints.json', {parent_task_id: parentTaskId})
         .then(getComplete, getFailed);
 
       function getComplete(response) {
