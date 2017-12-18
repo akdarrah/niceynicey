@@ -134,4 +134,24 @@ class CheckpointTest < ActiveSupport::TestCase
     end
   end
 
+  test "When sibling task has completed task" do
+    task = create(:task, user: @user)
+    child = create(:task, user: @user, parent: task)
+
+    other_task = create(:task, user: @user)
+    other_child = create(:task, user: @user, parent: other_task)
+
+    child.complete!
+    other_task.complete!
+
+    assert child.reload.completed?
+    assert other_child.reload.completed?
+
+    checkpoint = Checkpoint.create_checkpoint!(@user, task.id)
+
+    assert task.reload.pending?
+    assert child.reload.archived?
+    assert_equal 2, checkpoint.tasks.count
+  end
+
 end

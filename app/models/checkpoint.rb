@@ -30,6 +30,8 @@ class Checkpoint < ApplicationRecord
             eligible_task_ids.include?(duplicating_task.id)
         end
 
+        next if duplicate.blank?
+
         qualifying_task.traverse do |task|
           if task.completed? && eligible_task_ids.include?(task.id) && task.id != parent_task_id
             task.archive!
