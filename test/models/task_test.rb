@@ -47,6 +47,9 @@ class TaskTest < ActiveSupport::TestCase
   test "a task completes its children when completed" do
     child = create(:task, parent: @task)
 
+    assert @task.completed_at.blank?
+    assert child.completed_at.blank?
+
     assert @task.pending?
     assert child.pending?
 
@@ -54,6 +57,9 @@ class TaskTest < ActiveSupport::TestCase
 
     assert @task.reload.completed?
     assert child.reload.completed?
+
+    assert @task.reload.completed_at.present?
+    assert child.reload.completed_at.present?
   end
 
   test "a completed child task is NOT completed again" do
@@ -92,6 +98,10 @@ class TaskTest < ActiveSupport::TestCase
     assert @task.pending?
     assert @task.complete!
 
+    assert @task.archived_at.blank?
+    assert child.archived_at.blank?
+    assert grand.archived_at.blank?
+
     assert @task.reload.completed?
     assert child.reload.completed?
     assert grand.reload.completed?
@@ -101,6 +111,10 @@ class TaskTest < ActiveSupport::TestCase
     assert @task.reload.archived?
     assert child.reload.archived?
     assert grand.reload.archived?
+
+    assert @task.archived_at.present?
+    assert child.archived_at.present?
+    assert grand.archived_at.present?
   end
 
   # Task#parent_must_be_pending

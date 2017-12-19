@@ -45,6 +45,7 @@ class Task < ApplicationRecord
   scope :no_checkpoint, -> { where(checkpoint_id: nil) }
   scope :pending, -> { where(state: :pending) }
   scope :completed, -> { where(state: :completed) }
+  scope :archived, -> { where(state: :archived) }
   scope :unarchived, -> { where.not(state: :archived) }
 
   aasm :column => :state do
@@ -55,16 +56,24 @@ class Task < ApplicationRecord
     event :complete do
       transitions :from => :pending, :to => :completed
 
+      before do
+        before_complete!
+      end
+
       after do
-        complete_children!
+        after_complete!
       end
     end
 
     event :archive do
       transitions :from => :completed, :to => :archived
 
+      before do
+        before_archive!
+      end
+
       after do
-        archive_children!
+        after_archive!
       end
     end
   end
@@ -118,11 +127,19 @@ class Task < ApplicationRecord
 
   private
 
-  def complete_children!
+  def before_complete!
+    self.completed_at = Time.now
+  end
+
+  def after_complete!
     children.pending.each(&:complete!)
   end
 
-  def archive_children!
+  def before_archive!
+    self.archived_at = Time.now
+  end
+
+  def after_archive!
     children.completed.each(&:archive!)
   end
 
