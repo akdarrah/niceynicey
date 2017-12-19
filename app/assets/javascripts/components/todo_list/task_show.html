@@ -1,12 +1,5 @@
 <div class="task-show">
-  <a href="/tasks">
-    <i class="fa fa-arrow-left"></i>
-    All Tasks
-  </a>
   <span ng-if="$ctrl.task.parent">
-    &nbsp;
-    <i class="fa fa-angle-right"></i>
-    &nbsp;
     <a class="parent-link" ng-style="$ctrl.parentLinkStyle" ng-href="/tasks/{{ $ctrl.task.parent.id }}">
       <i class="fa fa-level-up"></i>
       {{ $ctrl.task.parent.label }}

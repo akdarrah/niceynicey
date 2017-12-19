@@ -18,6 +18,14 @@
 
   %body{'ng-app' => "application"}
     .container
+      - if current_user.present?
+        .row
+          .col-lg-8.mx-auto
+            %nav.navbar
+              = link_to "📦 NiceyNicey", root_url, class: "navbar-brand"
+              %ul.navbar-nav
+                %li.nav-item
+                  = link_to "Checkpoints", checkpoints_path
       = yield
     = Gon::Base.render_data
     = javascript_include_tag 'application'
