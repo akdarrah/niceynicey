@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require frappe-charts.min.iife.js
 //= require chroma.min
 //= require jquery
 //= require jquery_ujs
