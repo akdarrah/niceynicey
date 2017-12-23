@@ -48,6 +48,44 @@ class Task < ApplicationRecord
   scope :archived, -> { where(state: :archived) }
   scope :unarchived, -> { where.not(state: :archived) }
 
+  def self.tasks_completed_in_last_year(user_id, parent_task_id=nil)
+    base_condition = if parent_task_id.present?
+      "AND (id = #{parent_task_id})"
+    else
+      "AND (parent_id IS NULL)"
+    end
+
+    query = <<-SQL
+      WITH RECURSIVE children AS (
+        SELECT id, completed_at
+        FROM tasks
+        WHERE (user_id = #{user_id})
+          AND (checkpoint_id IS NULL)
+          #{base_condition}
+        UNION
+          SELECT a.id, a.completed_at
+          FROM tasks a
+          JOIN children b ON (a.parent_id = b.id)
+          WHERE a.completed_at >= '#{1.year.ago.to_formatted_s(:db)}'
+      ) SELECT * FROM children WHERE children.completed_at IS NOT NULL;
+    SQL
+
+    task_ids = ActiveRecord::Base.connection.execute(query).map{|r| r['id'].to_i}
+
+    query = <<-SQL
+      SELECT extract(epoch from date_trunc('day', tasks.completed_at)) "day", count(*)
+        FROM tasks
+        WHERE id IN (#{task_ids.join(',')})
+        GROUP BY 1
+        ORDER BY 1
+    SQL
+
+    ActiveRecord::Base.connection.execute(query).inject({}) do |final, result|
+      final.merge!(result["day"] => result["count"])
+    end
+  end
+
+
   aasm :column => :state do
     state :pending, :initial => true
     state :completed
