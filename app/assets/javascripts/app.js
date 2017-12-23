@@ -13,7 +13,8 @@
     'taskShow',
     'templates',
     'ui.sortable',
-    'ui.ace'
+    'ui.ace',
+    'spinner'
   ]);
 
 })();

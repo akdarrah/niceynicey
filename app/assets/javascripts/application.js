@@ -30,4 +30,6 @@
 //= require components/todo_list/project_container
 //= require components/todo_list/task
 //= require components/todo_list/task_list
+//= require components/todo_list/spinner.component
+//= require components/todo_list/spinner
 //= require_tree .
