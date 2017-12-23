@@ -27,12 +27,17 @@
     vm.completedTaskCount = completedTaskCount;
     vm.quote = gon.quote;
 
+    vm.analytics = {};
     vm.tasks = [];
     vm.parentTask = null;
     vm.tasksIndex = false;
     vm.readOnly = false;
 
     vm.$onInit = onInit;
+
+    $scope.$on("taskCompleted", function(event){
+      renderAnalytics();
+    });
 
     ///////////////////////////////
 
@@ -67,6 +72,35 @@
       if(vm.tasksIndex){
         getTasks();
       }
+
+      if(vm.readOnly){
+        return;
+      }
+
+      renderAnalytics();
+    }
+
+    function renderAnalytics(){
+      var getAnalytics;
+
+      if(vm.parentTask){
+        getAnalytics = vm.factory.getAnalytics(vm.parentTask.id);
+      } else {
+        getAnalytics = vm.factory.getAnalytics();
+      }
+
+      getAnalytics.then(function(response){
+        vm.analytics = response.data;
+
+        var heatmap = new Chart({
+          parent: "#heatmap",
+          type: 'heatmap',
+          height: 115,
+          data: vm.analytics,
+          discrete_domains: 1,
+          legend_colors: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
+        });
+      });
     }
 
     function createCheckpoint(){

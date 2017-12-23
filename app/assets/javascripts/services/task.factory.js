@@ -14,7 +14,8 @@
       createTask   : createTask,
       updateTask   : updateTask,
       destroyTask  : destroyTask,
-      completeTask : completeTask
+      completeTask : completeTask,
+      getAnalytics : getAnalytics
     };
 
     /////////////////////////
@@ -37,6 +38,29 @@
     function getTask(taskId) {
       return $http
         .get('/api/tasks/' + taskId + '.json')
+        .then(getComplete, getFailed);
+
+      function getComplete(response) {
+        return response;
+      }
+
+      function getFailed(response) {
+        console.info('Fetching Task Failed: ', response);
+        return response;
+      }
+    }
+
+    function getAnalytics(taskId) {
+      var analyticsUrl;
+
+      if(taskId){
+        analyticsUrl = '/api/tasks/' + taskId + '/analytics.json';
+      } else {
+        analyticsUrl = '/api/tasks/analytics.json';
+      }
+
+      return $http
+        .get(analyticsUrl)
         .then(getComplete, getFailed);
 
       function getComplete(response) {

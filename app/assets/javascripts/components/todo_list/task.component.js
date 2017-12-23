@@ -49,6 +49,7 @@
       completeTask.then(function(response){
         angular.extend(vm.task, response.data);
         setListStyle();
+        $scope.$emit("taskCompleted");
       });
     }
 

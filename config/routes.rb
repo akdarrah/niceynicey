@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   namespace :api do
     resources :checkpoints, only: [:create, :index, :show]
     resources :tasks, only: [:index, :show, :create, :update, :destroy] do
+      collection do
+        get :analytics
+      end
       member do
+        get :analytics
         post :complete
       end
     end
