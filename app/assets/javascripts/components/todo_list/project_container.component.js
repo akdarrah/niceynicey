@@ -35,6 +35,10 @@
 
     vm.$onInit = onInit;
 
+    $scope.$on("taskCompleted", function(event){
+      renderAnalytics();
+    });
+
     ///////////////////////////////
 
     function handleSubmit(){
@@ -73,6 +77,10 @@
         return;
       }
 
+      renderAnalytics();
+    }
+
+    function renderAnalytics(){
       var getAnalytics;
 
       if(vm.parentTask){
