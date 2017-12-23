@@ -47,7 +47,7 @@ class Api::TasksController < ApplicationController
 
   def analytics
     @task = current_user.tasks.find_by_id(params[:id])
-    render json: Task.tasks_completed_in_last_year(current_user.id, @task.try(:id))
+    render json: Task.task_ids_completed_in_last_year_grouped_by_day(current_user.id, @task.try(:id))
   end
 
   private

@@ -48,29 +48,61 @@ class Task < ApplicationRecord
   scope :archived, -> { where(state: :archived) }
   scope :unarchived, -> { where.not(state: :archived) }
 
-  def self.tasks_completed_in_last_year(user_id, parent_task_id=nil)
+  def self.recursive_query(direction, user_id, parent_task_id=nil)
     base_condition = if parent_task_id.present?
-      "AND (id = #{parent_task_id})"
-    else
-      "AND (parent_id IS NULL)"
-    end
+        "(tasks.id = #{parent_task_id})"
+      else
+        "(tasks.parent_id IS NULL)"
+      end
+
+    join_condition = case direction
+      when :descendant
+        "(a.parent_id = b.id)"
+      when :ancestor
+        "(a.id = b.parent_id)"
+      else
+        raise "Direction not supported"
+      end
+
+    post_condition = if parent_task_id.present?
+        "(children.id != #{parent_task_id.to_i})"
+      else
+        "(children.parent_id IS NOT NULL)"
+      end
 
     query = <<-SQL
       WITH RECURSIVE children AS (
-        SELECT id, completed_at
+        SELECT id, parent_id
         FROM tasks
-        WHERE (user_id = #{user_id})
-          AND (checkpoint_id IS NULL)
-          #{base_condition}
+        WHERE (tasks.user_id = #{user_id})
+          AND #{base_condition}
         UNION
-          SELECT a.id, a.completed_at
+          SELECT a.id, a.parent_id
           FROM tasks a
-          JOIN children b ON (a.parent_id = b.id)
-          WHERE a.completed_at >= '#{1.year.ago.to_formatted_s(:db)}'
-      ) SELECT * FROM children WHERE children.completed_at IS NOT NULL;
+          JOIN children b ON #{join_condition}
+      ) SELECT *
+          FROM children
+          WHERE #{post_condition};
     SQL
 
-    task_ids = ActiveRecord::Base.connection.execute(query).map{|r| r['id'].to_i}
+    ActiveRecord::Base.connection.execute(query).map{|r| r['id'].to_i}
+  end
+
+  def self.descendant_ids(user_id, parent_task_id=nil)
+    Task.recursive_query(:descendant, user_id, parent_task_id)
+  end
+
+  def self.ancestor_ids(user_id, parent_task_id=nil)
+    Task.recursive_query(:ancestor, user_id, parent_task_id)
+  end
+
+  def self.task_ids_completed_in_last_year_grouped_by_day(user_id, parent_task_id=nil)
+    descendant_ids = Task.descendant_ids(user_id, parent_task_id)
+
+    task_ids = Task.where(id: descendant_ids)
+      .no_checkpoint
+      .where(["completed_at >= ?", 1.year.ago])
+      .pluck(:id)
 
     return [] if task_ids.blank?
 
@@ -119,11 +151,11 @@ class Task < ApplicationRecord
   end
 
   def ancestors
-    Array(parent) + Array(parent.try(:ancestors))
+    Task.where(id: Task.ancestor_ids(user_id, self.id))
   end
 
   def descendants
-    (children + children.map(&:descendants)).flatten
+    Task.where(id: Task.descendant_ids(user_id, self.id))
   end
 
   def lineage
