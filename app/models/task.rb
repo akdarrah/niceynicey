@@ -72,6 +72,8 @@ class Task < ApplicationRecord
 
     task_ids = ActiveRecord::Base.connection.execute(query).map{|r| r['id'].to_i}
 
+    return [] if task_ids.blank?
+
     query = <<-SQL
       SELECT extract(epoch from date_trunc('day', tasks.completed_at)) "day", count(*)
         FROM tasks
