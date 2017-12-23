@@ -435,22 +435,4 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal [@task, child, grand], child.lineage
   end
 
-  # Task#task_ids_completed_in_last_year
-
-  # focus
-  # test "Finds project level tasks when no parent_task_id is provided" do
-  #   @user = create(:user)
-  #
-  #   child = create(:task, parent: @task, user: @user)
-  #   grand = create(:task, parent: child, user: @user)
-  #   other_grand = create(:task, parent: @task, user: @user)
-  #
-  #   other_task = create(:task, user: @user)
-  #   other_child = create(:task, parent: other_task, user: @user)
-  #
-  #   assert_equal [], Task.task_ids_completed_in_last_year(@user.id)
-  #
-  #   grand.complete!
-  # end
-
 end
