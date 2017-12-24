@@ -13,8 +13,14 @@
   </form>
 </div>
 
-<task-list ng-if="$ctrl.tasks.length" top-level="true" parent-task="$ctrl.parentTask" tasks="$ctrl.tasks" read-only="$ctrl.readOnly"></task-list>
-<div ng-if="!$ctrl.tasks.length">
+<div class="col-sm-12" ng-if="$ctrl.loading">
+  <spinner></spinner>
+  <br />
+  <br />
+</div>
+
+<task-list ng-if="!$ctrl.loading && $ctrl.tasks.length" top-level="true" parent-task="$ctrl.parentTask" tasks="$ctrl.tasks" read-only="$ctrl.readOnly"></task-list>
+<div ng-if="!$ctrl.loading && !$ctrl.tasks.length">
   <br />
   <blockquote class="blockquote text-center">
     <small>({{ $ctrl.quoteDirectionText() }})</small>

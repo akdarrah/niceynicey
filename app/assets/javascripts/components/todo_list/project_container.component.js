@@ -27,6 +27,7 @@
     vm.completedTaskCount = completedTaskCount;
     vm.quote = gon.quote;
 
+    vm.loading = false;
     vm.analytics = {};
     vm.tasks = [];
     vm.parentTask = null;
@@ -122,10 +123,12 @@
     }
 
     function getTasks(){
+      vm.loading = true;
       var getTasks = vm.factory.getTasks();
 
       getTasks.then(function(response){
         vm.tasks = response.data;
+        vm.loading = false;
       });
     }
 
