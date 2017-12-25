@@ -17,16 +17,19 @@
 
     vm.$onInit = onInit;
 
+    vm.loading = false;
     vm.checkpointId = null;
     vm.checkpoint = null;
 
     ///////////////////////////////
 
     function onInit(){
+      vm.loading = true;
       var getCheckpoint = vm.factory.getCheckpoint(vm.checkpointId);
 
       getCheckpoint.then(function(response){
         vm.checkpoint = response.data;
+        vm.loading = false;
       });
     }
 

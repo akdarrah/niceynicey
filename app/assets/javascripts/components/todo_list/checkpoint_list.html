@@ -1,13 +1,22 @@
 <div class="checkpoint-list">
-  <div ng-repeat="checkpoint in $ctrl.checkpoints">
-    <div class="card">
-      <div class="card-block">
-        <a ng-href="/checkpoints/{{checkpoint.id}}">
-          <h5 class="card-title">{{ checkpoint.human_completed_at }}</h5>
-        </a>
-        <h6 class="card-subtitle mb-2 text-muted"><strong>{{ checkpoint.completed_tasks_count}}</strong> Completed Task(s)</h6>
-      </div>
-    </div>
+
+  <div class="col-sm-12" ng-show="$ctrl.loading">
+    <spinner></spinner>
     <br />
+    <br />
+  </div>
+
+  <div ng-hide="$ctrl.loading">
+    <div ng-repeat="checkpoint in $ctrl.checkpoints">
+      <div class="card">
+        <div class="card-block">
+          <a ng-href="/checkpoints/{{checkpoint.id}}">
+            <h5 class="card-title">{{ checkpoint.human_completed_at }}</h5>
+          </a>
+          <h6 class="card-subtitle mb-2 text-muted"><strong>{{ checkpoint.completed_tasks_count}}</strong> Completed Task(s)</h6>
+        </div>
+      </div>
+      <br />
+    </div>
   </div>
 </div>

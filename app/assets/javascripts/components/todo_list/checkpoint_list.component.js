@@ -15,15 +15,18 @@
 
     vm.$onInit = onInit;
 
+    vm.loading = false;
     vm.checkpoints = null;
 
     ///////////////////////////////
 
     function onInit(){
+      vm.loading = true;
       var getCheckpoints = vm.factory.getCheckpoints();
 
       getCheckpoints.then(function(response){
         vm.checkpoints = response.data;
+        vm.loading = false;
       });
     }
 

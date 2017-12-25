@@ -1,9 +1,17 @@
 <div class="checkpoint-show">
-  <h1>{{ $ctrl.checkpoint.human_completed_at }}</h1>
-  <h6 class="text-muted">{{ $ctrl.checkpoint.completed_tasks_count}} Completed Task(s)</h6>
-  <br />
+  <div class="col-sm-12" ng-show="$ctrl.loading">
+    <spinner></spinner>
+    <br />
+    <br />
+  </div>
 
-  <div ng-if="$ctrl.checkpoint.tasks.length">
-    <project-container tasks="$ctrl.checkpoint.tasks" read-only="true"></project-container>
+  <div ng-hide="$ctrl.loading">
+    <h1>{{ $ctrl.checkpoint.human_completed_at }}</h1>
+    <h6 class="text-muted">{{ $ctrl.checkpoint.completed_tasks_count}} Completed Task(s)</h6>
+    <br />
+
+    <div ng-if="$ctrl.checkpoint.tasks.length">
+      <project-container tasks="$ctrl.checkpoint.tasks" read-only="true"></project-container>
+    </div>
   </div>
 </div>
