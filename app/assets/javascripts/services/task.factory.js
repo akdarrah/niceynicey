@@ -9,13 +9,14 @@
 
   function taskFactory($http) {
     return {
-      getTasks     : getTasks,
-      getTask      : getTask,
-      createTask   : createTask,
-      updateTask   : updateTask,
-      destroyTask  : destroyTask,
-      completeTask : completeTask,
-      getAnalytics : getAnalytics
+      getTasks           : getTasks,
+      getTask            : getTask,
+      createTask         : createTask,
+      updateTask         : updateTask,
+      destroyTask        : destroyTask,
+      completeTask       : completeTask,
+      getAnalytics       : getAnalytics,
+      getCheckpointTasks : getCheckpointTasks
     };
 
     /////////////////////////
@@ -31,6 +32,21 @@
 
       function getFailed(response) {
         console.info('Fetching Tasks Failed: ', response);
+        return response;
+      }
+    }
+
+    function getCheckpointTasks(checkpointId) {
+      return $http
+        .get('/api/checkpoints/' + checkpointId + '/tasks.json')
+        .then(getComplete, getFailed);
+
+      function getComplete(response) {
+        return response;
+      }
+
+      function getFailed(response) {
+        console.info('Fetching checkpoint Tasks Failed: ', response);
         return response;
       }
     }

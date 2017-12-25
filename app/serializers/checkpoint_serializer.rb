@@ -2,14 +2,6 @@ class CheckpointSerializer < ActiveModel::Serializer
   attributes :id, :user_id, :created_at, :updated_at,
     :completed_tasks_count, :human_completed_at
 
-  has_many :tasks
-
-  def tasks
-    object.tasks
-      .top_level
-      .position_order
-  end
-
   def completed_tasks_count
     object.tasks.completed.count
   end

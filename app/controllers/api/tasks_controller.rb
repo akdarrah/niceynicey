@@ -1,13 +1,20 @@
 class Api::TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_task, only: [:show, :edit, :update, :destroy, :complete]
+  before_action :find_checkpoint, only: [:index]
 
   def index
-    @tasks = current_user.tasks
-      .top_level
-      .position_order
-      .no_checkpoint
-      .unarchived
+    @tasks = if @checkpoint.present?
+      @checkpoint.tasks
+        .top_level
+        .position_order
+    else
+      current_user.tasks
+        .top_level
+        .position_order
+        .no_checkpoint
+        .unarchived
+    end
 
     render json: @tasks, status: :ok
   end
@@ -59,6 +66,10 @@ class Api::TasksController < ApplicationController
   def task_params
     params.require(:task)
       .permit(:label, :parent_id, :state, :position, :notes, :color_hex)
+  end
+
+  def find_checkpoint
+    @checkpoint = current_user.checkpoints.find_by_id(params[:checkpoint_id])
   end
 
 end
