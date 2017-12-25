@@ -21,6 +21,7 @@
     vm.toggleEditMode = toggleEditMode;
     vm.$onInit = onInit;
 
+    vm.loading = false;
     vm.editMode = false;
     vm.readOnly = false;
     vm.taskId = null;
@@ -43,6 +44,7 @@
     }
 
     function getTaskData(){
+      vm.loading = true;
       var getTask = vm.factory.getTask(vm.taskId);
 
       getTask.then(function(response){
@@ -50,6 +52,7 @@
         vm.readOnly = vm.task.checkpoint_id != null;
 
         setStyles();
+        vm.loading = false;
       });
     }
 
