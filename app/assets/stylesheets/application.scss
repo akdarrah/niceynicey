@@ -161,24 +161,6 @@ ul.no-list-style {
   }
 }
 
-.loaded-content.ng-hide {
-  opacity: 0;
-
-  -webkit-transform: translate(0,25px);
-  -moz-transform: translate(0,25px);
-  -o-transform: translate(0,25px);
-  -ms-transform: translate(0,25px);
-  transform: translate(0,25px);
-}
-
-.loaded-content.ng-hide-remove {
-  -webkit-transition: .25s ease-in-out;
-  -moz-transition: .25s ease-in-out;
-  -o-transition: .25s ease-in-out;
-  transition: .25s ease-in-out;
-}
-
-
 // https://codepen.io/jondiprose/pen/jrDab
 
 @keyframes grow{
