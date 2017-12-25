@@ -14,7 +14,8 @@
     'templates',
     'ui.sortable',
     'ui.ace',
-    'spinner'
+    'spinner',
+    'ngAnimate'
   ]);
 
 })();

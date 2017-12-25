@@ -18,6 +18,7 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require angular
+//= require angular-animate
 //= require sortable
 //= require src-min-noconflict/ace
 //= require ui-ace

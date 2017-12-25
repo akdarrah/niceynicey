@@ -19,7 +19,7 @@
   <br />
 </div>
 
-<div ng-hide="$ctrl.loading">
+<div class="loaded-content" ng-show="!$ctrl.loading">
   <task-list ng-if="$ctrl.tasks.length" top-level="true" parent-task="$ctrl.parentTask" tasks="$ctrl.tasks" read-only="$ctrl.readOnly"></task-list>
   <div ng-if="!$ctrl.tasks.length">
     <br />
