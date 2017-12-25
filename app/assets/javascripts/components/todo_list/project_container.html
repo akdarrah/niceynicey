@@ -5,44 +5,46 @@
         ng-class="{'form-valid': $ctrl.commentForm.$valid, 'form-invalid': $ctrl.commentForm.$invalid}"
         novalidate>
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="{{ $ctrl.placeHolderText() }}" ng-model="$ctrl.todoText" required>
+      <input type="text" class="form-control" placeholder="{{ $ctrl.placeHolderText() }}" ng-model="$ctrl.todoText" required ng-disabled="$ctrl.loading">
       <span class="input-group-btn">
-        <button class="btn btn-primary">Add</button>
+        <button class="btn btn-primary" ng-disabled="$ctrl.loading">Add</button>
       </span>
     </div>
   </form>
 </div>
 
-<div class="col-sm-12" ng-if="$ctrl.loading">
+<div class="col-sm-12" ng-show="$ctrl.loading">
   <spinner></spinner>
   <br />
   <br />
 </div>
 
-<task-list ng-if="!$ctrl.loading && $ctrl.tasks.length" top-level="true" parent-task="$ctrl.parentTask" tasks="$ctrl.tasks" read-only="$ctrl.readOnly"></task-list>
-<div ng-if="!$ctrl.loading && !$ctrl.tasks.length">
-  <br />
-  <blockquote class="blockquote text-center">
-    <small>({{ $ctrl.quoteDirectionText() }})</small>
+<div ng-hide="$ctrl.loading">
+  <task-list ng-if="$ctrl.tasks.length" top-level="true" parent-task="$ctrl.parentTask" tasks="$ctrl.tasks" read-only="$ctrl.readOnly"></task-list>
+  <div ng-if="!$ctrl.tasks.length">
     <br />
-    <br />
-    <p class="quote-body">&ldquo;{{ $ctrl.quote.body }}&rdquo;</p>
-    <footer class="blockquote-footer">{{ $ctrl.quote.author }}</footer>
-  </blockquote>
-</div>
+    <blockquote class="blockquote text-center">
+      <small>({{ $ctrl.quoteDirectionText() }})</small>
+      <br />
+      <br />
+      <p class="quote-body">&ldquo;{{ $ctrl.quote.body }}&rdquo;</p>
+      <footer class="blockquote-footer">{{ $ctrl.quote.author }}</footer>
+    </blockquote>
+  </div>
 
-<div ng-if="!$ctrl.readOnly && $ctrl.completedTaskCount() > 0">
-  <div class="card">
-    <div class="card-block">
-      <h6 class="card-title">Archive {{$ctrl.completedTaskCount()}} Completed Tasks</h6>
-      <button class="btn btn-primary card-link" ng-click="$ctrl.createCheckpoint()">Create Checkpoint</button>
+  <div ng-if="!$ctrl.readOnly && $ctrl.completedTaskCount() > 0">
+    <div class="card">
+      <div class="card-block">
+        <h6 class="card-title">Archive {{$ctrl.completedTaskCount()}} Completed Tasks</h6>
+        <button class="btn btn-primary card-link" ng-click="$ctrl.createCheckpoint()">Create Checkpoint</button>
+      </div>
     </div>
   </div>
-</div>
 
-<div ng-show="!$ctrl.readOnly">
-  <br />
-  <div class="col-sm-12">
-    <div id="heatmap"></div>
+  <div ng-show="!$ctrl.readOnly">
+    <br />
+    <div class="col-sm-12">
+      <div id="heatmap"></div>
+    </div>
   </div>
 </div>
