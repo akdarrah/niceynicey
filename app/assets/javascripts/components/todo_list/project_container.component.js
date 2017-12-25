@@ -27,6 +27,8 @@
     vm.completedTaskCount = completedTaskCount;
     vm.quote = gon.quote;
 
+    vm.analyticsCompletedCount = 0;
+    vm.activeMenuItem = "checkpoint";
     vm.loading = false;
     vm.analytics = {};
     vm.tasks = [];
@@ -35,6 +37,7 @@
     vm.readOnly = false;
 
     vm.$onInit = onInit;
+    vm.switchMenuItem = switchMenuItem;
 
     $scope.$on("taskCompleted", function(event){
       renderAnalytics();
@@ -93,6 +96,10 @@
       getAnalytics.then(function(response){
         vm.analytics = response.data;
 
+        vm.analyticsCompletedCount = Object.values(vm.analytics).reduce(function(sum, number){
+          return sum + number;
+        }, 0);
+
         var heatmap = new Chart({
           parent: "#heatmap",
           type: 'heatmap',
@@ -130,6 +137,10 @@
         vm.tasks = response.data;
         vm.loading = false;
       });
+    }
+
+    function switchMenuItem(menuChoice){
+      vm.activeMenuItem = menuChoice;
     }
 
     function showForm(){

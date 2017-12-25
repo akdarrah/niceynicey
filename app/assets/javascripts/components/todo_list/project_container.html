@@ -32,19 +32,27 @@
     </blockquote>
   </div>
 
-  <div ng-if="!$ctrl.readOnly && $ctrl.completedTaskCount() > 0">
-    <div class="card">
-      <div class="card-block">
+
+  <div class="card" ng-if="!$ctrl.readOnly">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link" ng-class="{'active': $ctrl.activeMenuItem === 'checkpoint'}" ng-click="$ctrl.switchMenuItem('checkpoint')">Checkpoint ({{$ctrl.completedTaskCount() | number}})</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" ng-class="{'active': $ctrl.activeMenuItem === 'heatmap'}" ng-click="$ctrl.switchMenuItem('heatmap')">Heatmap ({{ $ctrl.analyticsCompletedCount | number }})</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-block">
+      <div ng-show="$ctrl.activeMenuItem === 'checkpoint'">
         <h6 class="card-title">Archive {{$ctrl.completedTaskCount()}} Completed Tasks</h6>
         <button class="btn btn-primary card-link" ng-click="$ctrl.createCheckpoint()">Create Checkpoint</button>
+      </div>
+      <div ng-show="$ctrl.activeMenuItem === 'heatmap'">
+        <div id="heatmap"></div>
       </div>
     </div>
   </div>
 
-  <div ng-show="!$ctrl.readOnly">
-    <br />
-    <div class="col-sm-12">
-      <div id="heatmap"></div>
-    </div>
-  </div>
 </div>
