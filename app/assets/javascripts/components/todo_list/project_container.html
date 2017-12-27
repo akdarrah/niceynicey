@@ -37,17 +37,19 @@
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a class="nav-link" ng-class="{'active': $ctrl.activeMenuItem === 'checkpoint'}" ng-click="$ctrl.switchMenuItem('checkpoint')">Checkpoint ({{$ctrl.completedTaskCount() | number}})</a>
+          <a class="nav-link" ng-class="{'active': $ctrl.activeMenuItem === 'checkpoint'}" ng-click="$ctrl.switchMenuItem('checkpoint')">Archive ({{$ctrl.completedTaskCount() | number}})</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" ng-class="{'active': $ctrl.activeMenuItem === 'heatmap'}" ng-click="$ctrl.switchMenuItem('heatmap')">Heatmap ({{ $ctrl.analyticsCompletedCount | number }})</a>
+          <a class="nav-link" ng-class="{'active': $ctrl.activeMenuItem === 'heatmap'}" ng-click="$ctrl.switchMenuItem('heatmap')">Pulse ({{ $ctrl.analyticsCompletedCount | number }})</a>
         </li>
       </ul>
     </div>
     <div class="card-block">
       <div ng-show="$ctrl.activeMenuItem === 'checkpoint'">
-        <h6 class="card-title">Archive {{$ctrl.completedTaskCount() | number}} Completed Tasks</h6>
-        <button class="btn btn-primary card-link" ng-click="$ctrl.createCheckpoint()">Create Checkpoint</button>
+        <p>
+          Archive <strong>{{$ctrl.completedTaskCount() | number}}</strong> Completed Tasks. Completed tasks will be cleared from your task list.
+        </p>
+        <button class="btn btn-primary card-link" ng-click="$ctrl.createCheckpoint()" ng-disabled="$ctrl.completedTaskCount() == 0">Archive</button>
       </div>
       <div ng-show="$ctrl.activeMenuItem === 'heatmap'">
         <p>
