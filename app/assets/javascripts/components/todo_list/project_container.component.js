@@ -35,6 +35,7 @@
     vm.parentTask = null;
     vm.tasksIndex = false;
     vm.readOnly = false;
+    vm.lastCheckpoint = null;
 
     vm.$onInit = onInit;
     vm.switchMenuItem = switchMenuItem;
@@ -121,6 +122,8 @@
       }
 
       createCheckpoint.then(function(response){
+        vm.lastCheckpoint = response.data;
+        
         if(vm.parentTask){
           $scope.$emit('checkpointCreated');
         } else {

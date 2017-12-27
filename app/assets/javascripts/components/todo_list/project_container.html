@@ -50,6 +50,12 @@
           Archive <strong>{{$ctrl.completedTaskCount() | number}}</strong> Completed Tasks. Completed tasks will be cleared from your task list.
         </p>
         <button class="btn btn-primary card-link" ng-click="$ctrl.createCheckpoint()" ng-disabled="$ctrl.completedTaskCount() == 0">Archive</button>
+        <div ng-if="$ctrl.lastCheckpoint">
+          <br />
+          <div class="alert alert-success" role="alert">
+            <strong>Well done! 😁</strong> <a ng-href="/checkpoints/{{$ctrl.lastCheckpoint.id}}">View your checkpoint for {{ $ctrl.lastCheckpoint.completed_tasks_count}} task(s)</a>
+          </div>
+        </div>
       </div>
       <div ng-show="$ctrl.activeMenuItem === 'heatmap'">
         <p>
