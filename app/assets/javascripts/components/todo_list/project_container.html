@@ -46,10 +46,13 @@
     </div>
     <div class="card-block">
       <div ng-show="$ctrl.activeMenuItem === 'checkpoint'">
-        <h6 class="card-title">Archive {{$ctrl.completedTaskCount()}} Completed Tasks</h6>
+        <h6 class="card-title">Archive {{$ctrl.completedTaskCount() | number}} Completed Tasks</h6>
         <button class="btn btn-primary card-link" ng-click="$ctrl.createCheckpoint()">Create Checkpoint</button>
       </div>
       <div ng-show="$ctrl.activeMenuItem === 'heatmap'">
+        <p>
+          <strong>{{ $ctrl.analyticsCompletedCount | number }}</strong> tasks completed in the last year
+        </p>
         <div id="heatmap"></div>
       </div>
     </div>
