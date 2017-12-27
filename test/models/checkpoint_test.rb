@@ -154,4 +154,44 @@ class CheckpointTest < ActiveSupport::TestCase
     assert_equal 2, checkpoint.tasks.count
   end
 
+  test "Creates TaskCopy Records" do
+    task = create(:task, user: @user)
+    child = create(:task, user: @user, parent: task)
+    grand = create(:task, user: @user, parent: child)
+
+    child.complete!
+
+    assert child.reload.completed?
+    assert grand.reload.completed?
+
+    assert_equal 0, TaskCopy.count
+    checkpoint = Checkpoint.create_checkpoint!(@user)
+    assert_equal 3, TaskCopy.count
+
+    assert_equal 1, checkpoint.projects.count
+    task_copy = checkpoint.projects.first
+
+    assert_equal 1, task_copy.children.count
+    child_copy = task_copy.children.first
+
+    assert_equal 1, child_copy.children.count
+    grand_copy = child_copy.children.first
+    assert_equal 0, grand_copy.children.count
+
+    assert checkpoint.task_copies
+      .where(original_task: task)
+      .where(copied_task: task_copy)
+      .exists?
+
+    assert checkpoint.task_copies
+      .where(original_task: child)
+      .where(copied_task: child_copy)
+      .exists?
+
+    assert checkpoint.task_copies
+      .where(original_task: grand)
+      .where(copied_task: grand_copy)
+      .exists?
+  end
+
 end

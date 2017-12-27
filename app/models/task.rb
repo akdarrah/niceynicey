@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  attr_accessor :copied_from
+
   include AASM
 
   COLORS = [
@@ -15,6 +17,12 @@ class Task < ApplicationRecord
   belongs_to :parent, class_name: "Task", optional: true
   belongs_to :checkpoint, optional: true
   belongs_to :user
+
+  has_many :task_copies_as_original, foreign_key: :original_task_id, class_name: "TaskCopy"
+  has_many :task_copies, through: :task_copies_as_original, source: :copied_task
+
+  has_one :task_copies_as_copied, foreign_key: :copied_task_id, class_name: "TaskCopy"
+  has_one :copied_from_task, through: :task_copies_as_copied, source: :original_task
 
   validates :user, :label, :color_hex, presence: true
   validate :parent_must_be_pending
@@ -159,6 +167,7 @@ class Task < ApplicationRecord
 
     if criteria_passed
       duplicate = dup
+      duplicate.copied_from = self
 
       children.each do |child|
         duplicate_child = child.dup_with_children(&block)

@@ -3,6 +3,7 @@ class Checkpoint < ApplicationRecord
 
   has_many :projects, -> { where(parent_id: nil) }, class_name: 'Task'
   has_many :tasks, dependent: :destroy
+  has_many :task_copies, dependent: :destroy
 
   validates :tasks, presence: true
 
@@ -42,6 +43,11 @@ class Checkpoint < ApplicationRecord
 
         duplicate.traverse do |task|
           task.checkpoint = checkpoint
+
+          checkpoint.task_copies.build(
+            original_task: task.copied_from,
+            copied_task: task
+          )
         end
 
         checkpoint.tasks << duplicate
