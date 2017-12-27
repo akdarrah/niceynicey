@@ -1,7 +1,12 @@
 <div ng-style="$ctrl.listStyle">
   <div class="task-row no-word-break">
     <span ng-style="$ctrl.taskLinkStyle">
-      <span class="item-title" ng-class="{'completed': $ctrl.task.state=='completed'}">{{ $ctrl.task.label }}</span>
+      <strong ng-if="$ctrl.task.state == 'completed'">
+        <i class="fa fa-check"></i> {{ $ctrl.task.label }}
+      </strong>
+      <span ng-if="$ctrl.task.state != 'completed'">
+        {{ $ctrl.task.label }}
+      </span>
     </span>
   </div>
 
