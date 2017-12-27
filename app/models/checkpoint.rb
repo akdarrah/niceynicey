@@ -1,5 +1,7 @@
 class Checkpoint < ApplicationRecord
   belongs_to :user
+
+  has_many :projects, -> { where(parent_id: nil) }, class_name: 'Task'
   has_many :tasks, dependent: :destroy
 
   validates :tasks, presence: true

@@ -5,12 +5,10 @@ class Api::TasksController < ApplicationController
 
   def index
     @tasks = if @checkpoint.present?
-      @checkpoint.tasks
-        .top_level
+      @checkpoint.projects
         .position_order
     else
-      current_user.tasks
-        .top_level
+      current_user.projects
         .position_order
         .no_checkpoint
         .unarchived
