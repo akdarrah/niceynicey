@@ -2,14 +2,6 @@ class Task < ApplicationRecord
   include AASM
 
   COLORS = [
-    "#b60205",
-    "#d93f0b",
-    "#fbca04",
-    "#0e8a16",
-    "#006b75",
-    "#1d76db",
-    "#0052cc",
-    "#5319e7",
     "#e99695",
     "#f9d0c4",
     "#fef2c0",
