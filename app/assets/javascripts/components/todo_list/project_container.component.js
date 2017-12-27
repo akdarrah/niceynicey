@@ -7,8 +7,7 @@
     bindings: {
       tasks: '<',
       parentTask: '<',
-      tasksIndex: '=',
-      readOnly: '='
+      tasksIndex: '='
     }
   });
 
@@ -34,7 +33,6 @@
     vm.tasks = [];
     vm.parentTask = null;
     vm.tasksIndex = false;
-    vm.readOnly = false;
     vm.lastCheckpoint = null;
 
     vm.$onInit = onInit;
@@ -78,10 +76,6 @@
         getTasks();
       }
 
-      if(vm.readOnly){
-        return;
-      }
-
       renderAnalytics();
     }
 
@@ -123,7 +117,7 @@
 
       createCheckpoint.then(function(response){
         vm.lastCheckpoint = response.data;
-        
+
         if(vm.parentTask){
           $scope.$emit('checkpointCreated');
         } else {
@@ -147,7 +141,7 @@
     }
 
     function showForm(){
-      return !vm.readOnly && (!vm.parentTask || vm.parentTask.state == 'pending');
+      return !vm.parentTask || vm.parentTask.state == 'pending';
     }
 
     function completedTaskCount(tasks){

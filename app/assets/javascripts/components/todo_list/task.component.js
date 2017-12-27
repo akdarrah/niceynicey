@@ -8,7 +8,6 @@
       task: '<',
       parentTask: '<',
       showForm: '<',
-      readOnly: '=',
       topLevel: '=',
       backgroundColor: '<'
     }
@@ -26,7 +25,6 @@
     vm.allowChildAddition = allowChildAddition;
     vm.$onInit = onInit;
 
-    vm.readOnly = false;
     vm.showForm = false;
     vm.task = null;
     vm.backgroundColor = null;

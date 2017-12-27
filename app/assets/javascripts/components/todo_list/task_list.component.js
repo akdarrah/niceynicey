@@ -7,7 +7,6 @@
     bindings: {
       tasks: '<',
       parentTask: '<',
-      readOnly: '=',
       topLevel: '=',
       backgroundColor: '<'
     }
@@ -49,7 +48,6 @@
     vm.listStyle = {};
     vm.tasks = [];
     vm.parentTask = null;
-    vm.readOnly = false;
     vm.showForm = false;
     vm.backgroundColor = null;
 

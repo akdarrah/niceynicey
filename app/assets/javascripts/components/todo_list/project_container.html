@@ -20,7 +20,7 @@
 </div>
 
 <div ng-show="!$ctrl.loading">
-  <task-list ng-if="$ctrl.tasks.length" top-level="true" parent-task="$ctrl.parentTask" tasks="$ctrl.tasks" read-only="$ctrl.readOnly"></task-list>
+  <task-list ng-if="$ctrl.tasks.length" top-level="true" parent-task="$ctrl.parentTask" tasks="$ctrl.tasks"></task-list>
   <div ng-if="!$ctrl.tasks.length">
     <br />
     <blockquote class="blockquote text-center">
@@ -33,7 +33,7 @@
   </div>
 
 
-  <div class="card" ng-if="!$ctrl.readOnly">
+  <div class="card">
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">

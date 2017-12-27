@@ -1,18 +1,16 @@
 <div ng-style="$ctrl.listStyle">
   <div class="task-row no-word-break">
-    <span ng-if="!$ctrl.readOnly">
-      <i class="fa fa-bars reorder-icon"></i>
-      <button ng-disabled="$ctrl.task.state=='completed'" type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.completeTask($ctrl.task)">
-        <i class="fa fa-check"></i>
-      </button>
-      <button ng-if="$ctrl.allowChildAddition()" type="button" class="hidden-task-link btn btn-success btn-circle" ng-click="$ctrl.toggleForm()">
-        <i class="fa fa-plus"></i>
-      </button>
-    </span>
+    <i class="fa fa-bars reorder-icon"></i>
+    <button ng-disabled="$ctrl.task.state=='completed'" type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.completeTask($ctrl.task)">
+      <i class="fa fa-check"></i>
+    </button>
+    <button ng-if="$ctrl.allowChildAddition()" type="button" class="hidden-task-link btn btn-success btn-circle" ng-click="$ctrl.toggleForm()">
+      <i class="fa fa-plus"></i>
+    </button>
     <a ng-href="/tasks/{{$ctrl.task.id}}" ng-style="$ctrl.taskLinkStyle">
       <span class="item-title" ng-class="{'completed': $ctrl.task.state=='completed'}">{{ $ctrl.task.label }}</span>
     </a>
   </div>
 
-  <task-list parent-task="$ctrl.task" tasks="$ctrl.task.children" read-only="$ctrl.readOnly" background-color="$ctrl.backgroundColor"></task-list>
+  <task-list parent-task="$ctrl.task" tasks="$ctrl.task.children" background-color="$ctrl.backgroundColor"></task-list>
 </div>
