@@ -25,6 +25,12 @@
 //= require angular-rails-templates
 //= require app
 //= require services/task.factory
+//= require components/todo_list/project_container_summary.component
+//= require components/todo_list/project_container_summary
+//= require components/todo_list/task_summary.component
+//= require components/todo_list/task_summary
+//= require components/todo_list/task_list_summary.component
+//= require components/todo_list/task_list_summary
 //= require components/todo_list/project_container.component
 //= require components/todo_list/task.component
 //= require components/todo_list/task_list.component

@@ -1,0 +1,69 @@
+<div ng-if="$ctrl.showForm()">
+  <form id="comment-form"
+        name='$ctrl.commentForm'
+        ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"
+        ng-class="{'form-valid': $ctrl.commentForm.$valid, 'form-invalid': $ctrl.commentForm.$invalid}"
+        novalidate>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="{{ $ctrl.placeHolderText() }}" ng-model="$ctrl.todoText" required ng-disabled="$ctrl.loading">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" ng-disabled="$ctrl.loading">Add</button>
+      </span>
+    </div>
+  </form>
+</div>
+
+<div class="col-sm-12" ng-show="$ctrl.loading">
+  <spinner></spinner>
+  <br />
+  <br />
+</div>
+
+<div ng-show="!$ctrl.loading">
+  <task-list-summary ng-if="$ctrl.tasks.length" top-level="true" parent-task="$ctrl.parentTask" tasks="$ctrl.tasks" read-only="$ctrl.readOnly"></task-list>
+  <div ng-if="!$ctrl.tasks.length">
+    <br />
+    <blockquote class="blockquote text-center">
+      <small>({{ $ctrl.quoteDirectionText() }})</small>
+      <br />
+      <br />
+      <p class="quote-body">&ldquo;{{ $ctrl.quote.body }}&rdquo;</p>
+      <footer class="blockquote-footer">{{ $ctrl.quote.author }}</footer>
+    </blockquote>
+  </div>
+
+
+  <div class="card" ng-if="!$ctrl.readOnly">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link" ng-class="{'active': $ctrl.activeMenuItem === 'checkpoint'}" ng-click="$ctrl.switchMenuItem('checkpoint')">Archive ({{$ctrl.completedTaskCount() | number}})</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" ng-class="{'active': $ctrl.activeMenuItem === 'heatmap'}" ng-click="$ctrl.switchMenuItem('heatmap')">Pulse ({{ $ctrl.analyticsCompletedCount | number }})</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-block">
+      <div ng-show="$ctrl.activeMenuItem === 'checkpoint'">
+        <p>
+          Archive <strong>{{$ctrl.completedTaskCount() | number}}</strong> Completed Tasks. Completed tasks will be cleared from your task list.
+        </p>
+        <button class="btn btn-primary card-link" ng-click="$ctrl.createCheckpoint()" ng-disabled="$ctrl.completedTaskCount() == 0">Archive</button>
+        <div ng-if="$ctrl.lastCheckpoint">
+          <br />
+          <div class="alert alert-success" role="alert">
+            <strong>Well done! 😁</strong> <a ng-href="/checkpoints/{{$ctrl.lastCheckpoint.id}}">View your checkpoint for {{ $ctrl.lastCheckpoint.completed_tasks_count}} task(s)</a>
+          </div>
+        </div>
+      </div>
+      <div ng-show="$ctrl.activeMenuItem === 'heatmap'">
+        <p>
+          <strong>{{ $ctrl.analyticsCompletedCount | number }}</strong> tasks completed in the last year
+        </p>
+        <div id="heatmap"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
