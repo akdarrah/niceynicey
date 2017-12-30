@@ -4,7 +4,7 @@
     <button ng-disabled="$ctrl.task.state=='completed'" type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.completeTask($ctrl.task)" data-toggle="tooltip" data-placement="top" title="Mark completed">
       <i class="fa fa-check"></i>
     </button>
-    <button ng-if="$ctrl.allowChildAddition()" type="button" class="hidden-task-link btn btn-success btn-circle" ng-click="$ctrl.toggleForm()" data-toggle="tooltip" data-placement="top" title="Add Subtask">
+    <button ng-if="$ctrl.allowChildAddition()" type="button" class="hidden-task-link btn btn-success btn-circle" ng-click="$ctrl.toggleForm()" data-toggle="tooltip" data-placement="top" title="Add subtask">
       <i class="fa fa-plus"></i>
     </button>
     <a ng-href="/tasks/{{$ctrl.task.id}}" ng-style="$ctrl.taskLinkStyle">
