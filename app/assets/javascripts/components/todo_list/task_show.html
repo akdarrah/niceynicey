@@ -25,7 +25,9 @@
       <br />
       <div ui-ace ng-change="$ctrl.updateTask()" ng-readonly="$ctrl.readOnly" ng-model-options="{ debounce: 1000 }" ng-model="$ctrl.task.notes"></div>
       <hr>
-      <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task" read-only="$ctrl.readOnly"></project-container>
+      <div ng-if="$ctrl.task">
+        <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task" read-only="$ctrl.readOnly"></project-container>
+      </div>
     </div>
 
     <div ng-if="$ctrl.editMode">
