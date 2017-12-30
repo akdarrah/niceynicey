@@ -1,7 +1,7 @@
 class TaskSerializer < ActiveModel::Serializer
   attributes :id, :label, :parent_id, :user_id, :state,
     :created_at, :updated_at, :notes, :color_hex, :child_color_hex,
-    :checkpoint_id, :position
+    :checkpoint_id, :position, :human_completed_at, :human_archived_at
 
   has_many :children, serializer: TaskSerializer
 
@@ -22,4 +22,17 @@ class TaskSerializer < ActiveModel::Serializer
         .unarchived
     end
   end
+
+  def human_completed_at
+    if object.completed_at
+      object.completed_at.stamp("March 1, 1999 at 3:00 AM")
+    end
+  end
+
+  def human_archived_at
+    if object.archived_at
+      object.archived_at.stamp("March 1, 1999 at 3:00 AM")
+    end
+  end
+
 end

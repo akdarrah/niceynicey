@@ -7,6 +7,13 @@
   </div>
 
   <div ng-hide="$ctrl.loading">
+    <div class="alert alert-success" role="alert" ng-if="$ctrl.task.human_completed_at && !$ctrl.task.human_archived_at">
+      <strong><i class="fa fa-check"></i> Hooray!</strong> This task was completed {{ $ctrl.task.human_completed_at }} 🎉
+    </div>
+    <div class="alert alert-warning" role="alert" ng-if="$ctrl.task.human_archived_at">
+      <strong><i class="fa fa-check"></i> Hooray!</strong> This task was archived {{ $ctrl.task.human_archived_at }} 🎉
+    </div>
+
     <span ng-if="$ctrl.task.parent">
       <a class="parent-link" ng-style="$ctrl.parentLinkStyle" ng-href="/tasks/{{ $ctrl.task.parent.id }}">
         <i class="fa fa-level-up"></i>
