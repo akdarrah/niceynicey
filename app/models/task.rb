@@ -99,12 +99,18 @@ class Task < ApplicationRecord
   def self.task_ids_completed_in_last_year_grouped_by_day(user_id, parent_task_id=nil)
     descendant_ids = Task.descendant_ids(user_id, parent_task_id)
 
-    task_ids = Task.where(id: descendant_ids)
+    non_descendant_ids = if parent_task_id.present?
+      Array(parent_task_id)
+    else
+      User.find(user_id).projects.pluck(:id)
+    end
+
+    task_ids = Task.where(id: (descendant_ids + non_descendant_ids))
       .no_checkpoint
       .where(["completed_at >= ?", 1.year.ago])
       .pluck(:id)
 
-    return [] if task_ids.blank?
+    return {} if task_ids.blank?
 
     query = <<-SQL
       SELECT extract(epoch from date_trunc('day', tasks.completed_at)) "day", count(*)

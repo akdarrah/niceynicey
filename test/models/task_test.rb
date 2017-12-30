@@ -435,4 +435,114 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal [@task, child, grand], child.lineage
   end
 
+  # Task#task_ids_completed_in_last_year_grouped_by_day
+
+  test "returns nothing when there are no completed tasks" do
+    @user = create(:user)
+
+    @task.update_column :user_id, @user.id
+    child = create(:task, parent: @task, user: @user)
+
+    assert Task.task_ids_completed_in_last_year_grouped_by_day(@user.id).empty?
+  end
+
+  test "returns data when sub-task is completed" do
+    @user = create(:user)
+
+    @task.update_column :user_id, @user.id
+    child = create(:task, parent: @task, user: @user)
+
+    child.complete!
+
+    assert @task.pending?
+    assert child.completed?
+
+    total_count = Task.task_ids_completed_in_last_year_grouped_by_day(@user.id).values.sum
+    assert_equal 1, total_count
+  end
+
+  test "Only returns tasks completed in last year" do
+    @user = create(:user)
+
+    @task.update_column :user_id, @user.id
+    child = create(:task, parent: @task, user: @user)
+
+    child.complete!
+    child.update_column :completed_at, 2.year.ago
+
+    assert @task.pending?
+    assert child.completed?
+
+    assert Task.task_ids_completed_in_last_year_grouped_by_day(@user.id).empty?
+  end
+
+  test "returns data when project is completed" do
+    @user = create(:user)
+
+    @task.update_column :user_id, @user.id
+    child = create(:task, parent: @task, user: @user)
+
+    @task.complete!
+
+    assert @task.reload.completed?
+    assert child.reload.completed?
+
+    total_count = Task.task_ids_completed_in_last_year_grouped_by_day(@user.id).values.sum
+    assert_equal 2, total_count
+  end
+
+  test "Given a parent_task_id, returns nothing when there are no completed sub-tasks" do
+    @user = create(:user)
+
+    @task.update_column :user_id, @user.id
+    child = create(:task, parent: @task, user: @user)
+
+    assert Task.task_ids_completed_in_last_year_grouped_by_day(@user.id, @task.id).empty?
+  end
+
+  test "Given a parent_task_id, returns data when there are are completed sub-tasks" do
+    @user = create(:user)
+
+    @task.update_column :user_id, @user.id
+    child = create(:task, parent: @task, user: @user)
+
+    child.complete!
+
+    assert @task.reload.pending?
+    assert child.reload.completed?
+
+    total_count = Task.task_ids_completed_in_last_year_grouped_by_day(@user.id, @task.id).values.sum
+    assert_equal 1, total_count
+  end
+
+  test "Given a parent_task_id, Only returns data when there are are completed sub-tasks in the last year" do
+    @user = create(:user)
+
+    @task.update_column :user_id, @user.id
+    child = create(:task, parent: @task, user: @user)
+
+    child.complete!
+    child.update_column :completed_at, 2.year.ago
+
+    assert @task.reload.pending?
+    assert child.reload.completed?
+
+    assert Task.task_ids_completed_in_last_year_grouped_by_day(@user.id, @task.id).empty?
+  end
+
+  test "Given a parent_task_id, returns correct data when parent_task_id is completed" do
+    @user = create(:user)
+
+    @task.update_column :user_id, @user.id
+    child = create(:task, parent: @task, user: @user)
+
+    @task.complete!
+
+    assert @task.reload.completed?
+    assert child.reload.completed?
+
+    total_count = Task.task_ids_completed_in_last_year_grouped_by_day(@user.id, @task.id).values.sum
+    assert_equal 2, total_count
+  end
+
 end
