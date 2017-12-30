@@ -1,10 +1,10 @@
 <div ng-style="$ctrl.listStyle">
   <div class="task-row no-word-break">
     <i class="fa fa-bars reorder-icon"></i>
-    <button ng-disabled="$ctrl.task.state=='completed'" type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.completeTask($ctrl.task)">
+    <button ng-disabled="$ctrl.task.state=='completed'" type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.completeTask($ctrl.task)" data-toggle="tooltip" data-placement="top" title="Mark completed">
       <i class="fa fa-check"></i>
     </button>
-    <button ng-if="$ctrl.allowChildAddition()" type="button" class="hidden-task-link btn btn-success btn-circle" ng-click="$ctrl.toggleForm()">
+    <button ng-if="$ctrl.allowChildAddition()" type="button" class="hidden-task-link btn btn-success btn-circle" ng-click="$ctrl.toggleForm()" data-toggle="tooltip" data-placement="top" title="Add Subtask">
       <i class="fa fa-plus"></i>
     </button>
     <a ng-href="/tasks/{{$ctrl.task.id}}" ng-style="$ctrl.taskLinkStyle">

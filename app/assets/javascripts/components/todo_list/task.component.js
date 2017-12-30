@@ -61,6 +61,7 @@
 
     function onInit(){
       setListStyle();
+      angular.element('[data-toggle="tooltip"]').tooltip();
     }
 
     function setListStyle(){
