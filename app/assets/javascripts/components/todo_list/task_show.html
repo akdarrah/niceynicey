@@ -24,10 +24,8 @@
       <h1 class='white-text task-title no-word-break' ng-style="$ctrl.titleStyle">{{$ctrl.task.label}}</h1>
       <br />
       <div ui-ace ng-change="$ctrl.updateTask()" ng-readonly="$ctrl.readOnly" ng-model-options="{ debounce: 1000 }" ng-model="$ctrl.task.notes"></div>
-      <div ng-if="$ctrl.showChildren()">
-        <hr>
-        <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task" read-only="$ctrl.readOnly"></project-container>
-      </div>
+      <hr>
+      <project-container tasks="$ctrl.task.children" parent-task="$ctrl.task" read-only="$ctrl.readOnly"></project-container>
     </div>
 
     <div ng-if="$ctrl.editMode">

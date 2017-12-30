@@ -17,7 +17,6 @@
     vm.colorFactory = colorFactory;
 
     vm.updateTask = updateTask;
-    vm.showChildren = showChildren;
     vm.toggleEditMode = toggleEditMode;
     vm.$onInit = onInit;
 
@@ -34,10 +33,6 @@
     });
 
     ///////////////////////////////
-
-    function showChildren(){
-      return vm.task && (vm.task.children.length || vm.task.state == 'pending');
-    }
 
     function onInit(){
       getTaskData();

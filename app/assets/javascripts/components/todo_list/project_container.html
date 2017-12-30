@@ -24,9 +24,11 @@
   <div ng-if="!$ctrl.tasks.length">
     <br />
     <blockquote class="blockquote text-center">
-      <small>({{ $ctrl.quoteDirectionText() }})</small>
-      <br />
-      <br />
+      <div ng-if="$ctrl.showForm()">
+        <small>({{ $ctrl.quoteDirectionText() }})</small>
+        <br />
+        <br />
+      </div>
       <p class="quote-body">&ldquo;{{ $ctrl.quote.body }}&rdquo;</p>
       <footer class="blockquote-footer">{{ $ctrl.quote.author }}</footer>
     </blockquote>
