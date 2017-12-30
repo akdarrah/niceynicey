@@ -7,6 +7,14 @@
   </div>
 
   <div ng-hide="$ctrl.loading">
+    <blockquote class="blockquote text-center" ng-show="!$ctrl.checkpoints.length">
+      <small>(Archive is empty. Time to get to work! 🚀)</small>
+      <br />
+      <br />
+      <p class="quote-body">&ldquo;{{ $ctrl.quote.body }}&rdquo;</p>
+      <footer class="blockquote-footer">{{ $ctrl.quote.author }}</footer>
+    </blockquote>
+
     <div ng-repeat="checkpoint in $ctrl.checkpoints">
       <div class="card">
         <div class="card-block">

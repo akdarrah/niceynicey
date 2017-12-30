@@ -15,6 +15,7 @@
 
     vm.$onInit = onInit;
 
+    vm.quote = gon.quote;
     vm.loading = false;
     vm.checkpoints = null;
 
