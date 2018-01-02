@@ -133,8 +133,6 @@ ul.no-list-style {
 }
 
 .reorder-icon {
-  margin-left: 5px;
-
   &:hover {
     cursor: move;
   }
@@ -142,6 +140,11 @@ ul.no-list-style {
 
 .task-row {
   padding: 3px;
+
+  .extended-control {
+    cursor:pointer;
+    cursor:hand;
+  }
 
   a {
     color: white;

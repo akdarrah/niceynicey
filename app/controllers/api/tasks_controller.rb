@@ -63,7 +63,7 @@ class Api::TasksController < ApplicationController
 
   def task_params
     params.require(:task)
-      .permit(:label, :parent_id, :state, :position, :notes, :color_hex)
+      .permit(:label, :parent_id, :state, :position, :notes, :color_hex, :extended)
   end
 
   def find_checkpoint

@@ -23,6 +23,8 @@
     vm.completeTask = completeTask;
     vm.toggleForm = toggleForm;
     vm.allowChildAddition = allowChildAddition;
+    vm.retractChildren = retractChildren;
+    vm.extendChildren = extendChildren;
     vm.$onInit = onInit;
 
     vm.showForm = false;
@@ -52,11 +54,30 @@
     }
 
     function toggleForm(){
+      extendChildren();
       $rootScope.$broadcast('toggleTaskForm', vm.task);
     }
 
     function allowChildAddition(){
       return vm.task.state == 'pending';
+    }
+
+    function retractChildren(){
+      vm.task.extended = false;
+
+      var updateTask = vm.factory.updateTask(vm.task);
+      updateTask.then(function(response){
+        angular.extend(vm.task, response.data);
+      });
+    }
+
+    function extendChildren(){
+      vm.task.extended = true;
+
+      var updateTask = vm.factory.updateTask(vm.task);
+      updateTask.then(function(response){
+        angular.extend(vm.task, response.data);
+      });
     }
 
     function onInit(){

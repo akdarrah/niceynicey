@@ -110,7 +110,8 @@
         notes: task.notes,
         position: task.position,
         parent_id: task.parent_id,
-        color_hex: task.color_hex
+        color_hex: task.color_hex,
+        extended: task.extended
       };
 
       return $http

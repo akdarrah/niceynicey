@@ -1,5 +1,7 @@
 <div ng-style="$ctrl.listStyle">
   <div class="task-row no-word-break">
+    <a class="extended-control" ng-if="$ctrl.task.extended" ng-click="$ctrl.retractChildren()">&lsqb;&minus;&rsqb;</a>
+    <a class="extended-control" ng-if="!$ctrl.task.extended" ng-click="$ctrl.extendChildren()">&lsqb;&plus;&rsqb;</a>
     <i class="fa fa-bars reorder-icon"></i>
     <button ng-disabled="$ctrl.task.state=='completed'" type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.completeTask($ctrl.task)" data-toggle="tooltip" data-placement="top" title="Mark completed">
       <i class="fa fa-check"></i>
@@ -12,5 +14,5 @@
     </a>
   </div>
 
-  <task-list parent-task="$ctrl.task" tasks="$ctrl.task.children" background-color="$ctrl.backgroundColor"></task-list>
+  <task-list ng-show="$ctrl.task.extended" parent-task="$ctrl.task" tasks="$ctrl.task.children" background-color="$ctrl.backgroundColor"></task-list>
 </div>
