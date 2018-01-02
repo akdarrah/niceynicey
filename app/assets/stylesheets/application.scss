@@ -1,6 +1,10 @@
 @import "bootstrap";
 @import "font-awesome";
 
+.navbar-brand {
+  font-family: 'Fredoka One', cursive;
+}
+
 // https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
 .no-word-break {
   /* These are technically the same, but use both */
