@@ -20,8 +20,12 @@
     vm.factory = taskFactory;
     vm.colorFactory = colorFactory;
 
-    vm.disableCompletionButton = disableCompletionButton;
+    vm.disableReopenButton = disableReopenButton;
+    vm.showPinned = showPinned;
+    vm.showCompleteButton = showCompleteButton;
+    vm.showReopenButton = showReopenButton;
     vm.completeTask = completeTask;
+    vm.reopenTask = reopenTask;
     vm.toggleForm = toggleForm;
     vm.allowChildAddition = allowChildAddition;
     vm.retractChildren = retractChildren;
@@ -44,8 +48,20 @@
 
     ///////////////////////////////
 
-    function disableCompletionButton(){
-      return vm.task.state == 'completed' || vm.task.pinned;
+    function showPinned(){
+      return vm.task.pinned;
+    }
+
+    function showCompleteButton(){
+      return !vm.task.pinned && vm.task.state == 'pending';
+    }
+
+    function showReopenButton(){
+      return !vm.task.pinned && vm.task.state == 'completed';
+    }
+
+    function disableReopenButton(){
+      return vm.parentTask && vm.parentTask.state == 'completed';
     }
 
     function completeTask(task){
@@ -55,6 +71,16 @@
         angular.extend(vm.task, response.data);
         setListStyle();
         $scope.$emit("taskCompleted");
+      });
+    }
+
+    function reopenTask(task){
+      var reopenTask = vm.factory.reopenTask(task.id);
+
+      reopenTask.then(function(response){
+        angular.extend(vm.task, response.data);
+        setListStyle();
+        $scope.$emit("taskReopened");
       });
     }
 

@@ -1,6 +1,6 @@
 class Api::TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :complete]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :complete, :reopen]
   before_action :find_checkpoint, only: [:index]
 
   def index
@@ -47,6 +47,11 @@ class Api::TasksController < ApplicationController
 
   def complete
     @task.complete!
+    render json: @task, status: :ok
+  end
+
+  def reopen
+    @task.reopen!
     render json: @task, status: :ok
   end
 

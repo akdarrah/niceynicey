@@ -3,9 +3,14 @@
     <a class="extended-control" ng-if="$ctrl.task.extended" ng-click="$ctrl.retractChildren()">&lsqb;&minus;&rsqb;</a>
     <a class="extended-control" ng-if="!$ctrl.task.extended" ng-click="$ctrl.extendChildren()">&lsqb;&plus;&rsqb;</a>
     <i class="fa fa-bars reorder-icon"></i>
-    <button ng-disabled="$ctrl.disableCompletionButton()" type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.completeTask($ctrl.task)">
-      <i ng-show="!$ctrl.task.pinned" class="fa fa-check"></i>
-      <i ng-show="$ctrl.task.pinned" class="fa fa-lock"></i>
+    <button ng-show="$ctrl.showPinned()" disabled='true' type='button' class="btn btn-primary btn-circle">
+      <i class="fa fa-lock"></i>
+    </button>
+    <button ng-show="$ctrl.showCompleteButton()" type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.completeTask($ctrl.task)">
+      <i class="fa fa-check"></i>
+    </button>
+    <button ng-show="$ctrl.showReopenButton()" ng-disabled="$ctrl.disableReopenButton()" type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.reopenTask($ctrl.task)">
+      <i class="fa fa-history"></i>
     </button>
     <button ng-if="$ctrl.allowChildAddition()" type="button" class="hidden-task-link btn btn-success btn-circle" ng-click="$ctrl.toggleForm()">
       <i class="fa fa-plus"></i>

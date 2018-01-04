@@ -15,6 +15,7 @@
       updateTask         : updateTask,
       destroyTask        : destroyTask,
       completeTask       : completeTask,
+      reopenTask         : reopenTask,
       getAnalytics       : getAnalytics,
       getCheckpointTasks : getCheckpointTasks
     };
@@ -155,6 +156,21 @@
 
       function getFailed(response) {
         console.info('Completing Task Failed: ', response);
+        return response;
+      }
+    }
+
+    function reopenTask(taskID){
+      return $http
+        .post('/api/tasks/' + taskID + '/reopen')
+        .then(getComplete, getFailed);
+
+      function getComplete(response) {
+        return response;
+      }
+
+      function getFailed(response) {
+        console.info('Reopening Task Failed: ', response);
         return response;
       }
     }

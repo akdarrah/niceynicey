@@ -42,6 +42,10 @@
       renderAnalytics();
     });
 
+    $scope.$on("taskReopened", function(event){
+      renderAnalytics();
+    });
+
     ///////////////////////////////
 
     function handleSubmit(){

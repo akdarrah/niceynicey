@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       member do
         get :analytics
         post :complete
+        post :reopen
       end
     end
   end
