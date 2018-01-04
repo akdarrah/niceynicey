@@ -20,8 +20,8 @@
     <br />
   </div>
 
-  <div ng-show="!$ctrl.loading">
-    <task-list ng-if="$ctrl.tasks.length" top-level="true" parent-task="$ctrl.parentTask" tasks="$ctrl.tasks"></task-list>
+  <div ng-show="!$ctrl.loading" class="loaded-content">
+    <task-list ng-show="$ctrl.tasks.length" top-level="true" parent-task="$ctrl.parentTask" tasks="$ctrl.tasks"></task-list>
     <div ng-if="!$ctrl.tasks.length">
       <br />
       <blockquote class="blockquote text-center">

@@ -122,6 +122,23 @@ body {
   box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
 }
 
+.loaded-content.ng-hide {
+  opacity: 0;
+
+  -webkit-transform: translate(25px, 0);
+  -moz-transform: translate(25px, 0);
+  -o-transform: translate(25px, 0);
+  -ms-transform: translate(25px, 0);
+  transform: translate(25px, 0);
+}
+
+.loaded-content.ng-hide-remove {
+  -webkit-transition: .25s ease-in-out;
+  -moz-transition: .25s ease-in-out;
+  -o-transition: .25s ease-in-out;
+  transition: .25s ease-in-out;
+}
+
 .top-level-comment-form-container {
   margin-bottom: 10px;
 }
