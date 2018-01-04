@@ -2,7 +2,7 @@ class TaskSerializer < ActiveModel::Serializer
   attributes :id, :label, :parent_id, :user_id, :state,
     :created_at, :updated_at, :notes, :color_hex, :child_color_hex,
     :checkpoint_id, :position, :human_completed_at, :human_archived_at,
-    :extended
+    :extended, :pinned
 
   has_many :children, serializer: TaskSerializer
 

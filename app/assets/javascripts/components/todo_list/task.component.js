@@ -20,6 +20,7 @@
     vm.factory = taskFactory;
     vm.colorFactory = colorFactory;
 
+    vm.disableCompletionButton = disableCompletionButton;
     vm.completeTask = completeTask;
     vm.toggleForm = toggleForm;
     vm.allowChildAddition = allowChildAddition;
@@ -42,6 +43,10 @@
     });
 
     ///////////////////////////////
+
+    function disableCompletionButton(){
+      return vm.task.state == 'completed' || vm.task.pinned;
+    }
 
     function completeTask(task){
       var completeTask = vm.factory.completeTask(task.id);
