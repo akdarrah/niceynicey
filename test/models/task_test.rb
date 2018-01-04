@@ -42,6 +42,44 @@ class TaskTest < ActiveSupport::TestCase
     assert @task.archived?
   end
 
+  test "a pending task cannot be reopened" do
+    assert @task.pending?
+
+    assert_raises AASM::InvalidTransition do
+      @task.reopen!
+    end
+  end
+
+  test "a completed task CAN be reopened" do
+    @task.complete!
+    assert @task.reload.completed?
+
+    @task.reopen!
+    assert @task.reload.pending?
+  end
+
+  test "a completed task cannot be reopened if the parent is completed" do
+    child = create(:task, parent: @task)
+
+    @task.complete!
+
+    assert @task.reload.completed?
+    assert child.reload.completed?
+
+    refute child.reopen!
+    assert child.reload.completed?
+  end
+
+  test "an archived task cannot be reopened" do
+    @task.complete!
+    @task.archive!
+    assert @task.reload.archived?
+
+    assert_raises AASM::InvalidTransition do
+      @task.reopen!
+    end
+  end
+
   # Children
 
   test "a task completes its children when completed" do

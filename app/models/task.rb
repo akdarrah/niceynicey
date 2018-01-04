@@ -143,6 +143,10 @@ class Task < ApplicationRecord
       end
     end
 
+    event :reopen do
+      transitions :from => :completed, :to => :pending
+    end
+
     event :archive do
       transitions :from => :completed, :to => :archived
 
