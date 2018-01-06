@@ -1,6 +1,14 @@
 @import "bootstrap";
 @import "font-awesome";
 
+a {
+  color: #6772e5;
+
+  &:hover {
+    color:#32325d;
+  }
+}
+
 .navbar-brand {
   font-family: 'Fredoka One', cursive;
 }
