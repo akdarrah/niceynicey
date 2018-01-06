@@ -51,11 +51,16 @@ class TaskTest < ActiveSupport::TestCase
   end
 
   test "a completed task CAN be reopened" do
+    assert @task.completed_at.blank?
+
     @task.complete!
+
     assert @task.reload.completed?
+    assert @task.reload.completed_at.present?
 
     @task.reopen!
     assert @task.reload.pending?
+    assert @task.reload.completed_at.blank?
   end
 
   test "a completed task cannot be reopened if the parent is completed" do

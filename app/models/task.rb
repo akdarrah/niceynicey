@@ -145,6 +145,10 @@ class Task < ApplicationRecord
 
     event :reopen do
       transitions :from => :completed, :to => :pending
+
+      before do
+        before_reopen!
+      end
     end
 
     event :archive do
@@ -216,6 +220,10 @@ class Task < ApplicationRecord
 
   def after_complete!
     children.pending.each(&:complete!)
+  end
+
+  def before_reopen!
+    self.completed_at = nil
   end
 
   def before_archive!
