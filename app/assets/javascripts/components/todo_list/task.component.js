@@ -20,6 +20,9 @@
     vm.factory = taskFactory;
     vm.colorFactory = colorFactory;
 
+    vm.primaryButtonClick = primaryButtonClick;
+    vm.disablePrimaryButton = disablePrimaryButton;
+    vm.primaryButtonIcon = primaryButtonIcon;
     vm.disableReopenButton = disableReopenButton;
     vm.showPinned = showPinned;
     vm.showCompleteButton = showCompleteButton;
@@ -47,6 +50,29 @@
     });
 
     ///////////////////////////////
+
+    function primaryButtonIcon(){
+      if(vm.showPinned()){
+        return "fa-lock";
+      } else if (vm.showCompleteButton()) {
+        return "fa-check";
+      } else if (vm.showReopenButton()) {
+        return "fa-history";
+      }
+    }
+
+    function disablePrimaryButton(){
+      return vm.showPinned() ||
+        (vm.showReopenButton() && vm.disableReopenButton());
+    }
+
+    function primaryButtonClick(task){
+      if(vm.showCompleteButton()){
+        vm.completeTask(task);
+      } else if (vm.showReopenButton()) {
+        vm.reopenTask(task);
+      }
+    }
 
     function showPinned(){
       return vm.task.pinned;
