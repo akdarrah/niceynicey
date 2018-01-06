@@ -5,7 +5,6 @@
     'projectContainer',
     'task',
     'taskList',
-    'projectContainerSummary',
     'taskSummary',
     'taskListSummary',
     'taskFactory',
