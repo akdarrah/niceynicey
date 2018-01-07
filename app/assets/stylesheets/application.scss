@@ -76,6 +76,17 @@ html, body {
   // background-size: cover;
 }
 
+.checkpoint-list {
+  .inline-project-label {
+    padding: 3px;
+    margin: 0 2px;
+  }
+
+  th {
+    padding-bottom: 10px;
+  }
+}
+
 .btn-circle {
   width: 25px;
   height: 25px;

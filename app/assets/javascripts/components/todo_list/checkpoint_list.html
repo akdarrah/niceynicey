@@ -6,7 +6,7 @@
     <br />
   </div>
 
-  <div ng-hide="$ctrl.loading">
+  <div ng-hide="$ctrl.loading" class="loaded-content">
     <blockquote class="blockquote text-center" ng-show="!$ctrl.checkpoints.length">
       <small>(Archive is empty. Time to get to work! 🚀)</small>
       <br />
@@ -15,16 +15,28 @@
       <footer class="blockquote-footer">{{ $ctrl.quote.author }}</footer>
     </blockquote>
 
-    <div ng-repeat="checkpoint in $ctrl.checkpoints">
-      <div class="card">
-        <div class="card-block">
-          <a ng-href="/checkpoints/{{checkpoint.id}}">
-            <h5 class="card-title">{{ checkpoint.human_completed_at }}</h5>
-          </a>
-          <h6 class="card-subtitle mb-2 text-muted"><strong>{{ checkpoint.completed_tasks_count}}</strong> Completed Task(s)</h6>
-        </div>
-      </div>
-      <br />
-    </div>
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>Archived</th>
+          <th>Completed</th>
+          <th>Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="checkpoint in $ctrl.checkpoints">
+          <td scope="row">
+            <a ng-href="/checkpoints/{{checkpoint.id}}">
+              {{ checkpoint.compact_completed_at }}
+            </a>
+          </td>
+          <td>{{ checkpoint.completed_tasks_count}}</td>
+          <td>
+            <span class="inline-project-label" ng-repeat="project in checkpoint.projects" ng-style="$ctrl.styleProject(project)">{{ project.label }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
   </div>
 </div>
