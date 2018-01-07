@@ -19,6 +19,8 @@
     vm.colorFactory = colorFactory;
 
     vm.$onInit = onInit;
+    vm.retractChildren = retractChildren;
+    vm.extendChildren = extendChildren;
 
     vm.task = null;
     vm.backgroundColor = null;
@@ -30,6 +32,17 @@
 
     function onInit(){
       setListStyle();
+
+      vm.task.extended = vm.task.state !== "completed" ||
+        (vm.task.state === "completed" && !vm.task.children.length);
+    }
+
+    function retractChildren(){
+      vm.task.extended = false;
+    }
+
+    function extendChildren(){
+      vm.task.extended = true;
     }
 
     function setListStyle(){

@@ -1,14 +1,17 @@
 <div ng-style="$ctrl.listStyle">
   <div class="task-row no-word-break">
     <span ng-style="$ctrl.taskLinkStyle">
-      <strong ng-if="$ctrl.task.state == 'completed'">
-        <i class="fa fa-check"></i> {{ $ctrl.task.label }}
-      </strong>
+      <a class="extended-control" ng-if="$ctrl.task.extended" ng-click="$ctrl.retractChildren()">&lsqb;&minus;&rsqb;</a>
+      <a class="extended-control" ng-if="!$ctrl.task.extended" ng-click="$ctrl.extendChildren()">&lsqb;&plus;&rsqb;</a>
+
+      <span ng-if="$ctrl.task.state == 'completed'">
+        <i class="fa fa-circle"></i> {{ $ctrl.task.label }}
+      </span>
       <span ng-if="$ctrl.task.state != 'completed'">
-        {{ $ctrl.task.label }}
+        <i class="fa fa-circle-thin"></i> {{ $ctrl.task.label }}
       </span>
     </span>
   </div>
 
-  <task-list-summary parent-task="$ctrl.task" tasks="$ctrl.task.children" background-color="$ctrl.backgroundColor"></task-list>
+  <task-list-summary ng-show="$ctrl.task.extended" parent-task="$ctrl.task" tasks="$ctrl.task.children" background-color="$ctrl.backgroundColor"></task-list>
 </div>

@@ -6,13 +6,13 @@
   </div>
 
   <div ng-hide="$ctrl.loading">
-    <h5 class="text-center text-muted">{{ $ctrl.checkpoint.human_completed_at }} Report</h5>
+    <h6 class="text-center  text-muted">{{ $ctrl.checkpoint.human_completed_at }} Report</h6>
 
-    <hr />
+    <h2 class="text-center">
+      Completed <strong>{{ $ctrl.checkpoint.completed_tasks_count}}</strong> task(s) in <strong>{{ $ctrl.tasks.length }}</strong> project(s).
+    </h2>
 
-    <p>
-      You have completed <strong>{{ $ctrl.checkpoint.completed_tasks_count}}</strong> task(s) in <strong>{{ $ctrl.tasks.length }}</strong> project(s).
-    </p>
+    <br />
 
     <div ng-if="$ctrl.tasks.length">
       <task-list-summary top-level="true" tasks="$ctrl.tasks"></task-list>
