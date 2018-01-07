@@ -12,7 +12,7 @@ class CheckpointSerializer < ActiveModel::Serializer
   end
 
   def compact_completed_at
-    object.created_at.stamp("03/01/1999 3:00 AM")
+    object.created_at.stamp("3/01/99 3:00AM")
   end
 
   def projects
