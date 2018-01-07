@@ -31,7 +31,12 @@
             </a>
           </td>
           <td>
-            <span class="inline-project-label" ng-repeat="project in checkpoint.projects" ng-style="$ctrl.styleProject(project)">{{ project.label }}</span>
+            <div ng-repeat="project in checkpoint.projects">
+              <span class="inline-project-label" ng-style="$ctrl.styleProject(project)">
+                {{ project.label }}
+              </span>
+              <br />
+            </div>
           </td>
           <td>{{ checkpoint.completed_tasks_count}}</td>
         </tr>
