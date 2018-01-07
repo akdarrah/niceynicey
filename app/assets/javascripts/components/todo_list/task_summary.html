@@ -13,5 +13,5 @@
     </span>
   </div>
 
-  <task-list-summary ng-show="$ctrl.task.extended" parent-task="$ctrl.task" tasks="$ctrl.task.children" background-color="$ctrl.backgroundColor"></task-list>
+  <task-list-summary skip-extended-override="$ctrl.skipExtendedOverride" ng-show="$ctrl.task.extended" parent-task="$ctrl.task" tasks="$ctrl.task.children" background-color="$ctrl.backgroundColor"></task-list>
 </div>

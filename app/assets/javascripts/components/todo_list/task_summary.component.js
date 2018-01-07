@@ -8,7 +8,8 @@
       task: '<',
       parentTask: '<',
       topLevel: '=',
-      backgroundColor: '<'
+      backgroundColor: '<',
+      skipExtendedOverride: '='
     }
   });
 
@@ -26,12 +27,17 @@
     vm.backgroundColor = null;
     vm.parentTask = null;
     vm.listStyle = {};
+    vm.skipExtendedOverride = false;
     vm.taskLinkStyle = {};
 
     ///////////////////////////////
 
     function onInit(){
       setListStyle();
+
+      if(vm.skipExtendedOverride){
+        return true;
+      }
 
       vm.task.extended = vm.task.state !== "completed" ||
         (vm.task.state === "completed" && !vm.task.children.length);

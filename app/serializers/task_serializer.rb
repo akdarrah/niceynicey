@@ -2,7 +2,7 @@ class TaskSerializer < ActiveModel::Serializer
   attributes :id, :label, :parent_id, :user_id, :state,
     :created_at, :updated_at, :notes, :color_hex, :child_color_hex,
     :checkpoint_id, :position, :human_completed_at, :human_archived_at,
-    :extended, :pinned, :descendants_count
+    :extended, :pinned, :descendants_count, :copied_from_task_id
 
   has_many :children, serializer: TaskSerializer
 
@@ -12,6 +12,12 @@ class TaskSerializer < ActiveModel::Serializer
       label: object.parent.label,
       color_hex: object.parent.color_hex
     }
+  end
+
+  def copied_from_task_id
+    if object.checkpoint_id.present?
+      object.copied_from_task.try(:id)
+    end
   end
 
   def children

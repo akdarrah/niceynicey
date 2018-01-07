@@ -1,5 +1,5 @@
 <ul ng-model="$ctrl.tasks" class="no-list-style" ng-style="$ctrl.listStyle" ng-class="{'top-level-task-list': $ctrl.topLevel}">
   <li ng-repeat="task in $ctrl.tasks">
-    <task-summary top-level="$ctrl.topLevel" task="task" parent-task="$ctrl.parentTask" background-color="$ctrl.backgroundColor"></task>
+    <task-summary skip-extended-override="$ctrl.skipExtendedOverride" top-level="$ctrl.topLevel" task="task" parent-task="$ctrl.parentTask" background-color="$ctrl.backgroundColor"></task>
   </li>
 </ul>

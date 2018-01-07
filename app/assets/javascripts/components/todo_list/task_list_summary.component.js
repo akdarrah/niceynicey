@@ -8,7 +8,8 @@
       tasks: '<',
       parentTask: '<',
       topLevel: '=',
-      backgroundColor: '<'
+      backgroundColor: '<',
+      skipExtendedOverride: '='
     }
   });
 
@@ -21,6 +22,7 @@
     vm.tasks = [];
     vm.parentTask = null;
     vm.backgroundColor = null;
+    vm.skipExtendedOverride = false;
 
     vm.$onInit = onInit;
 
