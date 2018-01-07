@@ -54,7 +54,10 @@
       <p>
         Archive <strong>{{$ctrl.completedTaskCount() | number}}</strong> Completed Tasks. Completed tasks will be cleared from your task list.
       </p>
-      <button class="btn btn-primary card-link" ng-click="$ctrl.createCheckpoint()" ng-disabled="$ctrl.completedTaskCount() == 0">Archive</button>
+      <button class="btn btn-primary btn-lg btn-block card-link" ng-click="$ctrl.createCheckpoint()" ng-disabled="$ctrl.completedTaskCount() == 0">
+        <i class="fa fa-archive"></i>
+        Archive
+      </button>
       <div ng-if="$ctrl.lastCheckpoint">
         <br />
         <div class="alert alert-success" role="alert">
