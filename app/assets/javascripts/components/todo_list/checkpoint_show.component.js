@@ -31,12 +31,12 @@
       var getCheckpoint = vm.factory.getCheckpoint(vm.checkpointId);
       getCheckpoint.then(function(response){
         vm.checkpoint = response.data;
-        vm.loading = false;
       });
 
       var getCheckpointTasks = vm.taskFactory.getCheckpointTasks(vm.checkpointId);
       getCheckpointTasks.then(function(response){
         vm.tasks = response.data;
+        vm.loading = false;
       });
     }
 

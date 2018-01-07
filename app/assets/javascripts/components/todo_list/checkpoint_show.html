@@ -5,7 +5,7 @@
     <br />
   </div>
 
-  <div ng-hide="$ctrl.loading">
+  <div ng-hide="$ctrl.loading" class="loaded-content">
     <h6 class="text-center  text-muted">{{ $ctrl.checkpoint.human_completed_at }} Report</h6>
 
     <h2 class="text-center">
@@ -14,7 +14,7 @@
 
     <br />
 
-    <div ng-if="$ctrl.tasks.length">
+    <div ng-show="$ctrl.tasks.length">
       <task-list-summary top-level="true" tasks="$ctrl.tasks"></task-list>
     </div>
   </div>
