@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   root to: 'tasks#index'
 
+  get '/checkpoints', to: redirect('/archives')
+  get '/checkpoints/:id', to: redirect('/archives/%{id}')
+
   resources :tasks, only: [:index, :show, :destroy]
-  resources :checkpoints, only: [:index, :show]
+  resources :checkpoints, :path => :archives, only: [:index, :show]
   devise_for :users
 
   namespace :api do
