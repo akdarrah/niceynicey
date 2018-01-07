@@ -64,16 +64,16 @@
         <div class="form-group row">
           <div class="col-sm-2"></div>
           <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Save</button> or
+            <button type="submit" class="btn btn-primary btn-lg">Save</button> or
             <a href="" ng-click="$ctrl.toggleEditMode()">Cancel</a>
           </div>
         </div>
       </form>
       <br />
       <div class="alert alert-danger" role="alert">
-        <p>Delete {{$ctrl.task.label}} along with <strong>{{$ctrl.task.children.length}}</strong> sub-tasks.</p>
+        <p>Delete <strong>{{::$ctrl.task.label}}</strong> along with <strong>{{ $ctrl.task.descendants_count }}</strong> subtasks</p>
         <div class="small-12">
-          <a data-confirm="Are you sure?" class="btn btn-danger" rel="nofollow" data-method="delete" ng-href="/tasks/{{$ctrl.task.id}}">Delete {{$ctrl.task.label}}</a>
+          <a data-confirm="Are you sure?" class="btn btn-danger" rel="nofollow" data-method="delete" ng-href="/tasks/{{$ctrl.task.id}}">Delete {{::$ctrl.task.label}}</a>
         </div>
       </div>
     </div>
