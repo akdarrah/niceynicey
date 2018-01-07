@@ -17,5 +17,22 @@
     <div ng-show="$ctrl.tasks.length">
       <task-list-summary top-level="true" tasks="$ctrl.tasks"></task-list>
     </div>
+
+    <hr />
+
+    <div ng-show="!$ctrl.showCurrent">
+      <i>Giving a status update?</i>
+      <br />
+      <br />
+      <button class="btn btn-primary btn-lg btn-block card-link" ng-click="$ctrl.showCurrentProjects()">
+        <i class="fa fa-share"></i>
+        Show Current Projects
+      </button>
+    </div>
+
+    <div ng-show="$ctrl.showCurrent">
+      <task-list-summary top-level="true" tasks="$ctrl.currentTasks"></task-list>
+    </div>
+
   </div>
 </div>
