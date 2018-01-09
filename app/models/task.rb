@@ -215,6 +215,7 @@ class Task < ApplicationRecord
   private
 
   def before_complete!
+    self.extended = false
     self.completed_at = Time.now
   end
 
@@ -223,6 +224,7 @@ class Task < ApplicationRecord
   end
 
   def before_reopen!
+    self.extended = true
     self.completed_at = nil
   end
 

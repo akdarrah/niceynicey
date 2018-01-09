@@ -17,6 +17,14 @@ class TaskTest < ActiveSupport::TestCase
     assert @task.completed?
   end
 
+  test "tasks is NOT extended when completed" do
+    @task.update_column :extended, true
+    @task.complete!
+
+    assert @task.completed?
+    refute @task.extended?
+  end
+
   test "a completed task can NOT be completed" do
     @task.complete!
     assert @task.completed?
@@ -61,6 +69,15 @@ class TaskTest < ActiveSupport::TestCase
     @task.reopen!
     assert @task.reload.pending?
     assert @task.reload.completed_at.blank?
+  end
+
+  test "tasks are extended when reopened" do
+    @task.update_column :extended, false
+
+    @task.complete!
+    @task.reopen!
+
+    assert @task.reload.extended?
   end
 
   test "a completed task cannot be reopened if the parent is completed" do
