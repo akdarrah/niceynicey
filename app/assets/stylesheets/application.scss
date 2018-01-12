@@ -87,6 +87,7 @@ html, body {
 }
 
 .btn-circle {
+  display: inline-block;
   width: 25px;
   height: 25px;
   text-align: center;
@@ -97,6 +98,14 @@ html, body {
 
   cursor:pointer;
   cursor:hand;
+
+  &.color-hex-button {
+    margin: 5px 3px 3px 3px;
+  }
+
+  &.selected {
+    border: 2px solid #0074D9;
+  }
 }
 
 .nav-item a {

@@ -16,6 +16,19 @@
     vm.factory = taskFactory;
     vm.colorFactory = colorFactory;
 
+    vm.suggestedColorHexes = [
+      "#e99695",
+      "#f9d0c4",
+      "#fef2c0",
+      "#c2e0c6",
+      "#bfdadc",
+      "#c5def5",
+      "#bfd4f2",
+      "#d4c5f9"
+    ];
+
+    vm.chooseColor = chooseColor;
+    vm.colorPickerStyle = colorPickerStyle;
     vm.updateTask = updateTask;
     vm.toggleEditMode = toggleEditMode;
     vm.$onInit = onInit;
@@ -81,6 +94,16 @@
           'color': vm.colorFactory.getTextColor(vm.task.parent.color_hex)
         };
       }
+    }
+
+    function colorPickerStyle(colorHex){
+      return {
+        background: colorHex
+      };
+    }
+
+    function chooseColor(colorHex){
+      vm.task.color_hex = colorHex;
     }
 
   }
