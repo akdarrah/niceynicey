@@ -27,7 +27,7 @@ gem 'html-pipeline'
 gem 'commonmarker'
 
 gem 'gon'
-gem 'acts_as_list'
+gem 'acts_as_list', '~> 0.9.10'
 gem 'devise'
 gem 'haml'
 gem 'simple_form'

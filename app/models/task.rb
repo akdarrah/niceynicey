@@ -38,7 +38,7 @@ class Task < ApplicationRecord
     foreign_key: :parent_id,
     dependent: :destroy
 
-  acts_as_list scope: :parent_id
+  acts_as_list scope: [:user_id, :parent_id, :checkpoint_id, state: [:pending, :completed]]
 
   scope :top_level, -> { where(parent_id: nil) }
   scope :position_order, -> { order(position: :asc) }
