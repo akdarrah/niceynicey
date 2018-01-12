@@ -15,6 +15,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery_ui
+//= require jquery.ui.touch-punch.min.js
 //= require popper
 //= require bootstrap-sprockets
 //= require angular
