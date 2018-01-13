@@ -1,6 +1,6 @@
 <div ng-style="$ctrl.listStyle">
   <div class="task-row no-word-break">
-    <span ng-style="$ctrl.taskLinkStyle">
+    <span ng-style="$ctrl.taskLinkStyle" class="task-summary-info">
       <a class="extended-control" ng-if="$ctrl.task.extended" ng-click="$ctrl.retractChildren()">&lsqb;&minus;&rsqb;</a>
       <a class="extended-control" ng-if="!$ctrl.task.extended" ng-click="$ctrl.extendChildren()">&lsqb;&plus;&rsqb;</a>
 

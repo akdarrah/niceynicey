@@ -196,6 +196,19 @@ ul.no-list-style {
 .task-row {
   padding: 3px;
 
+  &:hover {
+    background: #333;
+    color: white;
+
+    .item-title {
+      color: white;
+    }
+
+    .task-summary-info {
+      color: white !important;
+    }
+  }
+
   .extended-control {
     cursor:pointer;
     cursor:hand;
