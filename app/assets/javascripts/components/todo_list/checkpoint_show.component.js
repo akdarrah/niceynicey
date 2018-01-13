@@ -16,10 +16,8 @@
     vm.factory = checkpointFactory;
     vm.taskFactory = taskFactory;
 
-    vm.showCurrentProjects = showCurrentProjects;
     vm.$onInit = onInit;
 
-    vm.showCurrent = false;
     vm.currentTasks = [];
     vm.loading = false;
     vm.checkpointId = null;
@@ -40,20 +38,19 @@
       getCheckpointTasks.then(function(response){
         vm.tasks = response.data;
         vm.loading = false;
-      });
-    }
 
-    function showCurrentProjects(){
-      vm.showCurrent = true;
-      var projectIdsToExtend = currentProjectIds();
 
-      var getCurrentTasks = vm.taskFactory.getTasks();
-      getCurrentTasks.then(function(response){
-        vm.currentTasks = response.data;
+        var projectIdsToExtend = currentProjectIds();
 
-        vm.currentTasks.forEach(function(task){
-          task.extended = contains.call(projectIdsToExtend, task.id);
+        var getCurrentTasks = vm.taskFactory.getTasks();
+        getCurrentTasks.then(function(response){
+          vm.currentTasks = response.data;
+
+          vm.currentTasks.forEach(function(task){
+            task.extended = contains.call(projectIdsToExtend, task.id);
+          });
         });
+
       });
     }
 

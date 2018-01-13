@@ -6,32 +6,26 @@
   </div>
 
   <div ng-hide="$ctrl.loading" class="loaded-content">
-    <h6 class="text-center  text-muted">{{ $ctrl.checkpoint.human_completed_at }} Report</h6>
-
-    <h2 class="text-center">
-      Completed <strong>{{ $ctrl.checkpoint.completed_tasks_count}}</strong> task(s) in <strong>{{ $ctrl.tasks.length }}</strong> project(s).
-    </h2>
-
+    <br />
+    <h5 class="text-center" style="color: #24b47e; text-transform: uppercase;">{{ $ctrl.checkpoint.human_completed_at }}</h5>
     <br />
 
-    <div ng-show="$ctrl.tasks.length">
-      <task-list-summary top-level="true" tasks="$ctrl.tasks"></task-list>
+    <div style="padding: 5px; background: #eff2f7;">
+      <div style="color: #317ec2; padding: 5px; margin-bottom: 0;">
+        <p>
+          <strong>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</strong> Completed <strong>{{ $ctrl.checkpoint.completed_tasks_count}}</strong> task(s) in <strong>{{ $ctrl.tasks.length }}</strong> project(s)
+        </p>
+      </div>
+      <task-list-summary top-level="true" tasks="$ctrl.tasks"></task-list-summary>
     </div>
 
-    <hr />
-
-    <div ng-show="!$ctrl.showCurrent">
-      <i>Giving a status update?</i>
-      <br />
-      <br />
-      <button class="btn btn-primary btn-lg btn-block card-link" ng-click="$ctrl.showCurrentProjects()">
-        <i class="fa fa-share"></i>
-        Show Current Projects
-      </button>
-    </div>
-
-    <div ng-show="$ctrl.showCurrent">
-      <task-list-summary skip-extended-override="true" top-level="true" tasks="$ctrl.currentTasks"></task-list>
+    <div style="padding: 5px; background: #f4eff7;">
+      <div style="color: #9831c4; padding: 5px; margin-bottom: 0;">
+        <p>
+          <strong>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</strong> Pending <strong>{{ $ctrl.checkpoint.open_tasks_count }}</strong> task(s) in <strong>{{ $ctrl.currentTasks.length }}</strong> project(s)
+        </p>
+      </div>
+      <task-list-summary skip-extended-override="true" top-level="true" tasks="$ctrl.currentTasks"></task-list-summary>
     </div>
 
   </div>
