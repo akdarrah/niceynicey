@@ -21,8 +21,8 @@
 //= require angular
 //= require angular-animate
 //= require sortable
-//= require src-min-noconflict/ace
-//= require ui-ace
+//= require simplemde.min
+//= require simplemde-angular.min
 //= require angular-rails-templates
 //= require app
 //= require services/task.factory

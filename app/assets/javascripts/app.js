@@ -15,7 +15,7 @@
     'taskShow',
     'templates',
     'ui.sortable',
-    'ui.ace',
+    'simplemde',
     'spinner',
     'ngAnimate'
   ]);
