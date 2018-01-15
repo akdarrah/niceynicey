@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/checkpoints', to: redirect('/archives')
   get '/checkpoints/:id', to: redirect('/archives/%{id}')
 
+  resources :marketing, only: [:index]
   resources :tasks, only: [:index, :show, :destroy]
   resources :checkpoints, :path => :archives, only: [:index, :show]
   devise_for :users

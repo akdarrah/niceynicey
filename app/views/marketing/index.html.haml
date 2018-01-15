@@ -1,0 +1,17 @@
+.row
+  .col-sm-12.col-lg-6
+    %h1
+      %span.navbar-brand NiceyNicey
+      is a
+      %strong{style: "font-weight: bolder; font-size: 46px"} hierarchical-based todo list
+      for highly productive people
+
+    %br
+    %p{style: "font-size: 28px"} It's your brain, digitalized. 🚀
+    = link_to "Sign In", new_user_session_path, class: "btn btn-success btn-lg"
+    %br
+    %br
+  .col-sm-12.col-lg-6
+    = image_tag("NiceyNicey.png", class: "img-fluid rounded app-img")
+    %br
+    %br
