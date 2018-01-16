@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'tasks#index'
+  root to: 'marketing#index'
 
   get '/checkpoints', to: redirect('/archives')
   get '/checkpoints/:id', to: redirect('/archives/%{id}')
