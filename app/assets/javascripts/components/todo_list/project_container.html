@@ -58,12 +58,6 @@
         <i class="fa fa-archive"></i>
         Archive
       </button>
-      <div ng-if="$ctrl.lastCheckpoint">
-        <br />
-        <div class="alert alert-success" role="alert">
-          <strong>Well done! 😁</strong> <a ng-href="/checkpoints/{{$ctrl.lastCheckpoint.id}}">View your checkpoint for {{ $ctrl.lastCheckpoint.completed_tasks_count}} task(s)</a>
-        </div>
-      </div>
     </div>
     <div ng-show="$ctrl.activeMenuItem === 'heatmap'">
       <p>

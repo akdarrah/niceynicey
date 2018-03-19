@@ -42,10 +42,6 @@
     vm.titleStyle = {};
     vm.parentLinkStyle = {};
 
-    $scope.$on('checkpointCreated', function(){
-      getTaskData();
-    });
-
     ///////////////////////////////
 
     function onInit(){
