@@ -15,7 +15,7 @@
     </form>
   </li>
 
-  <li ng-repeat="task in $ctrl.tasks">
+  <li ng-repeat="task in $ctrl.tasks | orderBy : 'position'">
     <task top-level="$ctrl.topLevel" task="task" parent-task="$ctrl.parentTask" background-color="$ctrl.backgroundColor"></task>
   </li>
 </ul>
