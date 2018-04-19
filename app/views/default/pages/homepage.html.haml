@@ -1,0 +1,9 @@
+%h1= @page.title
+= @page.content(:text).try(:html_safe)
+= @page.content(:portfolio).try(:html_safe)
+= @page.content(:line_test).try(:html_safe)
+= image_tag @page.content(:photo_test).try(:file_url)
+
+%ul
+  - @page.content(:photo_collection_test).photos.each do |photo|
+    %li= image_tag photo.try(:file_url)

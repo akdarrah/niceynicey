@@ -16,6 +16,7 @@ system/*
 tmp/restart.txt
 public/system/*
 public/images/*
+public/uploads/*
 public/system/*
 public/assets/*
 start_unicorn
