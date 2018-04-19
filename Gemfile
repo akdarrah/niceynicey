@@ -37,6 +37,8 @@ gem 'angularjs-rails'
 gem 'angular-rails-templates'
 gem 'angular_rails_csrf'
 
+gem 'spina'
+
 group :development, :test  do
   gem 'factory_girl'
   gem 'awesome_print'

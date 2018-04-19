@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Spina::Engine => '/marketing'
   root to: 'marketing#index'
 
   get '/checkpoints', to: redirect('/archives')

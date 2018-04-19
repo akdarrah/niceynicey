@@ -1,0 +1,4 @@
+%h1= @page.title
+= @page.content(:text).try(:html_safe)
+= @page.content(:portfolio).try(:html_safe)
+= @page.content(:line_test).try(:html_safe)
