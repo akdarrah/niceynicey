@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :marketing, only: [:index]
   resources :tasks, only: [:index, :show, :destroy]
   resources :checkpoints, :path => :archives, only: [:index, :show]
+
+  ActiveAdmin.routes(self)
   devise_for :users
 
   namespace :api do

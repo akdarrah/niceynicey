@@ -24,9 +24,12 @@
           .col-lg-8.mx-auto
             %nav.navbar
               = link_to "📦 NiceyNicey", tasks_url, class: "navbar-brand"
-              %ul.navbar-nav
+              %ul.nav
+                - if current_user.admin?
+                  %li.nav-item
+                    = link_to "👁‍🗨", admin_dashboard_path, class: "nav-link"
                 %li.nav-item
-                  = link_to "Archive", checkpoints_path
+                  = link_to "Archive", checkpoints_path, class: "nav-link"
       = yield
     = Gon::Base.render_data
     = javascript_include_tag 'application'
