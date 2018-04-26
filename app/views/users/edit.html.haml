@@ -1,0 +1,20 @@
+.row
+  .col-lg-8.mx-auto.main-column
+    %h2
+      Your Account
+    %br
+    = simple_form_for @user do |f|
+      = f.error_notification
+      .form-group
+        = f.input :email, input_html: {class: "form-control"}
+      .form-group
+        = f.input :time_zone, priority: /US/, input_html: {class: "form-control"}
+      %br
+      .form-actions
+        = f.button :submit, "Save", class: "btn btn-primary btn-lg btn-block"
+    %br
+    %ul.nav.flex-column
+      %li.nav-item
+        = link_to "🔑 Change Password", edit_user_registration_path, class: "nav-link"
+      %li.nav-item
+        = link_to "👋 Logout", destroy_user_session_path, method: :delete, class: "nav-link"
