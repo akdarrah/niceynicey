@@ -3,6 +3,9 @@ class CheckpointWorker
 
   def perform(user_id)
     user = User.find(user_id)
-    Checkpoint.create_checkpoint!(user)
+
+    if user.tasks.no_checkpoint.completed.exists?
+      Checkpoint.create_checkpoint!(user)
+    end
   end
 end
