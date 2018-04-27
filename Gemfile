@@ -40,7 +40,7 @@ gem 'angular_rails_csrf'
 gem 'activeadmin'
 
 gem 'sidekiq'
-gem 'sidetiq'
+gem "sidekiq-cron", "~> 0.6.3"
 
 group :development, :test  do
   gem 'factory_girl'
