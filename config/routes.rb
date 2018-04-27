@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root to: 'marketing#index'
 
@@ -11,6 +13,8 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
   devise_for :users
+
+  mount Sidekiq::Web => '/sidekiq', :constraints => AdminConstraint.new
 
   namespace :api do
     resources :checkpoints, only: [:create, :index, :show] do

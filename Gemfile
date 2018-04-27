@@ -39,6 +39,9 @@ gem 'angular_rails_csrf'
 
 gem 'activeadmin'
 
+gem 'sidekiq'
+gem 'sidetiq'
+
 group :development, :test  do
   gem 'factory_girl'
   gem 'awesome_print'
