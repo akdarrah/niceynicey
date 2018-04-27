@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq', :constraints => AdminConstraint.new
 
   namespace :api do
-    resources :checkpoints, only: [:create, :index, :show] do
+    resources :checkpoints, only: [:index, :show] do
       resources :tasks, only: [:index]
     end
     resources :tasks, only: [:index, :show, :create, :update, :destroy] do

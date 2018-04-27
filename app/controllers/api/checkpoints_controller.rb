@@ -11,9 +11,4 @@ class Api::CheckpointsController < ApplicationController
     render json: @checkpoints, status: :ok
   end
 
-  def create
-    @checkpoint = Checkpoint.create_checkpoint!(current_user, params[:parent_task_id])
-    render json: @checkpoint, status: :ok
-  end
-
 end

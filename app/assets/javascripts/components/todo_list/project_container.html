@@ -51,13 +51,10 @@
   </div>
   <div class="card-block">
     <div ng-show="$ctrl.activeMenuItem === 'checkpoint'">
+      <br />
       <p>
-        Archive <strong>{{$ctrl.completedTaskCount() | number}}</strong> Completed Tasks. Completed tasks will be cleared from your task list.
+        ⏱ <strong>{{$ctrl.completedTaskCount() | number}}</strong> completed task(s) will automatically be archived at midnight.
       </p>
-      <button class="btn btn-primary btn-lg btn-block card-link" ng-click="$ctrl.createCheckpoint()" ng-disabled="$ctrl.completedTaskCount() == 0">
-        <i class="fa fa-archive"></i>
-        Archive
-      </button>
     </div>
     <div ng-show="$ctrl.activeMenuItem === 'heatmap'">
       <p>

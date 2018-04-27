@@ -9,27 +9,11 @@
 
   function checkpointFactory($http) {
     return {
-      createCheckpoint : createCheckpoint,
-      getCheckpoint    : getCheckpoint,
-      getCheckpoints   : getCheckpoints
+      getCheckpoint  : getCheckpoint,
+      getCheckpoints : getCheckpoints
     };
 
     /////////////////////////
-
-    function createCheckpoint(parentTaskId) {
-      return $http
-        .post('/api/checkpoints.json', {parent_task_id: parentTaskId})
-        .then(getComplete, getFailed);
-
-      function getComplete(response) {
-        return response;
-      }
-
-      function getFailed(response) {
-        console.info('Creating Checkpoint Failed: ', response);
-        return response;
-      }
-    }
 
     function getCheckpoint(checkpointId){
       return $http

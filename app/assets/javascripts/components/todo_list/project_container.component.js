@@ -21,7 +21,6 @@
     vm.handleSubmit = handleSubmit;
     vm.placeHolderText = placeHolderText;
     vm.quoteDirectionText = quoteDirectionText;
-    vm.createCheckpoint = createCheckpoint;
     vm.showForm = showForm;
     vm.completedTaskCount = completedTaskCount;
     vm.quote = gon.quote;
@@ -106,20 +105,6 @@
           discrete_domains: 1,
           legend_colors: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
         });
-      });
-    }
-
-    function createCheckpoint(){
-      var createCheckpoint;
-
-      if(vm.parentTask){
-        createCheckpoint = vm.checkpointFactory.createCheckpoint(vm.parentTask.id);
-      } else {
-        createCheckpoint = vm.checkpointFactory.createCheckpoint();
-      }
-
-      createCheckpoint.then(function(response){
-        $window.location.href = ('/checkpoints/' + response.data.id);
       });
     }
 
