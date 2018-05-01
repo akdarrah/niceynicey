@@ -152,6 +152,8 @@ class TaskTest < ActiveSupport::TestCase
   end
 
   test "a task archives it's children when it is archived" do
+    Task.any_instance.stubs(:calculate_points).returns(100)
+
     child = create(:task, parent: @task)
     grand = create(:task, parent: child)
 
@@ -161,6 +163,10 @@ class TaskTest < ActiveSupport::TestCase
     assert @task.archived_at.blank?
     assert child.archived_at.blank?
     assert grand.archived_at.blank?
+
+    assert @task.points.zero?
+    assert child.points.zero?
+    assert grand.points.zero?
 
     assert @task.reload.completed?
     assert child.reload.completed?
@@ -175,6 +181,10 @@ class TaskTest < ActiveSupport::TestCase
     assert @task.archived_at.present?
     assert child.archived_at.present?
     assert grand.archived_at.present?
+
+    assert_equal 100, @task.points
+    assert_equal 100, child.points
+    assert_equal 100, grand.points
   end
 
   # Task#parent_must_be_pending
@@ -240,6 +250,39 @@ class TaskTest < ActiveSupport::TestCase
     assert @task.reload.archived?
     assert child.reload.archived?
     assert child.valid?
+  end
+
+  # Task#zero_points_unless_archived_original
+
+  test "an archived task without a checkpoint is allowed to have points" do
+    @task.update_column :state, :archived
+
+    assert @task.archived?
+    assert @task.checkpoint.blank?
+
+    @task.points = 12
+    assert @task.valid?
+  end
+
+  test "an un-archived task without a checkpoint is NOT allowed to have points" do
+    refute @task.archived?
+    assert @task.checkpoint.blank?
+
+    @task.points = 12
+    refute @task.valid?
+  end
+
+  test "an archived task WITH a checkpoint is NOT allowed to have points" do
+    @task.update_column :state, :archived
+
+    @checkpoint = build(:checkpoint)
+    Task.any_instance.stubs(:checkpoint).returns(@checkpoint)
+
+    assert @task.archived?
+    refute @task.checkpoint.blank?
+
+    @task.points = 12
+    refute @task.valid?
   end
 
   # Task#dup_with_children
