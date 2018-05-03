@@ -41,6 +41,7 @@ gem 'activeadmin'
 
 gem 'sidekiq'
 gem "sidekiq-cron", "~> 0.6.3"
+gem 'groupdate'
 
 group :development, :test  do
   gem 'factory_girl'

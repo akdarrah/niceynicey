@@ -250,9 +250,8 @@ class Task < ApplicationRecord
     end
   end
 
-  # TODO
   def calculate_points
-    100
+    PointCalculator.new(user, self).calculate
   end
 
   def set_color_hex_on_create
