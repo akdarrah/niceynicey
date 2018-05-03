@@ -13,6 +13,8 @@ module Niceynicey
     # -- all .rb files in that directory are automatically loaded.
 
     config.time_zone = 'Eastern Time (US & Canada)'
+    
+    config.enable_dependency_loading = true
     config.autoload_paths += %W(#{Rails.root}/lib)
   end
 end
