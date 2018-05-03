@@ -26,6 +26,7 @@ class Task < ApplicationRecord
 
   validates :user, :label, :color_hex, presence: true
   validate :parent_must_be_pending
+  validate :zero_points_unless_archived_original
   validates :color_hex, color: true
 
   before_validation :set_color_hex_on_create, on: :create
@@ -230,6 +231,7 @@ class Task < ApplicationRecord
 
   def before_archive!
     self.archived_at = Time.now
+    self.points = calculate_points
   end
 
   def after_archive!
@@ -240,6 +242,16 @@ class Task < ApplicationRecord
     if pending? && checkpoint.blank? && parent.present? && !parent.pending?
       errors.add(:parent, "must be pending")
     end
+  end
+
+  def zero_points_unless_archived_original
+    if points.nonzero? && (!archived? || checkpoint.present?)
+      errors.add(:points, "must be zero")
+    end
+  end
+
+  def calculate_points
+    PointCalculator.new(user, self).calculate
   end
 
   def set_color_hex_on_create

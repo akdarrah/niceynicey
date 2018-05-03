@@ -147,6 +147,8 @@ GEM
       json
       multi_json
       request_store (>= 1.0)
+    groupdate (4.0.0)
+      activesupport (>= 4.2)
     haml (5.0.3)
       temple (>= 0.8.0)
       tilt
@@ -436,6 +438,7 @@ DEPENDENCIES
   factory_girl
   font-awesome-rails
   gon
+  groupdate
   haml
   html-pipeline
   i18n-tasks
