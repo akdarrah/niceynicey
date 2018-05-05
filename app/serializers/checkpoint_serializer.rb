@@ -13,11 +13,11 @@ class CheckpointSerializer < ActiveModel::Serializer
   end
 
   def human_completed_at
-    object.created_at.stamp("March 1, 1999 at 3:00 AM")
+    object.created_at.stamp("March 1, 1999")
   end
 
   def compact_completed_at
-    object.created_at.stamp("3/01/99 3:00AM")
+    object.created_at.stamp("3/01/99")
   end
 
   def projects
