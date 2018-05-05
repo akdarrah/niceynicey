@@ -1,7 +1,8 @@
 class CheckpointSerializer < ActiveModel::Serializer
   attributes :id, :user_id, :created_at, :updated_at,
     :completed_tasks_count, :human_completed_at,
-    :projects, :compact_completed_at, :open_tasks_count
+    :projects, :compact_completed_at, :open_tasks_count,
+    :points
 
   def open_tasks_count
     object.user.tasks.no_checkpoint.unarchived.count

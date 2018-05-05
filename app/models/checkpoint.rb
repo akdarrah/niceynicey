@@ -5,7 +5,13 @@ class Checkpoint < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :task_copies, dependent: :destroy
 
+  has_many :original_tasks, through: :task_copies, source: :original_task
+
   validates :tasks, presence: true
+
+  def points
+    original_tasks.sum(:points)
+  end
 
   def self.create_checkpoint!(user, parent_task_id=nil)
     parent_task = user.tasks
