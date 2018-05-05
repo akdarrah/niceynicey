@@ -31,7 +31,10 @@
                 %li.nav-item
                   = link_to "⚙️", edit_user_path(:current_user), title: "Account Settings", class: "nav-link"
                 %li.nav-item
-                  = link_to "📆", checkpoints_path, title: "Archive", class: "nav-link"
+                  = link_to checkpoints_path, title: "Archive", class: "btn btn-primary nav-link" do
+                    📆
+                    %span.badge.badge-light= number_to_human current_user.tasks.sum(:points)
+
       = yield
     = Gon::Base.render_data
     = javascript_include_tag 'application'
