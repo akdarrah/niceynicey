@@ -113,7 +113,8 @@
         parent_id: task.parent_id,
         color_hex: task.color_hex,
         extended: task.extended,
-        pinned: task.pinned
+        pinned: task.pinned,
+        starred: task.starred
       };
 
       return $http

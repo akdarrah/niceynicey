@@ -7,17 +7,20 @@
     bindings: {
       tasks: '<',
       parentTask: '<',
-      tasksIndex: '='
+      tasksIndex: '=',
+      showToday: '<',
+      showHeaders: '<'
     }
   });
 
-  ProjectContainerController.$inject = ['$scope', '$http', 'taskFactory', 'checkpointFactory', '$window'];
+  ProjectContainerController.$inject = ['$scope', '$http', 'taskFactory', 'checkpointFactory', '$window', '$filter'];
 
-  function ProjectContainerController($scope, $http, taskFactory, checkpointFactory, $window){
+  function ProjectContainerController($scope, $http, taskFactory, checkpointFactory, $window, $filter){
     var vm = this;
     vm.factory = taskFactory;
     vm.checkpointFactory = checkpointFactory;
 
+    vm.starredTaskFilter = starredTaskFilter;
     vm.handleSubmit = handleSubmit;
     vm.placeHolderText = placeHolderText;
     vm.quoteDirectionText = quoteDirectionText;
@@ -45,6 +48,28 @@
     });
 
     ///////////////////////////////
+
+    function starredTaskFilter(){
+      if(!vm.tasks){
+        return [];
+      }
+
+      var flattened = flattenedTasks(vm.tasks);
+      var isStarred = function(task){
+        return task.starred;
+      };
+
+      return $filter('filter')(flattened, isStarred);
+    }
+
+    function flattenedTasks(tasks){
+      return tasks.reduce(function(flattened, task){
+        flattened = flattened.concat(task);
+        flattened = flattened.concat(flattenedTasks(task.children));
+
+        return flattened;
+      }, []);
+    }
 
     function handleSubmit(){
       var label = vm.todoText;

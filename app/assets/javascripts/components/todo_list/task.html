@@ -1,8 +1,11 @@
 <div ng-style="$ctrl.listStyle">
   <div class="task-row no-word-break">
-    <a class="extended-control" ng-if="$ctrl.task.extended" ng-click="$ctrl.retractChildren()">&lsqb;&minus;&rsqb;</a>
-    <a class="extended-control" ng-if="!$ctrl.task.extended" ng-click="$ctrl.extendChildren()">&lsqb;&plus;&rsqb;</a>
-    <i class="fa fa-bars reorder-icon"></i>
+    <a class="extended-control" ng-show="$ctrl.allowExtend" ng-if="$ctrl.task.extended" ng-click="$ctrl.retractChildren()">&lsqb;&minus;&rsqb;</a>
+    <a class="extended-control" ng-show="$ctrl.allowExtend" ng-if="!$ctrl.task.extended" ng-click="$ctrl.extendChildren()">&lsqb;&plus;&rsqb;</a>
+    <i ng-show="$ctrl.allowReorder" class="fa fa-bars reorder-icon"></i>
+    <button type='button' class="btn btn-circle" ng-class="$ctrl.starredClass()" ng-click="$ctrl.toggleStarred()">
+      <i class="fa fa-star"></i>
+    </button>
     <button ng-disabled='$ctrl.disablePrimaryButton()' type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.primaryButtonClick($ctrl.task)">
       <i class="fa" ng-class="$ctrl.primaryButtonIcon()"></i>
     </button>
@@ -14,5 +17,5 @@
     </a>
   </div>
 
-  <task-list ng-show="$ctrl.task.extended" parent-task="$ctrl.task" tasks="$ctrl.task.children" background-color="$ctrl.backgroundColor"></task-list>
+  <task-list ng-show="$ctrl.task.extended && $ctrl.showChildren" parent-task="$ctrl.task" tasks="$ctrl.task.children" background-color="$ctrl.backgroundColor"></task-list>
 </div>

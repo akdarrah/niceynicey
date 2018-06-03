@@ -9,7 +9,11 @@
       parentTask: '<',
       showForm: '<',
       topLevel: '=',
-      backgroundColor: '<'
+      backgroundColor: '<',
+      allowExtend: '<',
+      allowReorder: '<',
+      allowAddChildren: '<',
+      showChildren: '<'
     }
   });
 
@@ -33,6 +37,8 @@
     vm.allowChildAddition = allowChildAddition;
     vm.retractChildren = retractChildren;
     vm.extendChildren = extendChildren;
+    vm.starredClass = starredClass;
+    vm.toggleStarred = toggleStarred;
     vm.$onInit = onInit;
 
     vm.showForm = false;
@@ -116,7 +122,7 @@
     }
 
     function allowChildAddition(){
-      return vm.task.state == 'pending';
+      return vm.allowAddChildren && vm.task.state == 'pending';
     }
 
     function retractChildren(){
@@ -139,6 +145,25 @@
 
     function onInit(){
       setListStyle();
+
+      if(vm.showChildren === undefined){ vm.showChildren = true; };
+      if(vm.allowExtend === undefined){ vm.allowExtend = true; };
+      if(vm.allowReorder === undefined){ vm.allowReorder = true; };
+      if(vm.allowAddChildren === undefined){ vm.allowAddChildren = true; };
+    }
+
+    function starredClass(){
+      return (vm.task.starred ? 'btn-warning' : 'btn-light');
+    }
+
+    function toggleStarred(){
+      vm.task.starred = !vm.task.starred;
+
+      var updateTask = vm.factory.updateTask(vm.task);
+
+      updateTask.then(function(response){
+        angular.extend(vm.task, response.data);
+      });
     }
 
     function setListStyle(){
