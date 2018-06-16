@@ -15,7 +15,6 @@ system/*
 *.swp
 tmp/restart.txt
 public/system/*
-public/images/*
 public/system/*
 public/assets/*
 start_unicorn
