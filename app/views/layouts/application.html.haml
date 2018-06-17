@@ -19,7 +19,13 @@
 
   %body{'ng-app' => "application"}
     .container
-      - if current_user.present?
+      - if current_user.blank?
+        .row
+          .col-4.mx-auto
+            = image_tag "cueDO-logo-dark-background-p-500.png", class: 'img-fluid'
+            %br
+            %br
+      - else
         .row
           .col-lg-8.mx-auto
             %nav.navbar
