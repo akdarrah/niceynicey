@@ -6,10 +6,10 @@
     <button type='button' class="btn btn-circle" ng-class="$ctrl.starredClass()" ng-click="$ctrl.toggleStarred()">
       <i class="fa fa-star"></i>
     </button>
-    <button ng-disabled='$ctrl.disablePrimaryButton()' type='button' class="btn btn-primary btn-circle" ng-click="$ctrl.primaryButtonClick($ctrl.task)">
+    <button ng-disabled='$ctrl.disablePrimaryButton()' type='button' class="btn btn-blue btn-circle" ng-click="$ctrl.primaryButtonClick($ctrl.task)">
       <i class="fa" ng-class="$ctrl.primaryButtonIcon()"></i>
     </button>
-    <button ng-show="$ctrl.allowChildAddition()" type="button" class="hidden-task-link btn btn-success btn-circle" ng-click="$ctrl.toggleForm()">
+    <button ng-show="$ctrl.allowChildAddition()" type="button" class="hidden-task-link btn btn-green btn-circle" ng-click="$ctrl.toggleForm()">
       <i class="fa fa-plus"></i>
     </button>
     <a ng-href="/tasks/{{$ctrl.task.id}}" ng-style="$ctrl.taskLinkStyle">
@@ -17,5 +17,5 @@
     </a>
   </div>
 
-  <task-list ng-show="$ctrl.task.extended && $ctrl.showChildren" parent-task="$ctrl.task" tasks="$ctrl.task.children" background-color="$ctrl.backgroundColor"></task-list>
+  <task-list top-level="false" ng-show="$ctrl.task.extended && $ctrl.showChildren" parent-task="$ctrl.task" tasks="$ctrl.task.children" background-color="$ctrl.backgroundColor"></task-list>
 </div>

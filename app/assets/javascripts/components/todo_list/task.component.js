@@ -113,7 +113,7 @@
 
       reopenTask.then(function(response){
         $('.user-donation-amount').text(response.data.user_donation_amount)
-        
+
         angular.extend(vm.task, response.data);
         setListStyle();
         $scope.$emit("taskReopened");
@@ -148,6 +148,8 @@
     }
 
     function onInit(){
+      vm.backgroundColor = "#ffffff";
+
       setListStyle();
 
       if(vm.showChildren === undefined){ vm.showChildren = true; };
@@ -157,7 +159,7 @@
     }
 
     function starredClass(){
-      return (vm.task.starred ? 'btn-warning' : 'btn-light');
+      return (vm.task.starred ? 'btn-yellow' : 'btn-light');
     }
 
     function toggleStarred(){
@@ -176,11 +178,9 @@
 
       vm.listStyle = {};
       vm.taskLinkStyle = {};
+      vm.listStyle.background = '#ffffff';
 
-      if(vm.task.state == "completed"){
-        vm.backgroundColor = colorHex;
-        vm.listStyle.background = vm.backgroundColor;
-      } else if(vm.topLevel){
+      if(vm.topLevel){
         vm.backgroundColor = colorHex;
         vm.listStyle.background = vm.backgroundColor;
       }

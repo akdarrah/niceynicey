@@ -17,12 +17,12 @@
     vm.colorFactory = colorFactory;
 
     vm.suggestedColorHexes = [
-      "#e99695",
-      "#f9d0c4",
-      "#fef2c0",
+      "#BFC3CB",
+      "#B3C1DE",
+      "#A8DFDC",
       "#c2e0c6",
-      "#bfdadc",
-      "#c5def5",
+      "#D1E7AF",
+      "#f9eca4",
       "#bfd4f2",
       "#d4c5f9"
     ];

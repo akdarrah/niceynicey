@@ -1,6 +1,6 @@
 <div ng-show="$ctrl.showToday && $ctrl.starredTaskFilter().length">
   <div ng-show="!$ctrl.loading" class="loaded-content">
-    <h5 ng-show="$ctrl.showHeaders"><i class="fa fa-star"></i> Today</h5>
+    <h5 ng-show="$ctrl.showHeaders" class="navy-blue"><i class="fa fa-star"></i> Today</h5>
     <ul class="no-list-style" style="margin-left: 0;" ng-style="$ctrl.listStyle" ng-class="{'top-level-task-list': $ctrl.topLevel}">
       <li ng-repeat="task in $ctrl.starredTaskFilter()">
         <task top-level="true" task="task" parent-task="$ctrl.parentTask" background-color="$ctrl.backgroundColor" allow-extend="false" show-children="false" allow-reorder="false" allow-add-children="false"></task>
@@ -12,7 +12,7 @@
 </div>
 
 <div ng-if="$ctrl.showForm()" class="top-level-comment-form-container">
-  <h5 ng-show="$ctrl.showHeaders"><i class="fa fa-check-circle"></i> Tasks</h5>
+  <h5 ng-show="$ctrl.showHeaders" class="navy-blue"><i class="fa fa-check-circle"></i> Tasks</h5>
   <form id="comment-form"
         name='$ctrl.commentForm'
         ng-submit="$ctrl.commentForm.$valid && $ctrl.handleSubmit()"
@@ -21,7 +21,7 @@
     <div class="input-group">
       <input type="text" class="form-control" placeholder="{{ $ctrl.placeHolderText() }}" ng-model="$ctrl.todoText" required ng-disabled="$ctrl.loading">
       <span class="input-group-btn">
-        <button class="btn btn-primary" ng-disabled="$ctrl.loading">Add</button>
+        <button class="btn btn-yellow" ng-disabled="$ctrl.loading">Add</button>
       </span>
     </div>
   </form>

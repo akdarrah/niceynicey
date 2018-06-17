@@ -10,8 +10,35 @@ a {
   }
 }
 
+.btn-yellow {
+  background: #FCDD31;
+  color: black;
+}
+
+.btn-green {
+  background: #A4CE5A;
+}
+
+.btn-blue {
+  background: #6380c0;
+  color: white;
+}
+
+.btn-navy-blue {
+  background: #333746;
+  color: white;
+}
+
+.navy-blue {
+  color: #333746;
+}
+
 .navbar-brand {
   font-family: 'Fredoka One', cursive;
+
+  img {
+    width: 133px;
+  }
 }
 
 // https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
@@ -69,7 +96,7 @@ ul {
 }
 
 html, body {
-  background: #f1f5f9;
+  background: #B3C1DE;
   // background: url(https://images.unsplash.com/photo-1473790034954-491b2ee68f30?auto=format&fit=crop&w=1950&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D) no-repeat center center fixed;
   // -webkit-background-size: cover;
   // -moz-background-size: cover;
@@ -142,16 +169,14 @@ body {
   padding-bottom: 20px;
   margin-bottom: 20px;
 
-  border: 5px solid #5969e2;
-
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px; /* future proofing */
   -khtml-border-radius: 5px; /* for old Konqueror browsers */
 
-  -webkit-box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
-  -moz-box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
-  box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
+  // -webkit-box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
+  // -moz-box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
+  // box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
 }
 
 .loaded-content.ng-hide {
