@@ -216,6 +216,7 @@ class Task < ApplicationRecord
   private
 
   def before_complete!
+    self.donation_amount = 0.10
     self.extended = false
     self.completed_at = Time.now
   end
@@ -225,6 +226,7 @@ class Task < ApplicationRecord
   end
 
   def before_reopen!
+    self.donation_amount = 0.00
     self.extended = true
     self.completed_at = nil
   end

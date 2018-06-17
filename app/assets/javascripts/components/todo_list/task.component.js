@@ -100,6 +100,8 @@
       var completeTask = vm.factory.completeTask(task.id);
 
       completeTask.then(function(response){
+        $('.user-donation-amount').text(response.data.user_donation_amount)
+
         angular.extend(vm.task, response.data);
         setListStyle();
         $scope.$emit("taskCompleted");
@@ -110,6 +112,8 @@
       var reopenTask = vm.factory.reopenTask(task.id);
 
       reopenTask.then(function(response){
+        $('.user-donation-amount').text(response.data.user_donation_amount)
+        
         angular.extend(vm.task, response.data);
         setListStyle();
         $scope.$emit("taskReopened");

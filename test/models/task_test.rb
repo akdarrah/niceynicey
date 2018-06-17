@@ -17,6 +17,12 @@ class TaskTest < ActiveSupport::TestCase
     assert @task.completed?
   end
 
+  test "tasks is awarded a donation_amount on completion" do
+    assert_equal 0.00, @task.donation_amount
+    @task.complete!
+    assert_equal 0.10, @task.donation_amount
+  end
+
   test "tasks is NOT extended when completed" do
     @task.update_column :extended, true
     @task.complete!
@@ -78,6 +84,16 @@ class TaskTest < ActiveSupport::TestCase
     @task.reopen!
 
     assert @task.reload.extended?
+  end
+
+  test "tasks donation_amount is reverted when reopened" do
+    assert_equal 0.00, @task.donation_amount
+
+    @task.complete!
+    assert_equal 0.10, @task.reload.donation_amount
+
+    @task.reopen!
+    assert_equal 0.00, @task.reload.donation_amount
   end
 
   test "a completed task cannot be reopened if the parent is completed" do
