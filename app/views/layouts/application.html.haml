@@ -49,23 +49,28 @@
         .row
           .col-lg-8.mx-auto
             %nav.navbar
-              = link_to tasks_url, class: "navbar-brand" do
-                = image_tag "cueDO-logo-dark-background-p-500.png"
-              %ul.nav
-                - if current_user.admin?
-                  %li.nav-item.d-none.d-sm-block
-                    = link_to "👁‍🗨", admin_dashboard_path, title: "Admin", class: "nav-link"
-                %li.nav-item
-                  = link_to "⚙️", edit_user_path(:current_user), title: "Account Settings", class: "nav-link"
-                %li.nav-item.d-none.d-sm-block
-                  = link_to checkpoints_path, title: "Meals Provided", class: "btn btn-yellow nav-link" do
-                    🍽
-                    %span.badge.badge-light.user-donation-amount= current_user.donation_amount
-                &nbsp;
-                %li.nav-item
-                  = link_to checkpoints_path, title: "Productivity Score", class: "btn btn-navy-blue nav-link" do
-                    📆
-                    %span.badge.badge-light= number_to_human current_user.tasks.sum(:points)
+              .col-12.col-lg-4.mx-auto.text-center
+                = link_to tasks_url, class: "navbar-brand" do
+                  = image_tag "cueDO-logo-dark-background-p-500.png"
+                %br
+                %br
+              .col-12.col-lg-8.mx-auto
+                %ul.nav.justify-content-center
+                  - if current_user.admin?
+                    %li.nav-item.d-none.d-sm-block
+                      = link_to "👁‍🗨", admin_dashboard_path, title: "Admin", class: "nav-link"
+                  %li.nav-item
+                    = link_to "⚙️", edit_user_path(:current_user), title: "Account Settings", class: "nav-link"
+                  %li.nav-item
+                    = link_to checkpoints_path, title: "Meals Provided", class: "btn btn-yellow nav-link" do
+                      🍽
+                      %span.badge.badge-light.user-donation-amount= current_user.donation_amount
+                  &nbsp;
+                  %li.nav-item
+                    = link_to checkpoints_path, title: "Productivity Score", class: "btn btn-navy-blue nav-link" do
+                      📆
+                      %span.badge.badge-light= number_to_human current_user.tasks.sum(:points)
+                %br
 
       = yield
     = Gon::Base.render_data
