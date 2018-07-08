@@ -996,7 +996,6 @@ figcaption {
 }
 
 .body {
-  background-image: url('../images/example-bg.png');
   background-position: 0px 0px;
   background-size: 125px;
 }
@@ -1524,4 +1523,3 @@ html.w-mod-js *[data-ix="scale-on-scroll"] {
     margin-top: 0px;
   }
 }
-
